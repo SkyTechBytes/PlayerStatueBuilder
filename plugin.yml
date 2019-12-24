@@ -1,0 +1,8 @@
+name: PlayerStatuePlugin
+main: com.skytechbytes.testplugin.PlayerStatuePlugin
+version: 1.0
+api-version: 1.13
+commands:
+   statue:
+      description: Make a player statue based on a certain model and in a certain orientation
+      usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]
