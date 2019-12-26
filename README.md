@@ -5,8 +5,8 @@ SkyTechBytes' Player Statue Builder. Supports basically all skin formats!
 Need something to decorate your server? Tired of building player statues by hand? A tad bit conceited? If you answered yes to any of these questions, this player statue builder is perfect for you!
 <h2>Installation</h2>
 <li>1. Download the .jar below
-<li>2. Move the .jar to your "plugins" folder in your spigot server folder
-<li>3. Restart your spigot server
+<li>2. Move the .jar to your "plugins" folder in your spigot/bukkit/craftbukkit etc. server folder
+<li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
 Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
