@@ -11,8 +11,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ace/Downloads/Lib/spigot-api-1.14.4-R0.1-20191019.091257-79.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ace/Downloads/Lib/java-mojang-api--97bc9add82-1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

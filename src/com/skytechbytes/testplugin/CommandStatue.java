@@ -27,19 +27,61 @@ import com.skytechbytes.builder.Splicer;
 public class CommandStatue implements CommandExecutor {
 	
 	private Map<String,BufferedImage> cache = new HashMap<>();
+	private static final int minx = -4-1;
+	private static final int maxx = +12+1;
+	private static final int miny = 0-1;
+	private static final int maxy = +32+1;
+	private static final int minz = -6-1;
+	private static final int maxz = +3+1;
+	
 	
 	public CommandStatue() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public boolean checkBuild(Player p) {
+		switch (FaceBuilder.master_orientation) {
+		case 0:
+			return PlayerStatuePlugin.wgw.canBuild(p.getLocation().add(minx, miny, minz), p.getLocation().add(maxx,maxy,maxz), p);
+		case 1:
+			return PlayerStatuePlugin.wgw.canBuild(p.getLocation().add(minz, minx, miny), p.getLocation().add(maxz,maxx,maxy), p);
+		case 2:
+			return PlayerStatuePlugin.wgw.canBuild(p.getLocation().add(miny, minz, minx), p.getLocation().add(maxy,maxz,maxx), p);
+		}
+		return false;
+	}
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg0 instanceof Player) {
 			Player p = (Player) arg0;
 
-			if (!p.isOp()) return false;
+			if (!p.hasPermission("playerstatuecreatorx.createStatue")) {
+				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");
+				return false;
+			}
 			
 			try {
+				
+				if (arg3.length >= 3) {
+					if (arg3[2].equals("xy")) {
+						FaceBuilder.master_orientation = 0;
+					} else if (arg3[2].equals("xz")) {
+						FaceBuilder.master_orientation = 2;
+					} else if (arg3[2].equals("yz")) {
+						FaceBuilder.master_orientation = 1;
+					} else {
+						throw new Exception();
+					}
+				} else {
+					FaceBuilder.master_orientation = 0;
+				}
+				
+				boolean pass = checkBuild(p);
+				
+				if (pass == false) {
+					arg0.sendMessage(ChatColor.RED + "Insufficient build permissions.");
+					return false;
+				}
+				
 				Mojang api = new Mojang().connect();
 				api.connect();
 				String name = p.getName();
@@ -62,19 +104,7 @@ public class CommandStatue implements CommandExecutor {
 					bi = cache.get(name);
 				}
 				
-				if (arg3.length >= 3) {
-					if (arg3[2].equals("xy")) {
-						FaceBuilder.master_orientation = 0;
-					} else if (arg3[2].equals("xz")) {
-						FaceBuilder.master_orientation = 2;
-					} else if (arg3[2].equals("yz")) {
-						FaceBuilder.master_orientation = 1;
-					} else {
-						throw new Exception();
-					}
-				} else {
-					FaceBuilder.master_orientation = 0;
-				}
+				
 				
 				if (arg3.length >= 2) {
 					if (arg3[1].equals("slim")) {
@@ -92,6 +122,7 @@ public class CommandStatue implements CommandExecutor {
 
 			} catch (Exception e) {
 				arg0.sendMessage(ChatColor.RED + "Invalid arguments or the player requested does not exist! Usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]");
+				e.printStackTrace();
 			}
 			return true;
 		}
