@@ -18,6 +18,7 @@ import com.skytechbytes.testplugin.PlayerStatuePlugin;
  * 
  * From ryanhamshire's GriefProtection Plugin
  * "What's the point in re-inventing the wheel?"
+ * If no worldguard, everything is FINE.
  *
  */
 public class WorldGuardWrapper
@@ -64,9 +65,10 @@ public class WorldGuardWrapper
                         return false;
                     }
                 }
+                System.out.println("Building is OK | " + lesserCorner + "/" + greaterCorner);
                 return true;
             }
-
+            System.out.println("Building is OK | " + lesserCorner + "/" + greaterCorner);
             return true;
         }
         catch (Throwable shoe)

@@ -2,7 +2,11 @@ package com.skytechbytes.testplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.skytechbytes.support.WorldGuardWrapper;
-
+/**
+ * 
+ * @author SkyTechBytes
+ *
+ */
 public class PlayerStatuePlugin extends JavaPlugin {
 	public static PlayerStatuePlugin instance;
 	public static WorldGuardWrapper wgw;
@@ -13,8 +17,13 @@ public class PlayerStatuePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
     	instance = this;
-    	wgw = new WorldGuardWrapper();
+    	try {
+    		wgw = new WorldGuardWrapper();
+    	} catch (Throwable fit) {
+    		wgw = null;
+    	}
     	this.getCommand("statue").setExecutor(new CommandStatue());
+    	this.getCommand("statuecheck").setExecutor(new CommandStatueCheck());
 
 
     }

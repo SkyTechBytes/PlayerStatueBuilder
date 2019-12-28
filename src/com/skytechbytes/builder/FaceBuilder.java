@@ -3,6 +3,8 @@ package com.skytechbytes.builder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+
+import com.skytechbytes.builder.BuildUtils;
 /**
  * 
  * @author SkyTechBytes
@@ -11,6 +13,11 @@ import org.bukkit.World;
  */
 public class FaceBuilder {
 	public static int master_orientation = 2;
+	public static int minor_orientation = 3;
+	public Statue statue;
+	public FaceBuilder(Statue s) {
+		this.statue = s;
+	}
 	/**
 	 * 
 	 * @param o
@@ -37,13 +44,13 @@ public class FaceBuilder {
 				if (master_orientation == 0) {
 					switch (orientation) {
 					case 0:
-						w.getBlockAt(x+o.getBlockX()+off1, o.getBlockY()-y+matrix.length+off2, o.getBlockZ()+off3).setType(matrix[y][x]);
+						gba(w,o,x+off1,-y+matrix.length+off2,off3,matrix[y][x]);
 						break;
 					case 1:
-						w.getBlockAt(x+o.getBlockX()+off1, o.getBlockY()+off2, y+o.getBlockZ()+off3).setType(matrix[y][x]);
+						gba(w,o,x+off1,off2, y+off3,matrix[y][x]);
 						break;
 					case 2:
-						w.getBlockAt(o.getBlockX()+off1, o.getBlockY()-y+matrix.length+off2, x+o.getBlockZ()+off3).setType(matrix[y][x]);
+						gba(w,o,off1,-y+matrix.length+off2, x+off3,matrix[y][x]);
 						break;
 					}
 				} else if (master_orientation == 1) {
@@ -74,8 +81,26 @@ public class FaceBuilder {
 			}
 		}
 	}
-	public void gba(World w, Location o, int off1, int off2, int off3,Material m) {
-		w.getBlockAt(o.getBlockX()+off1, o.getBlockY()+off2, o.getBlockZ()+off3).setType(m);
+	private void gba(World w, Location o, int off1, int off2, int off3,Material m) {
+		switch (minor_orientation) {
+		case 0:
+			ll(w,o.getBlockX()+off1, o.getBlockY()+off2, o.getBlockZ()+off3,m);
+			break;
+		case 1:
+			ll(w,o.getBlockX()-off1, o.getBlockY()+off2, o.getBlockZ()-off3,m);
+			break;
+		case 2:
+			ll(w,o.getBlockX()+off3, o.getBlockY()+off2, o.getBlockZ()+off1,m);
+			break;
+		case 3:
+			ll(w,o.getBlockX()-off3, o.getBlockY()+off2, o.getBlockZ()-off1,m);
+			break;
+		}
+		
+	}
+	private void ll(World w, int off1, int off2, int off3, Material m) {
+		//w.getBlockAt(off1,off2,off3).setType(m);
+		statue.setBlockAt(off1, off2, off3, m);
 	}
 
 }

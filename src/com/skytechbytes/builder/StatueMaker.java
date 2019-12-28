@@ -3,25 +3,134 @@ package com.skytechbytes.builder;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 /**
  * 
  * @author SkyTechBytes
  * This is where the magic happens- all the mappings!
  *
  */
-public class Splicer {
+public class StatueMaker extends BukkitRunnable{
+	private Statue s;
+	private World w;
+	private Player p;
+	private Location origin;
+	private boolean quote = false;
+	private BufferedImage bi;
+	private String mode;
+	public StatueMaker(World w, Player p, String mode, BufferedImage bi) {
+		this(w,p,mode,bi,false);
+	}
+	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote) {
+		s = new Statue();
+		this.w = w;
+		this.p = p;
+		this.quote = quote;
+		this.bi = bi;
+		this.mode = mode;
+		origin = new Location(w,p.getLocation().getBlockX(),p.getLocation().getBlockY(),p.getLocation().getBlockZ());
+	}
+	private void initialize() {
+		FaceBuilder.minor_orientation = 0;
 
-	public Splicer() {
+		String d = getDirection(p.getLocation().getYaw());
+
+		if (d.equals("North")) {
+			FaceBuilder.minor_orientation = 1;
+		} else if (d.equals("East")) {
+			FaceBuilder.minor_orientation = 2;
+		} else if (d.equals("West")) {
+			FaceBuilder.minor_orientation = 3;
+		} else if (d.equals("South")) {
+			FaceBuilder.minor_orientation = 0;
+		}
+	}
+	/**
+	 * Converts a rotation to a cardinal direction name.
+	 * From sk89qs's command book plugin
+	 * @param rot
+	 * @return
+	 */
+	private static String getDirection(double rot) {
+		if (0 <= rot && rot < 45) {
+			return "North";
+		} else if (45 <= rot && rot < 135) {
+			return "East";
+		}else if (135 <= rot && rot < 225) {
+			return "South";
+		} else if (225 <= rot && rot < 315) {
+			return "West";
+		} else if (315 <= rot && rot < 360.0) {
+			return "North";
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * Actually make the statue from the sketchpad
+	 */
+	private void finish() {
+
+		if (quote) {
+			s.query(p);
+			return;
+		}
+
+		boolean canBuild = s.canBuild(w, p);
+
+		if (canBuild == false) {
+			p.sendMessage(ChatColor.RED + "Insufficient build permissions. Move to a place where you're allowed to build.");
+			return;
+		}
+		System.out.println("Trying to remove items...");
+		boolean takeMaterials = s.removeItems(p);
+		
+		if (takeMaterials == false) {
+			System.out.println("Insufficient materials");
+			return;
+		}
+		System.out.println("Creating Structure...");
+		s.createStatue(w,p);
+
 
 	}
-	public void makeStatue(Location l, BufferedImage ss) throws IOException {
+	@Override
+	public void run() {
+		
+		try {
+			if (mode.equals("default")) {
+				this.makeStatue(origin, bi);
+			} else if (mode.equals("slim")) {
+				this.makeSlimStatue(origin, bi);
+			} else if (mode.equals("legacy")) {
+				this.makeLegacyStatue(origin, bi);
+			} else {
+				this.makeStatue(origin, bi);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void makeStatue(Location l, BufferedImage ss) throws IOException {
+		initialize();
+
+		if (ss.getHeight() < 64) {
+			makeLegacyStatue(l,ss);
+			p.sendMessage(ChatColor.RED + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
+					+ "smaller than 64x64, so the plugin made a legacy skin statue instead.");
+			return;
+		}
+
 		//0 is vertical |_
 		//1 is flat |-
 		//2 is sideways |_
 		//Bottom, Right, Left, Top, Back, Front
 		//Right Leg
-		FaceBuilder fb = new FaceBuilder();
+		FaceBuilder fb = new FaceBuilder(s);
 		Reader r = new Reader();
 		//BufferedImage ss = r.read();
 		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
@@ -91,14 +200,17 @@ public class Splicer {
 		fb.buildFace(l, r.part(ss, 8+32, 0, 8, 8), 1,0,1+24+7+1,-5);
 		fb.buildFace(l, r.part(ss, 24+32, 8, 8, 8), 0,0,24,-5-1,true,false);
 		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
+
+		finish();
 	}
-	public void makeLegacyStatue(Location l, BufferedImage ss) {
+	private void makeLegacyStatue(Location l, BufferedImage ss) {
+		initialize();
 		//0 is vertical |_
 		//1 is flat |-
 		//2 is sideways |_
 		//Bottom, Right, Left, Top, Back, Front
 		//Right Leg
-		FaceBuilder fb = new FaceBuilder();
+		FaceBuilder fb = new FaceBuilder(s);
 		Reader r = new Reader();
 		//BufferedImage ss = r.read();
 		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
@@ -145,14 +257,17 @@ public class Splicer {
 		fb.buildFace(l, r.part(ss, 8+32, 0, 8, 8), 1,0,1+24+7+1,-5);
 		fb.buildFace(l, r.part(ss, 24+32, 8, 8, 8), 0,0,24,-5-1,true,false);
 		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
+
+		finish();
 	}
-	public void makeSlimStatue(Location l, BufferedImage ss) {
+	private void makeSlimStatue(Location l, BufferedImage ss) {
+		initialize();
 		//0 is vertical |_
 		//1 is flat |-
 		//2 is sideways |_
 		//Bottom, Right, Left, Top, Back, Front
 		//Right Leg
-		FaceBuilder fb = new FaceBuilder();
+		FaceBuilder fb = new FaceBuilder(s);
 		Reader r = new Reader();
 		//BufferedImage ss = r.read();
 		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
@@ -186,7 +301,7 @@ public class Splicer {
 		fb.buildFace(l, r.part(ss, 20, 20+16, 8, 12), 0,0,12,1);
 		fb.buildFace(l, r.part(ss, 32, 20+16, 8, 12), 0,0,12,-4,true,false);
 		//Bottom, Right, Left, Top, Back, Front
-		
+
 		//Right Arm
 		fb.buildFace(l, r.part(ss, 8+40-1, 16, 3, 4), 1,0-4+1,1+12,-3,false,true);
 		fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0-4+1,0+12,-3);//Done
@@ -211,7 +326,7 @@ public class Splicer {
 		fb.buildFace(l, r.part(ss, 8+16+16-4+16, 16+32, 3, 4), 1,0+4+4,12+12+1,-3);
 		fb.buildFace(l, r.part(ss, 12+16+16+16-1, 20+32, 3, 12), 0,0+4+4,0+12,-3-1,true,false);
 		fb.buildFace(l, r.part(ss, 4+16+16+16, 20+32, 3, 12), 0,0+4+4,0+12,1);
-		
+
 		//Head
 		fb.buildFace(l, r.part(ss, 16, 0, 8, 8), 1,0,1+24,-5,false,true);
 		fb.buildFace(l, r.part(ss, 0, 8, 8, 8), 2,0,0+24,-5);
@@ -225,5 +340,7 @@ public class Splicer {
 		fb.buildFace(l, r.part(ss, 8+32, 0, 8, 8), 1,0,1+24+7+1,-5);
 		fb.buildFace(l, r.part(ss, 24+32, 8, 8, 8), 0,0,24,-5-1,true,false);
 		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
+		finish();
 	}
+	
 }

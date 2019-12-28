@@ -24,11 +24,11 @@ import com.skytechbytes.builder.StatueMaker;
  * Thank you SparklingComet for the mojang api
  *
  */
-public class CommandStatue implements CommandExecutor {
+public class CommandStatueCheck implements CommandExecutor {
 	
 	private Map<String,BufferedImage> cache = new HashMap<>();
 
-	public CommandStatue() {
+	public CommandStatueCheck() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,16 +39,12 @@ public class CommandStatue implements CommandExecutor {
 
 			if (!p.hasPermission("playerstatuecreatorx.createStatue")) {
 				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");
-				return false;
+				return true;
 			}
 			
 			try {
 				
 				if (arg3.length >= 3) {
-					if (!p.hasPermission("playerstatuecreatorx.specialOrientations")) {
-						p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
-						throw new Exception();
-					}
 					if (arg3[2].equals("xy")) {
 						FaceBuilder.master_orientation = 0;
 					} else if (arg3[2].equals("xz")) {
@@ -88,16 +84,16 @@ public class CommandStatue implements CommandExecutor {
 				
 				if (arg3.length >= 2) {
 					if (arg3[1].equals("slim")) {
-						new StatueMaker(p.getWorld(),p,"slim",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"slim",bi,true).runTask(PlayerStatuePlugin.instance);
 					} else if (arg3[1].equals("legacy")) {
-						new StatueMaker(p.getWorld(),p,"legacy",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"legacy",bi,true).runTask(PlayerStatuePlugin.instance);
 					} else if (arg3[1].equals("default")) {
-						new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"default",bi,true).runTask(PlayerStatuePlugin.instance);
 					} else {
 						throw new Exception();
 					}
 				} else {
-					new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
+					new StatueMaker(p.getWorld(),p,"default",bi,true).runTask(PlayerStatuePlugin.instance);
 				}
 
 			} catch (Exception e) {
