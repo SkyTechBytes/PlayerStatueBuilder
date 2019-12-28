@@ -7,9 +7,6 @@ commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation
       usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]
-   statuecheck:
-      description: Checks how much a player statue will cost
-      usage: /statuecheck
 permissions:
    playerstatuecreatorx.createStatue:
       description: Allow creation of a statue

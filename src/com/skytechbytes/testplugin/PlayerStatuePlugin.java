@@ -23,7 +23,6 @@ public class PlayerStatuePlugin extends JavaPlugin {
     		wgw = null;
     	}
     	this.getCommand("statue").setExecutor(new CommandStatue());
-    	this.getCommand("statuecheck").setExecutor(new CommandStatueCheck());
 
 
     }

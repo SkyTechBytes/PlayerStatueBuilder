@@ -13,6 +13,7 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.skytechbytes.testplugin.Log;
 import com.skytechbytes.testplugin.PlayerStatuePlugin;
 /**
  * 
@@ -29,9 +30,9 @@ public class WorldGuardWrapper
     {
     	try {
     		this.worldGuard = (WorldGuardPlugin)PlayerStatuePlugin.instance.getServer().getPluginManager().getPlugin("WorldGuard");
-    		System.out.println("Worldguard detected!");
+    		Log.log("Worldguard detected!");
     	} catch (Exception e) {
-    		System.out.println("Worldguard not detected.");
+    		Log.log("Worldguard not detected.");
     	}
     }
 
@@ -40,7 +41,7 @@ public class WorldGuardWrapper
     	if (worldGuard == null) {
     		return true;
     	} else {
-    		System.out.println("Checking permissions");
+    		Log.log("Checking permissions");
     	}
         try
         {
@@ -61,14 +62,14 @@ public class WorldGuardWrapper
                 ApplicableRegionSet overlaps = manager.getApplicableRegions(tempRegion);
                 for (ProtectedRegion r : overlaps.getRegions()) {
                     if (!manager.getApplicableRegions(r).testState(localPlayer, Flags.BUILD)) {
-                    	System.out.println("Can't Build!");
+                    	Log.log("Can't Build!");
                         return false;
                     }
                 }
-                System.out.println("Building is OK | " + lesserCorner + "/" + greaterCorner);
+                Log.log("Building is OK | " + lesserCorner + "/" + greaterCorner);
                 return true;
             }
-            System.out.println("Building is OK | " + lesserCorner + "/" + greaterCorner);
+            Log.log("Building is OK | " + lesserCorner + "/" + greaterCorner);
             return true;
         }
         catch (Throwable shoe)

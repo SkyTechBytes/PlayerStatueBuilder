@@ -26,7 +26,7 @@ import com.skytechbytes.builder.StatueMaker;
  */
 public class CommandStatue implements CommandExecutor {
 	
-	private Map<String,BufferedImage> cache = new HashMap<>();
+	public static Map<String,BufferedImage> cache = new HashMap<>();
 
 	public CommandStatue() {
 		// TODO Auto-generated constructor stub
@@ -43,11 +43,11 @@ public class CommandStatue implements CommandExecutor {
 			}
 			
 			try {
-				
+				p.sendMessage(ChatColor.YELLOW + "Crunching numbers... please wait.");
 				if (arg3.length >= 3) {
 					if (!p.hasPermission("playerstatuecreatorx.specialOrientations")) {
 						p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
-						throw new Exception();
+						throw new Exception("Insufficient Permissions");
 					}
 					if (arg3[2].equals("xy")) {
 						FaceBuilder.master_orientation = 0;
@@ -56,7 +56,7 @@ public class CommandStatue implements CommandExecutor {
 					} else if (arg3[2].equals("yz")) {
 						FaceBuilder.master_orientation = 1;
 					} else {
-						throw new Exception();
+						throw new Exception("Orientation not supported");
 					}
 				} else {
 					FaceBuilder.master_orientation = 0;
@@ -94,15 +94,15 @@ public class CommandStatue implements CommandExecutor {
 					} else if (arg3[1].equals("default")) {
 						new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
 					} else {
-						throw new Exception();
+						throw new Exception("Skin format does not exist");
 					}
 				} else {
 					new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
 				}
 
 			} catch (Exception e) {
-				arg0.sendMessage(ChatColor.RED + "Invalid arguments or the player requested does not exist! Usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]");
-				//e.printStackTrace();
+				arg0.sendMessage(ChatColor.RED + "Invalid arguments or the player requested does not exist! " + e.getMessage());
+				return false;
 			}
 			return true;
 		}

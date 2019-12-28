@@ -8,6 +8,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.skytechbytes.testplugin.Log;
 /**
  * 
  * @author SkyTechBytes
@@ -38,6 +40,8 @@ public class StatueMaker extends BukkitRunnable{
 		FaceBuilder.minor_orientation = 0;
 
 		String d = getDirection(p.getLocation().getYaw());
+		
+		//Log.log(d);
 
 		if (d.equals("North")) {
 			FaceBuilder.minor_orientation = 1;
@@ -56,6 +60,9 @@ public class StatueMaker extends BukkitRunnable{
 	 * @return
 	 */
 	private static String getDirection(double rot) {
+		if (rot < 0) {
+			rot += 360;
+		}
 		if (0 <= rot && rot < 45) {
 			return "North";
 		} else if (45 <= rot && rot < 135) {
@@ -64,10 +71,11 @@ public class StatueMaker extends BukkitRunnable{
 			return "South";
 		} else if (225 <= rot && rot < 315) {
 			return "West";
-		} else if (315 <= rot && rot < 360.0) {
+		} else if (315 <= rot && rot <= 360.0) {
 			return "North";
 		} else {
-			return null;
+			Log.log("The Player's direction is somehow negative or greater than 360. Might want to report this.");
+			return "North";
 		}
 	}
 	/**
@@ -86,14 +94,14 @@ public class StatueMaker extends BukkitRunnable{
 			p.sendMessage(ChatColor.RED + "Insufficient build permissions. Move to a place where you're allowed to build.");
 			return;
 		}
-		System.out.println("Trying to remove items...");
+		Log.log("Trying to remove items...");
 		boolean takeMaterials = s.removeItems(p);
 		
 		if (takeMaterials == false) {
-			System.out.println("Insufficient materials");
+			Log.log("Insufficient materials");
 			return;
 		}
-		System.out.println("Creating Structure...");
+		Log.log("Creating Structure...");
 		s.createStatue(w,p);
 
 

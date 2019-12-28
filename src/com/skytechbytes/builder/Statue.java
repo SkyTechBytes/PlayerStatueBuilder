@@ -11,8 +11,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.skytechbytes.testplugin.Log;
 import com.skytechbytes.testplugin.PlayerStatuePlugin;
-import com.skytechbytes.testplugin.Util;
 /**
  * 
  * @author SkyTechBytes
@@ -89,7 +89,7 @@ public class Statue {
 				}
 			}
 		}
-		System.out.println("Statue Created");
+		Log.log("Statue Created");
 		return true;
 	}
 	public boolean canBuild(World w, Player p) {
@@ -168,7 +168,7 @@ public class Statue {
 		p.sendMessage(need);
 
 		if (hasRequired == false) {
-			p.sendMessage(ChatColor.RED + "You don't have all the materials to make that statue right now... "
+			p.sendMessage(ChatColor.YELLOW + "You don't have all the materials to make that statue right now... "
 					+ "when you do, make sure you run this command in an open space. You will be at the base of the statue "
 					+ "and the statue will be facing towards you.");
 		}
