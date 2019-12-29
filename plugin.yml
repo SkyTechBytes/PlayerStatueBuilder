@@ -8,15 +8,15 @@ commands:
       description: Make a player statue based on a certain model and in a certain orientation
       usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]
 permissions:
-   playerstatuecreatorx.createStatue:
+   playerstatuebuilderx.createStatue:
       description: Allow creation of a statue
       default: true
-   playerstatuecreatorx.bypass:
+   playerstatuebuilderx.bypass:
       description: Create a statue, bypassing material requirements
       default: op
-   playerstatuecreatorx.specialOrientation:
+   playerstatuebuilderx.specialOrientation:
       description: Allows creation of statues in the xz and yz plane. Orientation unpredictable so Admin only!
       default: op
-   playerstatuecreatorx.override:
+   playerstatuebuilderx.override:
       description: Player statue is created and overwrites blocks (usually just skips if not air)
       default: op

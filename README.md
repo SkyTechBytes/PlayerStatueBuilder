@@ -26,16 +26,16 @@ Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
 <li>Spawns the statue two blocks above the player to prevent suffocation.
   <h2>Permissions</h2>
    <pre>
-   playerstatuecreatorx.createStatue:
+   playerstatuebuilderx.createStatue:
       description: Allow creation of a statue
       default: true
-   playerstatuecreatorx.bypass:
+   playerstatuebuilderx.bypass:
       description: Create a statue, bypassing material requirements
       default: op
-   playerstatuecreatorx.specialOrientation:
+   playerstatuebuilderx.specialOrientation:
       description: Allows creation of statues in the xz and yz plane. Orientation unpredictable so Admin only!
       default: op
-   playerstatuecreatorx.override:
+   playerstatuebuilderx.override:
       description: Player statue is created and overwrites blocks (usually just skips if not air)
       default: op
       </pre>

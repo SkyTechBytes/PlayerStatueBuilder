@@ -78,7 +78,7 @@ public class Statue {
 					}
 
 					Block b = w.getBlockAt(new Location(w,keyX,keyY+3,keyZ));
-					if (p.hasPermission("playerstatuecreatorx.override") == false) {
+					if (p.hasPermission("playerstatuebuilderx.override") == false) {
 						if (!b.getType().equals(Material.AIR)) {
 							continue;
 						}
@@ -101,7 +101,7 @@ public class Statue {
 	}
 	public boolean removeItems(Player p) {
 
-		if (p.hasPermission("playerstatuecreatorx.bypass")) {
+		if (p.hasPermission("playerstatuebuilderx.bypass")) {
 			return true;
 		}
 

@@ -37,7 +37,7 @@ public class CommandStatue implements CommandExecutor {
 		if (arg0 instanceof Player) {
 			Player p = (Player) arg0;
 
-			if (!p.hasPermission("playerstatuecreatorx.createStatue")) {
+			if (!p.hasPermission("playerstatuebuilderx.createStatue")) {
 				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");
 				return false;
 			}
@@ -45,7 +45,7 @@ public class CommandStatue implements CommandExecutor {
 			try {
 				p.sendMessage(ChatColor.YELLOW + "Crunching numbers... please wait.");
 				if (arg3.length >= 3) {
-					if (!p.hasPermission("playerstatuecreatorx.specialOrientations")) {
+					if (!p.hasPermission("playerstatuebuilderx.specialOrientations")) {
 						p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
 						throw new Exception("Insufficient Permissions");
 					}
