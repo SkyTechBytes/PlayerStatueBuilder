@@ -24,6 +24,7 @@ Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
 <li>Rotates the statue so that it faces you (Supports 4 directions + the aforementioned xy,xz,yz, so 12 orientations in total!)
 <li>If used by a survival/normal player, the plugin won't delete blocks- only modifies air. This prevents accidental modification of the terrain, and eliminates the possibility that the statue will destroy bedrock or other stuff it shouldn't destroy.
 <li>Spawns the statue two blocks above the player to prevent suffocation.
+<li>Config file supports cooldowns (min), extra items required, and # of extra items required
   <h2>Permissions</h2>
    <pre>
    playerstatuebuilderx.createStatue:
@@ -38,7 +39,21 @@ Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
    playerstatuebuilderx.override:
       description: Player statue is created and overwrites blocks (usually just skips if not air)
       default: op
+   playerstatuebuilderx.noWait:
+      description: The player does not need to wait out the cooldown to make the statue - 5 minutes is default
+      default: op
       </pre>
+  <h2>Configuration File Explanation</h2>
+    <pre>
+    # PlayerStatueBuilderX Configuration File
+    # For the number of blocks below inside the statue total, add one of the "charge" item to the total
+    # So if rate is 16 and the total blocks in the statue is 512, the player would need 512/16 = 32 of the "charge" item (in this case, Diamond)
+      rate: 16
+    # Cooldown time for using the command in MINUTES (No decimals, set to zero for no cooldown). So 5 means 5 minutes between SUCCESSFUL statue CREATIONS.
+      cooldown: 5
+    # The "rate" determines how many extra of this "charge" item a player will need. Ex: EMERALD, REDSTONE, DIAMOND, etc.
+      charge: DIAMOND
+    </pre>
 <h2>Gallery</h2>
 ![2019-12-24_14 56 38](https://user-images.githubusercontent.com/36645753/71426391-a5946000-265d-11ea-8f40-76a392d1133c.png)
 ![2019-12-24_14 56 21](https://user-images.githubusercontent.com/36645753/71426392-a5946000-265d-11ea-9dc7-929790f2dfa2.png)
