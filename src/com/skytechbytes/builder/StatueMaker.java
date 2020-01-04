@@ -2,6 +2,7 @@ package com.skytechbytes.builder;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,13 +11,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.skytechbytes.testplugin.Log;
+import com.skytechbytes.testplugin.PlayerStatuePlugin;
 /**
  * 
  * @author SkyTechBytes
  * This is where the magic happens- all the mappings!
  *
  */
-public class StatueMaker extends BukkitRunnable{
+public class StatueMaker extends BukkitRunnable {
+	
+	public static HashMap<String,Long> cooldowns = new HashMap<>();
+	
 	private Statue s;
 	private World w;
 	private Player p;
@@ -77,6 +82,27 @@ public class StatueMaker extends BukkitRunnable{
 			Log.log("The Player's direction is somehow negative or greater than 360. Might want to report this.");
 			return "North";
 		}
+		
+	}
+	public boolean hasCooldown(Player p) {
+		if (p.hasPermission("playerstatuebuilderx.noWait")) {
+			return false;
+		}
+		if (cooldowns.get(p.getName()) == null) {
+			return false;
+		}
+		//cooldown has passed
+		if (cooldowns.get(p.getName()) < System.currentTimeMillis()) {
+			return false;
+		}
+		//millis
+		long timeLeft =  cooldowns.get(p.getName()) - System.currentTimeMillis();
+		
+		long min = timeLeft / 60000;
+		long sec = (timeLeft % 60000)/1000;
+		
+		p.sendMessage(ChatColor.RED + "You've created a statue recently. Please wait at least " + min + " minutes and " + sec + " seconds.");
+		return true;
 	}
 	/**
 	 * Actually make the statue from the sketchpad
@@ -94,6 +120,11 @@ public class StatueMaker extends BukkitRunnable{
 			p.sendMessage(ChatColor.RED + "Insufficient build permissions. Move to a place where you're allowed to build.");
 			return;
 		}
+		
+		if (hasCooldown(p) == true) {
+			return;
+		}
+		
 		Log.log("Trying to remove items...");
 		boolean takeMaterials = s.removeItems(p);
 		
@@ -104,7 +135,7 @@ public class StatueMaker extends BukkitRunnable{
 		Log.log("Creating Structure...");
 		s.createStatue(w,p);
 
-
+		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatuePlugin.instance.getConfig().getInt("cooldown") * 60000);
 	}
 	@Override
 	public void run() {
@@ -128,8 +159,8 @@ public class StatueMaker extends BukkitRunnable{
 
 		if (ss.getHeight() < 64) {
 			makeLegacyStatue(l,ss);
-			p.sendMessage(ChatColor.RED + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
-					+ "smaller than 64x64, so the plugin made a legacy skin statue instead.");
+			p.sendMessage(ChatColor.YELLOW + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
+					+ " smaller than 64x64, so the plugin made a legacy skin statue instead.");
 			return;
 		}
 

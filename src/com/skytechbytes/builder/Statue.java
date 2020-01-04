@@ -155,7 +155,13 @@ public class Statue {
 				}
 			}
 		}
-		blocks.put(Material.DIAMOND, count/16);
+		Material charge = Material.matchMaterial(PlayerStatuePlugin.instance.getConfig().getString("charge"));
+		int rate = PlayerStatuePlugin.instance.getConfig().getInt("rate");
+		if (rate > 0 && charge != null) {
+			blocks.put(charge, count/rate);
+		} else {
+			blocks.put(Material.EMERALD, count/10);
+		}
 
 		String need = ChatColor.AQUA + "To make this player statue, you need: \n";
 		for (Material key : blocks.keySet()) {

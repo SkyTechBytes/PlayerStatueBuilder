@@ -8,7 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.bukkit.Material;
-
+/**
+ * 
+ * @author SkyTechBytes
+ * This class "slices" the skin image file into parts
+ *
+ */
 public class Reader {
 	public static Color pixel(int pixel) {
 		int alpha = (pixel >> 24) & 0xff;

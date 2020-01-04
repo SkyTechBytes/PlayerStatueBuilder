@@ -10,6 +10,7 @@ import com.skytechbytes.support.WorldGuardWrapper;
 public class PlayerStatuePlugin extends JavaPlugin {
 	public static PlayerStatuePlugin instance;
 	public static WorldGuardWrapper wgw;
+	public static StatueConfiguration sc;
 	public PlayerStatuePlugin() {
 		// TODO Auto-generated constructor stub
 	}
@@ -17,6 +18,10 @@ public class PlayerStatuePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
     	instance = this;
+    	
+    	sc = new StatueConfiguration();
+    	sc.createConfig();
+    	
     	try {
     		wgw = new WorldGuardWrapper();
     	} catch (Throwable fit) {

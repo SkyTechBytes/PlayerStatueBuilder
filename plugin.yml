@@ -20,3 +20,6 @@ permissions:
    playerstatuebuilderx.override:
       description: Player statue is created and overwrites blocks (usually just skips if not air)
       default: op
+   playerstatuebuilderx.noWait:
+      description: The player does not need to wait out the cooldown to make the statue - 5 minutes is default
+      default: op
