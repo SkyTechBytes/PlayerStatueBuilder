@@ -9,7 +9,8 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
+<li>Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
+<li>Usage: "/undostatue" (Admin)
 <li>Supports the <strong>new skin type (sleeves, pantlegs, jacket, etc.)</strong>
 <li>Supports the <strong>"slim"</strong> skin format with 3 pixel arms
 <li>Supports the older skin type without sleeves, pantlegs, or a jacket
@@ -24,6 +25,7 @@ Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
 <li>Rotates the statue so that it faces you (Supports 4 directions + the aforementioned xy,xz,yz, so 12 orientations in total!)
 <li>If used by a survival/normal player, the plugin won't delete blocks- only modifies air. This prevents accidental modification of the terrain, and eliminates the possibility that the statue will destroy bedrock or other stuff it shouldn't destroy.
 <li>Spawns the statue two blocks above the player to prevent suffocation.
+<li>Undo-ing a statue affects only the last statue created by ANY player (Admin only)
 <li>Config file supports cooldowns (min), extra items required, and # of extra items required
   <h2>Permissions</h2>
    <pre>
@@ -41,6 +43,9 @@ Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
       default: op
    playerstatuebuilderx.noWait:
       description: The player does not need to wait out the cooldown to make the statue - 5 minutes is default
+      default: op
+   playerstatuebuilderx.undo:
+      description: The player is allowed to undo the last statue created by ANYONE on the server (no material refunds). You must have "override" permissions for this to work
       default: op
       </pre>
   <h2>Configuration File Explanation</h2>
