@@ -28,7 +28,7 @@ public class PlayerStatuePlugin extends JavaPlugin {
     		wgw = null;
     	}
     	this.getCommand("statue").setExecutor(new CommandStatue());
-
+    	this.getCommand("undostatue").setExecutor(new CommandUndostatue());
 
     }
     // Fired when plugin is disabled

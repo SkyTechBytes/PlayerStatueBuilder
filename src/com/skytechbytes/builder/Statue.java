@@ -21,11 +21,12 @@ import com.skytechbytes.testplugin.PlayerStatuePlugin;
  *
  */
 public class Statue {
+	public static Statue lastCreated;
 	/*
 	 * Hashception
 	 */
 
-	private HashMap<Integer,HashMap<Integer,HashMap<Integer,Material>>> matrix = new HashMap<>();
+	private HashMap<Integer,HashMap<Integer,HashMap<Integer,MaterialHolder>>> matrix = new HashMap<>();
 
 	public Statue () {
 
@@ -54,38 +55,55 @@ public class Statue {
 		if (z < minZ) minZ = z;
 
 		if (matrix.containsKey(z) == false) {
-			matrix.put(z, new HashMap<Integer,HashMap<Integer,Material>>() );
+			matrix.put(z, new HashMap<Integer,HashMap<Integer,MaterialHolder>>() );
 		}
 		if (matrix.get(z).containsKey(y) == false) {
-			matrix.get(z).put(y, new HashMap<Integer,Material>());
+			matrix.get(z).put(y, new HashMap<Integer,MaterialHolder>());
 		}
 		if (matrix.get(z).get(y).containsKey(x) == false) {
-			matrix.get(z).get(y).put(z, Material.AIR);
+			matrix.get(z).get(y).put(z, new MaterialHolder(Material.AIR));
 		}
 
-		matrix.get(z).get(y).put(x, m);
+		matrix.get(z).get(y).put(x, new MaterialHolder(m));
 	}
-	public boolean createStatue(World w, Player p) {
+	public boolean createStatue(World w, Player p, boolean eraseMode) {
 
 		for (int keyZ : matrix.keySet()) {
 			for (int keyY : matrix.get(keyZ).keySet()) {
 				for (int keyX : matrix.get(keyZ).get(keyY).keySet()) {
-					Material mat = matrix.get(keyZ).get(keyY).get(keyX);
+					MaterialHolder mat = matrix.get(keyZ).get(keyY).get(keyX);
 					//Make sure we aren't doing anything we shouldn't
 
-					if (mat.equals(Material.AIR)) {
+					if (mat.getM().equals(Material.AIR)) {
 						continue;
 					}
-
+					//WARNING: DO NOT CHANGE
 					Block b = w.getBlockAt(new Location(w,keyX,keyY+3,keyZ));
 					if (p.hasPermission("playerstatuebuilderx.override") == false) {
+						//We only replace AIR blocks in the world!
 						if (!b.getType().equals(Material.AIR)) {
 							continue;
 						}
 					}
+					/*
+					 * So if the material previously successfully changed and you want to erase and the material is the same
+					 * material it was changed to previously, then we will revert it back to an AIR block, which it must
+					 * have been (when building the statue, the plugin does not modify non-air blocks)
+					 * If this were somehow triggered too early, nothing would happen as all mat.isSuccess() is false by default 
+					 * Please note that you'll also need the "override" permission to overwrite any non-air blocks
+					 */
+					if (eraseMode == true && 
+							mat.isSuccess() == true && 
+							b.getBlockData().getMaterial().equals(matrix.get(keyZ).get(keyY).get(keyX).getM())) 
+					{
+						b.setType(Material.AIR);
+						continue;
+					} else if (eraseMode == true) {
+						continue;
+					}
 
-
-					b.setType(matrix.get(keyZ).get(keyY).get(keyX));
+					b.setType(matrix.get(keyZ).get(keyY).get(keyX).getM());
+					mat.setSuccess(true);
 				}
 			}
 		}
@@ -94,6 +112,7 @@ public class Statue {
 	}
 	public boolean canBuild(World w, Player p) {
 		try {
+			//WARNING: DO NOT CHANGE
 			return PlayerStatuePlugin.wgw.canBuild(new Location(w,minX,minY+3,+minZ), new Location(w,maxX,+maxY+3,maxZ), p);
 		} catch (Exception e) {
 			return true;
@@ -134,7 +153,7 @@ public class Statue {
 		for (int keyZ : matrix.keySet()) {
 			for (int keyY : matrix.get(keyZ).keySet()) {
 				for (int keyX : matrix.get(keyZ).get(keyY).keySet()) {
-					Material temp = matrix.get(keyZ).get(keyY).get(keyX);
+					Material temp = matrix.get(keyZ).get(keyY).get(keyX).getM();
 					if (temp.equals(Material.AIR)) {
 						continue;
 					}

@@ -133,9 +133,13 @@ public class StatueMaker extends BukkitRunnable {
 			return;
 		}
 		Log.log("Creating Structure...");
-		s.createStatue(w,p);
+		s.createStatue(w,p,false);
 
 		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatuePlugin.instance.getConfig().getInt("cooldown") * 60000);
+		/**
+		 * Now ready to be undone!
+		 */
+		Statue.lastCreated = s;
 	}
 	@Override
 	public void run() {
