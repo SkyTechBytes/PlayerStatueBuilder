@@ -20,7 +20,7 @@ Need something to decorate your server? Tired of building player statues by hand
 <li> So you would type "/statue USERNAME slim xz" if you would like to generate a skin with the user USERNAME, with a skin format of "slim", and having the statue laying down.
 <li>WorldGuard Support (also works without WorldGuard)!!!
 <li>Informs the player of what blocks/items are needed to build the statue.
-<li>Allows building of a statue ONLY if the uncolored/undyed blocks are in inventory (Admins bypass this) w/ Terracotta, Wood, Wool, and Diamonds (Diamond Cost = number of blocks divided by 16) - for survival/normal players. Configurable!
+<li>Allows building of a statue ONLY if the uncolored/undyed blocks are in inventory (Admins bypass this) w/ Terracotta, Wood, Wool, Concrete, and Diamonds (Diamond Cost = number of blocks divided by 16) - for survival/normal players. Configurable!
 <li>Multithreaded so it shouldn't lag your server 
 <li>Rotates the statue so that it faces you (Supports 4 directions + the aforementioned xy,xz,yz, so 12 orientations in total!)
 <li>If used by a survival/normal player, the plugin won't delete blocks- only modifies air. This prevents accidental modification of the terrain, and eliminates the possibility that the statue will destroy bedrock or other stuff it shouldn't destroy.
