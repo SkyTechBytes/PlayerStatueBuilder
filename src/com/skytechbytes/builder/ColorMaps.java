@@ -18,6 +18,7 @@ public class ColorMaps {
 	static Map<Color,Material> x = new HashMap<Color,Material>();
 	static Map<Color,Material> p = new HashMap<Color,Material>();
 	static Map<Color,Material> t = new HashMap<Color,Material>();
+	static Map<Color,Material> c = new HashMap<Color,Material>();
 
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
 
@@ -67,7 +68,25 @@ public class ColorMaps {
 		t.put(new Color(136,105,96),Material.LIGHT_GRAY_TERRACOTTA);
 		t.put(new Color(88,88,88),Material.CYAN_TERRACOTTA);
 		t.put(new Color(120,68,84),Material.PURPLE_TERRACOTTA);
-
+		
+		c.put(new Color(0xd0d6d7), Material.WHITE_CONCRETE);
+		c.put(new Color(0xe26100), Material.ORANGE_CONCRETE);
+		c.put(new Color(0xaa2da0), Material.MAGENTA_CONCRETE);
+		c.put(new Color(0x1e88c6), Material.LIGHT_BLUE_CONCRETE);
+		c.put(new Color(0xf3b10d), Material.YELLOW_CONCRETE);
+		c.put(new Color(0x5fab12), Material.LIME_CONCRETE);
+		c.put(new Color(0xd6648f), Material.PINK_CONCRETE);
+		c.put(new Color(0x33373b), Material.GRAY_CONCRETE);
+		c.put(new Color(0x7f7f75), Material.LIGHT_GRAY_CONCRETE);
+		c.put(new Color(0x0f798a), Material.CYAN_CONCRETE);
+		c.put(new Color(0x282a90), Material.BLUE_CONCRETE);
+		c.put(new Color(0x64199d), Material.PURPLE_CONCRETE);
+		c.put(new Color(0x485b1f), Material.GREEN_CONCRETE);
+		c.put(new Color(0x613a1a), Material.BROWN_CONCRETE);
+		c.put(new Color(0x901d1d), Material.RED_CONCRETE);
+		c.put(new Color(0x010205), Material.BLACK_CONCRETE);
+		
+		colorMaps.add(c);
 		colorMaps.add(x);
 		colorMaps.add(p);
 		colorMaps.add(t);

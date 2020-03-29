@@ -163,6 +163,8 @@ public class Statue {
 						temp = Material.OAK_PLANKS;
 					} else if (temp.toString().endsWith("TERRACOTTA")) {
 						temp = Material.TERRACOTTA;
+					} else if (temp.toString().endsWith("CONCRETE")) {
+						temp = Material.WHITE_CONCRETE;
 					}
 
 					if (blocks.containsKey(temp)) {

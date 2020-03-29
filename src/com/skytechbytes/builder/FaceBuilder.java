@@ -90,10 +90,10 @@ public class FaceBuilder {
 			ll(w,o.getBlockX()-off1, o.getBlockY()+off2, o.getBlockZ()-off3,m);
 			break;
 		case 2:
-			ll(w,o.getBlockX()+off3, o.getBlockY()+off2, o.getBlockZ()+off1,m);
+			ll(w,o.getBlockX()+off3, o.getBlockY()+off2, o.getBlockZ()-off1,m);//fixed by swapping +off1 to -off1
 			break;
 		case 3:
-			ll(w,o.getBlockX()-off3, o.getBlockY()+off2, o.getBlockZ()-off1,m);
+			ll(w,o.getBlockX()-off3, o.getBlockY()+off2, o.getBlockZ()+off1,m);//fixed by swapping -off1 to +off1
 			break;
 		}
 		
