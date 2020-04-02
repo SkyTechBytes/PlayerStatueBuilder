@@ -19,8 +19,12 @@ public class ColorMaps {
 	static Map<Color,Material> p = new HashMap<Color,Material>();
 	static Map<Color,Material> t = new HashMap<Color,Material>();
 	static Map<Color,Material> c = new HashMap<Color,Material>();
-
+	static Map<Color,Material> g = new HashMap<Color,Material>();
+	static Map<Color,Material> w = new HashMap<Color,Material>();
+	
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
+	
+	static List<Integer> activeColorMaps = new ArrayList<>();
 
 	static Map<Integer,Material> qMap = new HashMap<Integer,Material>();
 	public ColorMaps() {
@@ -86,19 +90,57 @@ public class ColorMaps {
 		c.put(new Color(0x901d1d), Material.RED_CONCRETE);
 		c.put(new Color(0x010205), Material.BLACK_CONCRETE);
 		
-		colorMaps.add(c);
+		g.put(new Color(0xf7f8f8), Material.WHITE_STAINED_GLASS);
+		g.put(new Color(0xdea877), Material.ORANGE_STAINED_GLASS);
+		g.put(new Color(0xc78adf), Material.MAGENTA_STAINED_GLASS);
+		g.put(new Color(0x99b8df), Material.LIGHT_BLUE_STAINED_GLASS);
+		g.put(new Color(0xe7e877), Material.YELLOW_STAINED_GLASS);
+		g.put(new Color(0xa7d867), Material.LIME_STAINED_GLASS);
+		g.put(new Color(0xf0a8bf), Material.PINK_STAINED_GLASS);
+		g.put(new Color(0x898a8a), Material.GRAY_STAINED_GLASS);
+		g.put(new Color(0x898a8a), Material.LIGHT_GRAY_STAINED_GLASS);
+		g.put(new Color(0x89a8b8), Material.CYAN_STAINED_GLASS);
+		g.put(new Color(0xa77ec8), Material.PURPLE_STAINED_GLASS);
+		g.put(new Color(0x697cc5), Material.BLUE_STAINED_GLASS);
+		g.put(new Color(0x998a77), Material.BROWN_STAINED_GLASS);
+		g.put(new Color(0x99a877), Material.GREEN_STAINED_GLASS);
+		g.put(new Color(0xa44949), Material.RED_STAINED_GLASS);
+		g.put(new Color(0x666767), Material.BLACK_STAINED_GLASS);
+		
+		w.put(new Color(0xE9ECEC), Material.WHITE_WOOL);
+		w.put(new Color(0x3E4447), Material.GRAY_WOOL);
+		w.put(new Color(0x141519), Material.BLACK_WOOL);
+		w.put(new Color(0x8E8E86), Material.LIGHT_GRAY_WOOL);
+		w.put(new Color(210,180,161),Material.WHITE_TERRACOTTA);
+		w.put(new Color(51,32,24),Material.GRAY_TERRACOTTA);
+		w.put(new Color(136,105,96),Material.LIGHT_GRAY_TERRACOTTA);
+		w.put(new Color(88,88,88),Material.CYAN_TERRACOTTA);
+		w.put(new Color(27,12,4),Material.BLACK_TERRACOTTA);
+		w.put(new Color(0xd0d6d7), Material.WHITE_CONCRETE);
+		w.put(new Color(0x33373b), Material.GRAY_CONCRETE);
+		w.put(new Color(0x7f7f75), Material.LIGHT_GRAY_CONCRETE);
+		w.put(new Color(0x010205), Material.BLACK_CONCRETE);
+		w.put(new Color(0x7c7c7c), Material.STONE);
+		
 		colorMaps.add(x);
 		colorMaps.add(p);
 		colorMaps.add(t);
+		colorMaps.add(c);
+		colorMaps.add(g);
+		colorMaps.add(w);
 
 	}
 	public static Material getMatchingMaterial(int r, int g, int b, int alpha) {
 		if (alpha < 255) {
 			return Material.AIR;
 		}
-		Material temp = Material.CHISELED_RED_SANDSTONE;
+		Material temp = Material.AIR;
 		int smallestDifference = Integer.MAX_VALUE;
-		for (Map<Color,Material> x : colorMaps) {
+		for (int i = 0 ; i < colorMaps.size() ; i++) {
+			if (!activeColorMaps.contains(i)) {
+				continue;
+			}
+			Map<Color,Material> x = colorMaps.get(i);
 			Set<Color> keys = x.keySet();
 			for(Color key: keys){
 				int difference = (int) (Math.pow(key.getRed()-r,2) + Math.pow(key.getGreen()-g,2) + Math.pow(key.getBlue()-b,2));
@@ -110,5 +152,8 @@ public class ColorMaps {
 		}
 		return temp;
 	}
-
+	public static List<Integer> getActiveColorMaps() {
+		return activeColorMaps;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package com.skytechbytes.builder;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -20,15 +21,15 @@ import com.skytechbytes.testplugin.PlayerStatuePlugin;
  * "But it works"
  *
  */
-public class Statue {
-	public static Statue lastCreated;
+public class Schematic {
+	public static Stack<Schematic> history = new Stack<>();
 	/*
 	 * Hashception
 	 */
 
 	private HashMap<Integer,HashMap<Integer,HashMap<Integer,MaterialHolder>>> matrix = new HashMap<>();
 
-	public Statue () {
+	public Schematic () {
 
 	}
 
@@ -165,8 +166,10 @@ public class Statue {
 						temp = Material.TERRACOTTA;
 					} else if (temp.toString().endsWith("CONCRETE")) {
 						temp = Material.WHITE_CONCRETE;
+					} else if (temp.toString().endsWith("GLASS")) {
+						temp = Material.GLASS;
 					}
-
+					
 					if (blocks.containsKey(temp)) {
 						blocks.put(temp,blocks.get(temp)+1);
 					} else {

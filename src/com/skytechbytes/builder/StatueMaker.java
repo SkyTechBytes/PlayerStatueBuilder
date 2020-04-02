@@ -22,7 +22,7 @@ public class StatueMaker extends BukkitRunnable {
 	
 	public static HashMap<String,Long> cooldowns = new HashMap<>();
 	
-	private Statue s;
+	private Schematic s;
 	private World w;
 	private Player p;
 	private Location origin;
@@ -33,7 +33,7 @@ public class StatueMaker extends BukkitRunnable {
 		this(w,p,mode,bi,false);
 	}
 	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote) {
-		s = new Statue();
+		s = new Schematic();
 		this.w = w;
 		this.p = p;
 		this.quote = quote;
@@ -139,7 +139,7 @@ public class StatueMaker extends BukkitRunnable {
 		/**
 		 * Now ready to be undone!
 		 */
-		Statue.lastCreated = s;
+		Schematic.history.add(s);
 	}
 	@Override
 	public void run() {

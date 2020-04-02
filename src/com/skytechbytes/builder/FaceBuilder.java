@@ -14,8 +14,8 @@ import com.skytechbytes.builder.BuildUtils;
 public class FaceBuilder {
 	public static int master_orientation = 2;
 	public static int minor_orientation = 3;
-	public Statue statue;
-	public FaceBuilder(Statue s) {
+	public Schematic statue;
+	public FaceBuilder(Schematic s) {
 		this.statue = s;
 	}
 	/**

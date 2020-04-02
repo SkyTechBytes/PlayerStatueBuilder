@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.skytechbytes.builder.Statue;
+import com.skytechbytes.builder.Schematic;
 /**
  * 
  * @author SkyTechBytes
@@ -28,7 +28,11 @@ public class CommandUndostatue implements CommandExecutor {
 			}
 			
 			try {
-				Statue s = Statue.lastCreated;
+				Schematic s = null;
+				
+				if (Schematic.history.size() > 0) {
+					s = Schematic.history.pop();
+				}
 				
 				if (s == null) {
 					throw new Exception("There is no statue to undo right now.");

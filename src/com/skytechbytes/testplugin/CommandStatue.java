@@ -2,7 +2,9 @@ package com.skytechbytes.testplugin;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.shanerx.mojang.Mojang;
 import org.shanerx.mojang.PlayerProfile;
 
+import com.skytechbytes.builder.C;
+import com.skytechbytes.builder.ColorMaps;
 import com.skytechbytes.builder.FaceBuilder;
 import com.skytechbytes.builder.StatueMaker;
 /**
@@ -42,22 +46,25 @@ public class CommandStatue implements CommandExecutor {
 				return false;
 			}
 			
+			List<String> flags = Arrays.asList(arg3);
+			
 			try {
 				p.sendMessage(ChatColor.YELLOW + "Crunching numbers... please wait.");
-				if (arg3.length >= 3) {
+				/*
+				 * Special orientation flags
+				 */
+				if (flags.contains("xy") || flags.contains("xz") || flags.contains("yz")) {
 					if (!p.hasPermission("playerstatuebuilderx.specialOrientations")) {
 						p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
 						throw new Exception("Insufficient Permissions");
 					}
-					if (arg3[2].equals("xy")) {
+					if (flags.contains("xy")) {
 						FaceBuilder.master_orientation = 0;
-					} else if (arg3[2].equals("xz")) {
+					} else if (flags.contains("xz")) {
 						FaceBuilder.master_orientation = 2;
-					} else if (arg3[2].equals("yz")) {
+					} else if (flags.contains("yz")) {
 						FaceBuilder.master_orientation = 1;
-					} else {
-						throw new Exception("Orientation not supported");
-					}
+					} 
 				} else {
 					FaceBuilder.master_orientation = 0;
 				}
@@ -83,18 +90,41 @@ public class CommandStatue implements CommandExecutor {
 				} else {
 					bi = cache.get(name);
 				}
+				/*
+				 * Types of blocks flags
+				 */
 				
+				ColorMaps.getActiveColorMaps().clear();
 				
+				if (flags.contains("wool")) ColorMaps.getActiveColorMaps().add(C.WOOL);
 				
-				if (arg3.length >= 2) {
-					if (arg3[1].equals("slim")) {
+				if (flags.contains("planks")) ColorMaps.getActiveColorMaps().add(C.PLANKS);
+				
+				if (flags.contains("terracotta")) ColorMaps.getActiveColorMaps().add(C.TERRACOTTA);
+				
+				if (flags.contains("concrete")) ColorMaps.getActiveColorMaps().add(C.CONCRETE);
+				
+				if (flags.contains("glass")) ColorMaps.getActiveColorMaps().add(C.GLASS);
+				
+				if (flags.contains("gray")) ColorMaps.getActiveColorMaps().add(C.GRAY);
+				
+				if (ColorMaps.getActiveColorMaps().size() == 0) {
+					ColorMaps.getActiveColorMaps().add(C.WOOL);
+					ColorMaps.getActiveColorMaps().add(C.PLANKS);
+					ColorMaps.getActiveColorMaps().add(C.TERRACOTTA);
+					ColorMaps.getActiveColorMaps().add(C.CONCRETE);
+				}
+				
+				/*
+				 * Type of skin flags
+				 */
+				if (flags.contains("slim") || flags.contains("legacy") || flags.contains("default")) {
+					if (flags.contains("slim")) {
 						new StatueMaker(p.getWorld(),p,"slim",bi).runTask(PlayerStatuePlugin.instance);
-					} else if (arg3[1].equals("legacy")) {
+					} else if (flags.contains("legacy")) {
 						new StatueMaker(p.getWorld(),p,"legacy",bi).runTask(PlayerStatuePlugin.instance);
-					} else if (arg3[1].equals("default")) {
+					} else if (flags.contains("default")) {
 						new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
-					} else {
-						throw new Exception("Skin format does not exist");
 					}
 				} else {
 					new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
