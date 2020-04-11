@@ -1,13 +1,13 @@
 name: PlayerStatuePlugin
 main: com.skytechbytes.testplugin.PlayerStatuePlugin
-version: 1.4
+version: 1.6
 author: SkyTechBytes
 softdepend: [WorldGuard]
 api-version: 1.13
 commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation
-      usage: /statue <Username> [default|slim|legacy] [xy|xz|yz]
+      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] 
    undostatue:
       description: Undo the last statue created by ANYONE on the server
       usage: /undostatue
