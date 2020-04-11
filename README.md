@@ -9,7 +9,7 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-<li>Usage: "/statue USERNAME [glass|concerete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] "
+<li>Usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] "
 <li>Usage: "/undostatue" (Admin) You can now UNDO more than just your last statue!
 <li>EXAMPLE 1: "/statue [USERNAME] glass" creates a statue made of glass only
 <li>EXAMPLE 2: "/statue [USERNAME] concrete" creates a statue made of concrete only
