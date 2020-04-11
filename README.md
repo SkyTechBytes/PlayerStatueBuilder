@@ -9,12 +9,19 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-<li>Usage: "/statue USERNAME [default|slim|legacy] [xy|xz|yz]"
-<li>Usage: "/undostatue" (Admin)
+<li>Usage: "/statue USERNAME [glass|concerete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] "
+<li>Usage: "/undostatue" (Admin) You can now UNDO more than just your last statue!
+<li>EXAMPLE 1: "/statue [USERNAME] glass" creates a statue made of glass only
+<li>EXAMPLE 2: "/statue [USERNAME] concrete" creates a statue made of concrete only
+<li>EXAMPLE 3: "/statue [USERNAME] terracotta planks" creates a statue made of only terracotta and wood planks
+<li>EXAMPLE 4: "/statue [USERNAME] gray" creates a grayscale statue
+<li>EXAMPLE 5: "/statue [USERNAME] slim gray" creates a grayscale statue that has the "slim" skin format (3px arms)
+<li>EXAMPLE 6: "/statue [USERNAME] wool xz" creates a statue made of only wool. The statue is lying down because of the "xz" parameter.
 <li>Supports the <strong>new skin type (sleeves, pantlegs, jacket, etc.)</strong>
 <li>Supports the <strong>"slim"</strong> skin format with 3 pixel arms
 <li>Supports the older skin type without sleeves, pantlegs, or a jacket
 <li><strong>So it basically supports all skins!</strong>
+<li>Supports the following block types: glass, concrete, terracotta, planks, gray-colored blocks, wool (you can combine them too!)
 <li>The default setting is "default" 
 <li>Also supports different skin orientations (lying down, lying on side, standing up)
 <li> So you would type "/statue USERNAME slim xz" if you would like to generate a skin with the user USERNAME, with a skin format of "slim", and having the statue laying down.
