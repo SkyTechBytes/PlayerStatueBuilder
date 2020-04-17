@@ -9,7 +9,19 @@
        <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>1.5</version>
+        <!--  1.5 is the original version -->
+        <version>3.1.0</version>
+        <!--  New shading stuff for bstats -->
+        <configuration>
+        <relocations>
+          <relocation>
+            <pattern>org.bstats</pattern>
+            <!-- Replace this with your package! -->
+            <shadedPattern>com.skytechbytes.testplugin</shadedPattern>
+          </relocation>
+        </relocations>
+      </configuration>
+      <!-- End shading bstats  -->
         <executions>
           <execution>
             <phase>package</phase>
@@ -36,8 +48,12 @@
 	<repository>
         <id>sk89q-repo</id>
         <url>https://maven.enginehub.org/repo/</url>
-   </repository>
-    </repositories>
+    </repository>
+    <repository>
+        <id>CodeMC</id>
+        <url>https://repo.codemc.org/repository/maven-public</url>
+    </repository>
+  </repositories>
 	
     <dependencies>
 	<!-- More dependencies... -->
@@ -77,7 +93,13 @@
                     </exclusion>
             </exclusions>
         </dependency>
-    
+        <!--  Bstats -->
+    	<dependency>
+		  <groupId>org.bstats</groupId>
+		  <artifactId>bstats-bukkit</artifactId>
+		  <version>1.7</version>
+		  <scope>compile</scope>
+		</dependency>
     </dependencies>
     
 </project>

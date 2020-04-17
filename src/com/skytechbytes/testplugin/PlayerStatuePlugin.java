@@ -1,4 +1,5 @@
 package com.skytechbytes.testplugin;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.skytechbytes.support.WorldGuardWrapper;
@@ -30,6 +31,11 @@ public class PlayerStatuePlugin extends JavaPlugin {
     	this.getCommand("statue").setExecutor(new CommandStatue());
     	this.getCommand("undostatue").setExecutor(new CommandUndostatue());
 
+    	//Bstats begins here
+    	int pluginId = 7093;
+    	Metrics m = new Metrics(this,pluginId);
+    	int version = Metrics.B_STATS_VERSION;
+    	
     }
     // Fired when plugin is disabled
     @Override

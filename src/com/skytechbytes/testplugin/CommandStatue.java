@@ -1,22 +1,16 @@
 package com.skytechbytes.testplugin;
 
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
-import javax.imageio.ImageIO;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.shanerx.mojang.Mojang;
-import org.shanerx.mojang.PlayerProfile;
 
 import com.skytechbytes.builder.C;
 import com.skytechbytes.builder.ColorMaps;
@@ -69,27 +63,31 @@ public class CommandStatue implements CommandExecutor {
 					FaceBuilder.master_orientation = 0;
 				}
 				
-				Mojang api = new Mojang().connect();
-				api.connect();
-				String name = p.getName();
+//				Mojang api = new Mojang().connect();
+//				api.connect();
+//				String name = p.getName();
+//				
+//				if (arg3.length >= 1) {
+//					name = arg3[0];
+//					
+//				}
+//				
+//				BufferedImage bi = null;
+//				if (!cache.containsKey(name)) {
+//					PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
+//	
+//					Optional<URL> URL  = pp.getTextures().get().getSkin();
+//	
+//					bi = ImageIO.read(URL.get());
+//					
+//					cache.put(name, bi);
+//				} else {
+//					bi = cache.get(name);
+//				}
 				
-				if (arg3.length >= 1) {
-					name = arg3[0];
-					
-				}
+				BufferedImage bi = Util.getSkinImage(p, arg3);
 				
-				BufferedImage bi = null;
-				if (!cache.containsKey(name)) {
-					PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
-	
-					Optional<URL> URL  = pp.getTextures().get().getSkin();
-	
-					bi = ImageIO.read(URL.get());
-					
-					cache.put(name, bi);
-				} else {
-					bi = cache.get(name);
-				}
+				
 				/*
 				 * Types of blocks flags
 				 */
