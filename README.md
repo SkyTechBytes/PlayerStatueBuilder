@@ -1,4 +1,4 @@
-# PlayerStatueBuilder
+# PlayerStatueBuilder / SkinStatueBuilder
 SkyTechBytes' Player Statue Builder. Supports basically all skin formats!
 <h1>PlayerStatueBuilderX</h1>
 <h2>Description</h2>
@@ -9,14 +9,16 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-<li>Usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] "
+<li>usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor]"
 <li>Usage: "/undostatue" (Admin) You can now UNDO more than just your last statue!
 <li>EXAMPLE 1: "/statue [USERNAME] glass" creates a statue made of glass only
 <li>EXAMPLE 2: "/statue [USERNAME] concrete" creates a statue made of concrete only
 <li>EXAMPLE 3: "/statue [USERNAME] terracotta planks" creates a statue made of only terracotta and wood planks
 <li>EXAMPLE 4: "/statue [USERNAME] gray" creates a grayscale statue
 <li>EXAMPLE 5: "/statue [USERNAME] slim gray" creates a grayscale statue that has the "slim" skin format (3px arms)
-<li>EXAMPLE 6: "/statue [USERNAME] wool xz" creates a statue made of only wool. The statue is lying down because of the "xz" parameter.
+<li>EXAMPLE 6: "/statue [USERNAME] wool xz" creates a statue made of only wool. The statue is lying down because of the "xz" parameter
+<li>EXAMPLE 7: "/statue [USERNAME] diamond_armor concrete" creates a statue with diamond armor made only out of concrete
+<li>EXAMPLE 8: "/statue [USERNAME] wool glass chainmail_helmet iron_chestplate golden_boots" creates a statue with a chainmail helmet, iron chestplate, and golden boots, made only out of wool and glass.
 <li>Supports the <strong>new skin type (sleeves, pantlegs, jacket, etc.)</strong>
 <li>Supports the <strong>"slim"</strong> skin format with 3 pixel arms
 <li>Supports the older skin type without sleeves, pantlegs, or a jacket
@@ -33,7 +35,17 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>If used by a survival/normal player, the plugin won't delete blocks- only modifies air. This prevents accidental modification of the terrain, and eliminates the possibility that the statue will destroy bedrock or other stuff it shouldn't destroy.
 <li>Spawns the statue two blocks above the player to prevent suffocation.
 <li>Undo-ing a statue affects only the last statue created by ANY player (Admin only)
+<li>You can add armor to your player statues now (chainmail, golden, diamond, iron)! You can select a piece of armor by stating what type of armor and then adding "_helmet" , "_chestplate" , or "_boots" (ex: diamond_boots).
+<li>You can now create a player statue DIRECTLY from your computer (if you're an admin). 
 <li>Config file supports cooldowns (min), extra items required, and # of extra items required
+  <h2>How to create a statue with a skin image directly from your computer"</h2>
+  <li>1. Obtain your skin's .png file and copy it
+  <li>2. Go to your "plugins" folder in your spigot server folder
+  <li>3. Go to the "PlayerStatueBuilderX" folder
+  <li>4. Paste your skin's .png file here. Remember the name of the file!!! (Like "bestskin.png" or "bestskin")
+  <li>5. Start your server
+  <li>6. Type "/statue .FILENAME" Make sure you ADD the period BEFORE you write the name of the file. REMOVE ".png" at the end of your filename when you type it into the command if you have it. Ex: Your file is named "bestSkinEver.png" so you would type "/statue .bestSkinEver"
+  <li>7. You can add "glass" "diamond_armor" etc. after it just like a normal skin statue to customize it!
   <h2>Permissions</h2>
    <pre>
    playerstatuebuilderx.createStatue:
@@ -54,6 +66,9 @@ Need something to decorate your server? Tired of building player statues by hand
    playerstatuebuilderx.undo:
       description: The player is allowed to undo the last statue created by ANYONE on the server (no material refunds). You must have "override" permissions for this to work
       default: op
+   playerstatuebuilderx.custom:
+      description: The player can put a '.' in front to create a custom statue from the plugin's data folder
+      default: true   
       </pre>
   <h2>Configuration File Explanation</h2>
     <pre>
@@ -71,3 +86,5 @@ Need something to decorate your server? Tired of building player statues by hand
 ![2019-12-24_14 56 21](https://user-images.githubusercontent.com/36645753/71426392-a5946000-265d-11ea-9dc7-929790f2dfa2.png)
 <br>
 <a href="https://imgur.com/a/m3HXHHj">Or Use Imgur to see them (click here)</a>
+    <br>
+    <a href="https://imgur.com/a/34qkFPs">1.7 Example (click)</a>
