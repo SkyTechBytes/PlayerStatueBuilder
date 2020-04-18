@@ -9,7 +9,7 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-<li>usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor]"
+<li>Usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor]"
 <li>Usage: "/undostatue" (Admin) You can now UNDO more than just your last statue!
 <li>EXAMPLE 1: "/statue [USERNAME] glass" creates a statue made of glass only
 <li>EXAMPLE 2: "/statue [USERNAME] concrete" creates a statue made of concrete only
@@ -36,9 +36,10 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>Spawns the statue two blocks above the player to prevent suffocation.
 <li>Undo-ing a statue affects only the last statue created by ANY player (Admin only)
 <li>You can add armor to your player statues now (chainmail, golden, diamond, iron)! You can select a piece of armor by stating what type of armor and then adding "_helmet" , "_chestplate" , or "_boots" (ex: diamond_boots).
+<li>The plugin uses bStats for plugin metrics; no personal information is stored and if you use worldedit/essentialsX you already use bStats. You may opt out by going to the configuration file under the "bStats" folder in your plugins folder.
 <li>You can now create a player statue DIRECTLY from your computer (if you're an admin). 
 <li>Config file supports cooldowns (min), extra items required, and # of extra items required
-  <h2>How to create a statue with a skin image directly from your computer"</h2>
+  <h2>How to create a statue with a skin image directly from your computer</h2>
   <li>1. Obtain your skin's .png file and copy it
   <li>2. Go to your "plugins" folder in your spigot server folder
   <li>3. Go to the "PlayerStatueBuilderX" folder
