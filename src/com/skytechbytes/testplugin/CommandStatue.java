@@ -118,18 +118,19 @@ public class CommandStatue implements CommandExecutor {
 				 */
 				if (flags.contains("slim") || flags.contains("legacy") || flags.contains("default")) {
 					if (flags.contains("slim")) {
-						new StatueMaker(p.getWorld(),p,"slim",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"slim",bi,false,flags).runTask(PlayerStatuePlugin.instance);
 					} else if (flags.contains("legacy")) {
-						new StatueMaker(p.getWorld(),p,"legacy",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"legacy",bi,false,flags).runTask(PlayerStatuePlugin.instance);
 					} else if (flags.contains("default")) {
-						new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"default",bi,false,flags).runTask(PlayerStatuePlugin.instance);
 					}
 				} else {
-					new StatueMaker(p.getWorld(),p,"default",bi).runTask(PlayerStatuePlugin.instance);
+					new StatueMaker(p.getWorld(),p,"default",bi,false,flags).runTask(PlayerStatuePlugin.instance);
 				}
 
 			} catch (Exception e) {
-				arg0.sendMessage(ChatColor.RED + "Invalid arguments or the player requested does not exist! " + e.getMessage());
+				arg0.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
+				//e.printStackTrace();
 				return false;
 			}
 			return true;

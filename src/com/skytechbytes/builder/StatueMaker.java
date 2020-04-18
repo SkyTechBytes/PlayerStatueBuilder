@@ -1,8 +1,8 @@
 package com.skytechbytes.builder;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.skytechbytes.testplugin.LegacyConverter;
 import com.skytechbytes.testplugin.Log;
 import com.skytechbytes.testplugin.PlayerStatuePlugin;
 /**
@@ -29,16 +30,16 @@ public class StatueMaker extends BukkitRunnable {
 	private boolean quote = false;
 	private BufferedImage bi;
 	private String mode;
-	public StatueMaker(World w, Player p, String mode, BufferedImage bi) {
-		this(w,p,mode,bi,false);
-	}
-	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote) {
+	private List<String> flags;
+
+	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote, List<String> arg3) {
 		s = new Schematic();
 		this.w = w;
 		this.p = p;
 		this.quote = quote;
 		this.bi = bi;
 		this.mode = mode;
+		this.flags = arg3;
 		origin = new Location(w,p.getLocation().getBlockX(),p.getLocation().getBlockY(),p.getLocation().getBlockZ());
 	}
 	private void initialize() {
@@ -158,15 +159,45 @@ public class StatueMaker extends BukkitRunnable {
 			e.printStackTrace();
 		}
 	}
-	private void makeStatue(Location l, BufferedImage ss) throws IOException {
+	/**
+	 * Warning: the original image is not changed in this process. A new image is returned.
+	 * @param l
+	 * @param ss
+	 * @return
+	 */
+	private BufferedImage preProcessing(Location l, BufferedImage ss) {
+		/*
+		 * Add armor to the player if they request it (or just add parts)
+		 */
+		
+		BufferedImage customizedImage = ImageUtil.deepCopy(ss);
+		
+		for (String key : AssetManager.armor.keySet()) {
+			if (flags.contains(key)) {
+				//Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
+				customizedImage = ImageUtil.overlayImage(customizedImage, AssetManager.armor.get(key));
+			}
+		}
+		return customizedImage;
+		
+	}
+	/**
+	 * Warning: the original "xx" image should not be changed (other than to convert to the new skin format). ONLY modify the ss image.
+	 * @param l
+	 * @param xx
+	 * @throws Exception
+	 */
+	private void makeStatue(Location l, BufferedImage xx) throws Exception {
 		initialize();
 
-		if (ss.getHeight() < 64) {
-			makeLegacyStatue(l,ss);
+		if (xx.getHeight() < 64) {
+			makeStatue(l,LegacyConverter.convertLegacy(xx));
 			p.sendMessage(ChatColor.YELLOW + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
 					+ " smaller than 64x64, so the plugin made a legacy skin statue instead.");
 			return;
 		}
+		
+		BufferedImage ss = preProcessing(l,xx);
 
 		//0 is vertical |_
 		//1 is flat |-
@@ -246,65 +277,11 @@ public class StatueMaker extends BukkitRunnable {
 
 		finish();
 	}
-	private void makeLegacyStatue(Location l, BufferedImage ss) {
+	private void makeSlimStatue(Location l, BufferedImage xx) {
 		initialize();
-		//0 is vertical |_
-		//1 is flat |-
-		//2 is sideways |_
-		//Bottom, Right, Left, Top, Back, Front
-		//Right Leg
-		FaceBuilder fb = new FaceBuilder(s);
-		Reader r = new Reader();
-		//BufferedImage ss = r.read();
-		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
-		fb.buildFace(l, r.part(ss, 0, 20, 4, 12), 2,0,0,-3);
-		//fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,12,-3);
-		fb.buildFace(l, r.part(ss, 12, 20, 4, 12), 0,0,0,-3,true,false);
-		fb.buildFace(l, r.part(ss, 4, 20, 4, 12), 0,0,0,0);
-
-		//Left Leg
-		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0+4,1,-3,true,true);
-		fb.buildFace(l, r.part(ss, 0, 20, 4, 12), 2,0+7,0,-3,false,false);
-		//fb.buildFace(l, r.part(ss, 8+16, 16+32, 4, 4), 1,0+4,12,-3);
-		fb.buildFace(l, r.part(ss, 12, 20, 4, 12), 0,0+4,0,-3,false,false);
-		fb.buildFace(l, r.part(ss, 4, 20, 4, 12), 0,0+4,0,0,true,false);
-
-		//Body
-		fb.buildFace(l, r.part(ss, 20, 20, 8, 12), 0,0,12,0);
-		fb.buildFace(l, r.part(ss, 32, 20, 8, 12), 0,0,12,-3,true,false);
-
-		//Right Arm
-		fb.buildFace(l, r.part(ss, 8+40, 16, 4, 4), 1,0-4,1+12,-3,false,true);
-		fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0-4,0+12,-3);
-		fb.buildFace(l, r.part(ss, 8+40-4, 16, 4, 4), 1,0-4,12+12,-3);
-		fb.buildFace(l, r.part(ss, 12+40, 20, 4, 12), 0,0-4,0+12,-3,true,false);
-		fb.buildFace(l, r.part(ss, 4+40, 20, 4, 12), 0,0-4,0+12,0);
-
-		//Left Arm
-		fb.buildFace(l, r.part(ss, 8+40, 16, 4, 4), 1,0+4+4,1+12,-3,true,true);
-		fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0+7+4,0+12,-3,false,false);
-		fb.buildFace(l, r.part(ss, 8+40-4, 16, 4, 4), 1,0+4+4,12+12,-3,true,false);
-		fb.buildFace(l, r.part(ss, 12+40, 20, 4, 12), 0,0+4+4,0+12,-3,false,false);
-		fb.buildFace(l, r.part(ss, 4+40, 20, 4, 12), 0,0+4+4,0+12,0,true,false);
-
-		//Head
-		fb.buildFace(l, r.part(ss, 16, 0, 8, 8), 1,0,1+24,-5,false,true);
-		fb.buildFace(l, r.part(ss, 0, 8, 8, 8), 2,0,0+24,-5);
-		fb.buildFace(l, r.part(ss, 16, 8, 8, 8), 2,0+7,0+24,-5,true,false);
-		fb.buildFace(l, r.part(ss, 8, 0, 8, 8), 1,0,1+24+7,-5);
-		fb.buildFace(l, r.part(ss, 24, 8, 8, 8), 0,0,24,-5,true,false);
-		fb.buildFace(l, r.part(ss, 8, 8, 8, 8), 0,0,24,2);
-		//Hat
-		fb.buildFace(l, r.part(ss, 0+32, 8, 8, 8), 2,0-1,0+24,-5);
-		fb.buildFace(l, r.part(ss, 16+32, 8, 8, 8), 2,0+7+1,0+24,-5,true,false);
-		fb.buildFace(l, r.part(ss, 8+32, 0, 8, 8), 1,0,1+24+7+1,-5);
-		fb.buildFace(l, r.part(ss, 24+32, 8, 8, 8), 0,0,24,-5-1,true,false);
-		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
-
-		finish();
-	}
-	private void makeSlimStatue(Location l, BufferedImage ss) {
-		initialize();
+		
+		BufferedImage ss = preProcessing(l,xx);
+		
 		//0 is vertical |_
 		//1 is flat |-
 		//2 is sideways |_
@@ -385,5 +362,67 @@ public class StatueMaker extends BukkitRunnable {
 		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
 		finish();
 	}
+	private void makeLegacyStatue(Location l, BufferedImage ss) throws Exception {
+		makeStatue(l,LegacyConverter.convertLegacy(ss));
+		/*
+		
+		initialize();
+		//0 is vertical |_
+		//1 is flat |-
+		//2 is sideways |_
+		//Bottom, Right, Left, Top, Back, Front
+		//Right Leg
+		FaceBuilder fb = new FaceBuilder(s);
+		Reader r = new Reader();
+		//BufferedImage ss = r.read();
+		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
+		fb.buildFace(l, r.part(ss, 0, 20, 4, 12), 2,0,0,-3);
+		//fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,12,-3);
+		fb.buildFace(l, r.part(ss, 12, 20, 4, 12), 0,0,0,-3,true,false);
+		fb.buildFace(l, r.part(ss, 4, 20, 4, 12), 0,0,0,0);
+
+		//Left Leg
+		fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0+4,1,-3,true,true);
+		fb.buildFace(l, r.part(ss, 0, 20, 4, 12), 2,0+7,0,-3,false,false);
+		//fb.buildFace(l, r.part(ss, 8+16, 16+32, 4, 4), 1,0+4,12,-3);
+		fb.buildFace(l, r.part(ss, 12, 20, 4, 12), 0,0+4,0,-3,false,false);
+		fb.buildFace(l, r.part(ss, 4, 20, 4, 12), 0,0+4,0,0,true,false);
+
+		//Body
+		fb.buildFace(l, r.part(ss, 20, 20, 8, 12), 0,0,12,0);
+		fb.buildFace(l, r.part(ss, 32, 20, 8, 12), 0,0,12,-3,true,false);
+
+		//Right Arm
+		fb.buildFace(l, r.part(ss, 8+40, 16, 4, 4), 1,0-4,1+12,-3,false,true);
+		fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0-4,0+12,-3);
+		fb.buildFace(l, r.part(ss, 8+40-4, 16, 4, 4), 1,0-4,12+12,-3);
+		fb.buildFace(l, r.part(ss, 12+40, 20, 4, 12), 0,0-4,0+12,-3,true,false);
+		fb.buildFace(l, r.part(ss, 4+40, 20, 4, 12), 0,0-4,0+12,0);
+
+		//Left Arm
+		fb.buildFace(l, r.part(ss, 8+40, 16, 4, 4), 1,0+4+4,1+12,-3,true,true);
+		fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0+7+4,0+12,-3,false,false);
+		fb.buildFace(l, r.part(ss, 8+40-4, 16, 4, 4), 1,0+4+4,12+12,-3,true,false);
+		fb.buildFace(l, r.part(ss, 12+40, 20, 4, 12), 0,0+4+4,0+12,-3,false,false);
+		fb.buildFace(l, r.part(ss, 4+40, 20, 4, 12), 0,0+4+4,0+12,0,true,false);
+
+		//Head
+		fb.buildFace(l, r.part(ss, 16, 0, 8, 8), 1,0,1+24,-5,false,true);
+		fb.buildFace(l, r.part(ss, 0, 8, 8, 8), 2,0,0+24,-5);
+		fb.buildFace(l, r.part(ss, 16, 8, 8, 8), 2,0+7,0+24,-5,true,false);
+		fb.buildFace(l, r.part(ss, 8, 0, 8, 8), 1,0,1+24+7,-5);
+		fb.buildFace(l, r.part(ss, 24, 8, 8, 8), 0,0,24,-5,true,false);
+		fb.buildFace(l, r.part(ss, 8, 8, 8, 8), 0,0,24,2);
+		//Hat
+		fb.buildFace(l, r.part(ss, 0+32, 8, 8, 8), 2,0-1,0+24,-5);
+		fb.buildFace(l, r.part(ss, 16+32, 8, 8, 8), 2,0+7+1,0+24,-5,true,false);
+		fb.buildFace(l, r.part(ss, 8+32, 0, 8, 8), 1,0,1+24+7+1,-5);
+		fb.buildFace(l, r.part(ss, 24+32, 8, 8, 8), 0,0,24,-5-1,true,false);
+		fb.buildFace(l, r.part(ss, 8+32, 8, 8, 8), 0,0,24,2+1);
+
+		finish();
+		*/
+	}
+	
 	
 }

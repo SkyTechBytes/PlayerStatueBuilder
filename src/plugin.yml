@@ -1,13 +1,13 @@
-name: PlayerStatuePlugin
+name: PlayerStatueBuilderX
 main: com.skytechbytes.testplugin.PlayerStatuePlugin
-version: 1.6
+version: 1.7
 author: SkyTechBytes
 softdepend: [WorldGuard]
 api-version: 1.13
 commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation
-      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] 
+      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor]
    undostatue:
       description: Undo the last statue created by ANYONE on the server
       usage: /undostatue
@@ -30,3 +30,6 @@ permissions:
    playerstatuebuilderx.undo:
       description: The player is allowed to undo the last statue created by ANYONE on the server (no material refunds). You must have "override" permissions for this to work
       default: op
+   playerstatuebuilderx.custom:
+      description: The player can put a '.' in front to create a custom statue from the plugin's data folder
+      default: true

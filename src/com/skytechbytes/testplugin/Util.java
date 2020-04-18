@@ -7,15 +7,17 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.shanerx.mojang.Mojang;
 import org.shanerx.mojang.PlayerProfile;
 
 public class Util {
-	public static Map<String,BufferedImage> cache = new HashMap<>();
+	private static Map<String,BufferedImage> cache = new HashMap<>();
 	
 	
 	public static BufferedImage getSkinImage(Player p, String[] arg3) throws Exception {
@@ -29,14 +31,27 @@ public class Util {
 		
 		BufferedImage bi = null;
 		if (!cache.containsKey(name)) {
-			//don't want those creepy little erors.
+			//don't want those creepy little errors.
 			if (name.startsWith(".") && name.length() > 1) {
+				
+				if (!p.hasPermission("playerstatuebuilderx.custom")) {
+					throw new Exception("Insufficient permissions to create custom statues!");
+				}
+				
 				
 				/*
 				 * The skin is on the local disk in the plugin's data folder.
 				 */
 				//Remove the weirdness at the front
 				String fileName = name.substring(1);
+				
+				Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+				boolean hasSpecialChar = pattern.matcher(fileName).find();
+				
+				if (hasSpecialChar) {
+					if (p.isOp()) p.sendMessage(ChatColor.RED + "Admins: make sure your skin image is alphanumeric only");
+					throw new Exception("Your skin name can't have a special character (don't include .png).");
+				}
 				
 				if (!(fileName.endsWith(".png") || fileName.endsWith(".PNG"))) {
 					fileName = fileName + ".png";
@@ -49,6 +64,10 @@ public class Util {
 				
 				
 					bi = ImageIO.read(customFile.toFile());
+					
+					if (bi == null) {
+						throw new Exception();
+					}
 				} catch (Exception e) {
 					throw new Exception("Unable to load file from plugin data folder. Make sure the name is spelled correctly and the skin"
 							+ " image file is in the same folder as the config file.");
@@ -60,15 +79,24 @@ public class Util {
 				/*
 				 * If the skin has no prefix, it is a normal skin that must be retrieved from the cloud.
 				 */
-				
-				Mojang api = new Mojang().connect();
-				api.connect();
-				
-				PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
-	
-				Optional<URL> URL  = pp.getTextures().get().getSkin();
-	
-				bi = ImageIO.read(URL.get());
+				try {
+					Mojang api = new Mojang().connect();
+					api.connect();
+					
+					PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
+		
+					Optional<URL> URL  = pp.getTextures().get().getSkin();
+		
+					bi = ImageIO.read(URL.get());
+					
+					if (bi == null) {
+						throw new Exception();
+					}
+				} catch (Exception e) {
+					throw new Exception("Something is wrong with getting the skin from the API. You may be offline, sending too many requests "
+							+ " (i.e. wait 2 minutes before "
+							+ "trying again), or the skin just doesn't exist.");
+				}
 			
 			}
 			
@@ -77,7 +105,7 @@ public class Util {
 			bi = cache.get(name);
 		}
 		
-		return bi;
+		return (bi);
 	}
 	
 //	public static final List<Material> UNBREAKABLE = new ArrayList<Material>();
