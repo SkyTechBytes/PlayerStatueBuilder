@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class ImageUtil {
+	
 	public static BufferedImage overlayImage(BufferedImage below, BufferedImage above) {
 		BufferedImage newImage = new BufferedImage(below.getWidth(),below.getHeight(),BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = newImage.createGraphics();
@@ -20,7 +21,7 @@ public class ImageUtil {
 	 * @param bi
 	 * @return
 	 */
-	static BufferedImage deepCopy(BufferedImage source) {
+	public static BufferedImage deepCopy(BufferedImage source) {
 		BufferedImage b = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
 	    Graphics2D g = b.createGraphics();
 	    g.drawImage(source, 0, 0, null);

@@ -19,7 +19,7 @@ import com.skytechbytes.builder.StatueMaker;
 /**
  * 
  * @author SkyTechBytes
- * Thank you SparklingComet for the mojang api
+ * Thank you SparklingComet for the mojang api (No longer used, but still, it was quite useful!)
  *
  */
 public class CommandStatue implements CommandExecutor {
@@ -63,27 +63,6 @@ public class CommandStatue implements CommandExecutor {
 					FaceBuilder.master_orientation = 0;
 				}
 				
-//				Mojang api = new Mojang().connect();
-//				api.connect();
-//				String name = p.getName();
-//				
-//				if (arg3.length >= 1) {
-//					name = arg3[0];
-//					
-//				}
-//				
-//				BufferedImage bi = null;
-//				if (!cache.containsKey(name)) {
-//					PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
-//	
-//					Optional<URL> URL  = pp.getTextures().get().getSkin();
-//	
-//					bi = ImageIO.read(URL.get());
-//					
-//					cache.put(name, bi);
-//				} else {
-//					bi = cache.get(name);
-//				}
 				
 				BufferedImage bi = Util.getSkinImage(p, arg3);
 				
@@ -130,7 +109,7 @@ public class CommandStatue implements CommandExecutor {
 
 			} catch (Exception e) {
 				arg0.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
-				//e.printStackTrace();
+				e.printStackTrace();
 				return false;
 			}
 			return true;

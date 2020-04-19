@@ -12,6 +12,7 @@ import org.bukkit.Material;
  * 
  * @author SkyTechBytes
  * The wool color codes are from the wiki, and the other color codes I did painstakingly by hand.
+ * If you use these, please credit thx
  *
  */
 public class ColorMaps {

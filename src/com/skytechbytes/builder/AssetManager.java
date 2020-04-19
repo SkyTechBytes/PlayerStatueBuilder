@@ -9,7 +9,12 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import com.skytechbytes.testplugin.Log;
-
+/**
+ * Overlay Armor Textures are by SmashPortal https://www.planetminecraft.com/skin/18-diamond-armor-overlay-skin/
+ * 
+ * @author SkyTechBytes
+ *
+ */
 public class AssetManager {
 	public static HashMap<String,BufferedImage> armor = new HashMap<>();
 	public static HashMap<String,BufferedImage> items = new HashMap<>();
@@ -62,7 +67,7 @@ public class AssetManager {
 			
 		}
 		
-		//probably doesn't do anything
+		//definitely does something
 		g.dispose();
 		
 		group.put(name, subImage);

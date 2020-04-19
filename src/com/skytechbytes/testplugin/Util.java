@@ -6,16 +6,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.shanerx.mojang.Mojang;
-import org.shanerx.mojang.PlayerProfile;
-
+/**
+ * 
+ * @author SkyTechBytes
+ * Big thanks to Crafatar and Playerdb.co for an amazing api to use for names and skins
+ *
+ */
 public class Util {
 	private static Map<String,BufferedImage> cache = new HashMap<>();
 	
@@ -80,22 +82,21 @@ public class Util {
 				 * If the skin has no prefix, it is a normal skin that must be retrieved from the cloud.
 				 */
 				try {
-					Mojang api = new Mojang().connect();
-					api.connect();
 					
-					PlayerProfile pp = api.getPlayerProfile(api.getUUIDOfUsername(name));
-		
-					Optional<URL> URL  = pp.getTextures().get().getSkin();
-		
-					bi = ImageIO.read(URL.get());
+					String json = APIWrapper.readJsonFromUrl("https://playerdb.co/api/player/minecraft/" + name);					
 					
-					if (bi == null) {
-						throw new Exception();
-					}
+					String uuid = json.substring(json.indexOf("raw_id\":")+9, json.indexOf("raw_id\":")+9+32);
+					
+					
+					System.out.println(uuid);
+					URL URL  = new URL("https://crafatar.com/skins/" + uuid);
+		
+					bi = ImageIO.read(URL);
+					
+					
 				} catch (Exception e) {
-					throw new Exception("Something is wrong with getting the skin from the API. You may be offline, sending too many requests "
-							+ " (i.e. wait 2 minutes before "
-							+ "trying again), or the skin just doesn't exist.");
+					System.out.println(e.getMessage());
+					throw new Exception("Something is wrong with getting the skin from the API. The player may not exist or the API servers may be down. ");
 				}
 			
 			}
@@ -107,27 +108,4 @@ public class Util {
 		
 		return (bi);
 	}
-	
-//	public static final List<Material> UNBREAKABLE = new ArrayList<Material>();
-//	static {
-//		UNBREAKABLE.add(Material.BARRIER);
-//		UNBREAKABLE.add(Material.BEDROCK);
-//		UNBREAKABLE.add(Material.COMMAND_BLOCK);
-//		UNBREAKABLE.add(Material.END_GATEWAY);
-//		UNBREAKABLE.add(Material.END_PORTAL);
-//		UNBREAKABLE.add(Material.END_PORTAL_FRAME);
-//		UNBREAKABLE.add(Material.JIGSAW);
-//		UNBREAKABLE.add(Material.STRUCTURE_BLOCK);
-//		UNBREAKABLE.add(Material.ANVIL);
-//		UNBREAKABLE.add(Material.ENCHANTING_TABLE);
-//		UNBREAKABLE.add(Material.OBSIDIAN);
-//		UNBREAKABLE.add(Material.ENDER_CHEST);
-//		UNBREAKABLE.add(Material.NETHER_PORTAL);
-//		UNBREAKABLE.add(Material.CHEST);
-//		UNBREAKABLE.add(Material.SHULKER_BOX);
-//		UNBREAKABLE.add(Material.BARREL);
-//	}
-//	public static boolean isSensitive(Material m) {
-//		return UNBREAKABLE.contains(m);
-//	}
 }

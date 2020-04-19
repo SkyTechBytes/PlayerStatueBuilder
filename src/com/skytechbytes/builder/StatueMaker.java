@@ -164,8 +164,9 @@ public class StatueMaker extends BukkitRunnable {
 	 * @param l
 	 * @param ss
 	 * @return
+	 * @throws Exception 
 	 */
-	private BufferedImage preProcessing(Location l, BufferedImage ss) {
+	private BufferedImage preProcessing(Location l, BufferedImage ss) throws Exception {
 		/*
 		 * Add armor to the player if they request it (or just add parts)
 		 */
@@ -175,7 +176,9 @@ public class StatueMaker extends BukkitRunnable {
 		for (String key : AssetManager.armor.keySet()) {
 			if (flags.contains(key)) {
 				//Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
+				
 				customizedImage = ImageUtil.overlayImage(customizedImage, AssetManager.armor.get(key));
+				
 			}
 		}
 		return customizedImage;
@@ -191,7 +194,7 @@ public class StatueMaker extends BukkitRunnable {
 		initialize();
 
 		if (xx.getHeight() < 64) {
-			makeStatue(l,LegacyConverter.convertLegacy(xx));
+			makeStatue(l,LegacyConverter.convertLegacy(xx,false));
 			p.sendMessage(ChatColor.YELLOW + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
 					+ " smaller than 64x64, so the plugin made a legacy skin statue instead.");
 			return;
@@ -277,8 +280,15 @@ public class StatueMaker extends BukkitRunnable {
 
 		finish();
 	}
-	private void makeSlimStatue(Location l, BufferedImage xx) {
+	private void makeSlimStatue(Location l, BufferedImage xx) throws Exception {
 		initialize();
+		
+		if (xx.getHeight() < 64) {
+			makeSlimStatue(l,LegacyConverter.convertLegacy(xx,true));
+			p.sendMessage(ChatColor.YELLOW + "You attempted to make a statue with a 64x64 (newer format) but the skin you specified is"
+					+ " smaller than 64x64, so the plugin made a legacy skin statue instead.");
+			return;
+		}
 		
 		BufferedImage ss = preProcessing(l,xx);
 		
@@ -363,7 +373,7 @@ public class StatueMaker extends BukkitRunnable {
 		finish();
 	}
 	private void makeLegacyStatue(Location l, BufferedImage ss) throws Exception {
-		makeStatue(l,LegacyConverter.convertLegacy(ss));
+		makeStatue(l,LegacyConverter.convertLegacy(ss,false));
 		/*
 		
 		initialize();

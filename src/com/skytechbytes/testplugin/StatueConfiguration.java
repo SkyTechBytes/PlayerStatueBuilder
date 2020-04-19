@@ -4,7 +4,9 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
-
+/**
+ * @author SkyTechBytes
+ */
 public class StatueConfiguration {
 	private Plugin p = PlayerStatuePlugin.instance;
 	
