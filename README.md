@@ -19,25 +19,28 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>EXAMPLE 6: "/statue [USERNAME] wool xz" creates a statue made of only wool. The statue is lying down because of the "xz" parameter
 <li>EXAMPLE 7: "/statue [USERNAME] diamond_armor concrete" creates a statue with diamond armor made only out of concrete
 <li>EXAMPLE 8: "/statue [USERNAME] wool glass chainmail_helmet iron_chestplate golden_boots" creates a statue with a chainmail helmet, iron chestplate, and golden boots, made only out of wool and glass.
+<li>EXAMPLE 9: "/statue [USERNAME] head right_arm slim" creates the head and right arm components of the statue only with slim arms (Use this to build a statue in parts)
 <li>Supports the <strong>new skin type (sleeves, pantlegs, jacket, etc.)</strong>
 <li>Supports the <strong>"slim"</strong> skin format with 3 pixel arms
 <li>Supports the older skin type without sleeves, pantlegs, or a jacket
 <li><strong>So it basically supports all skins!</strong>
 <li>Supports the following block types: glass, concrete, terracotta, planks, gray-colored blocks, wool (you can combine them too!)
-<li>The default setting is "default" 
+<li>The default setting is "default"
 <li>Also supports different skin orientations (lying down, lying on side, standing up)
 <li> So you would type "/statue USERNAME slim xz" if you would like to generate a skin with the user USERNAME, with a skin format of "slim", and having the statue laying down.
 <li>WorldGuard Support (also works without WorldGuard)!!!
+<li>Vault Support (also works without Vault)!!!
+<li>EssentialsX Economy Support (also works without EssentialsX)!!!
 <li>Informs the player of what blocks/items are needed to build the statue.
 <li>Allows building of a statue ONLY if the uncolored/undyed blocks are in inventory (Admins bypass this) w/ Terracotta, Wood, Wool, Concrete, and Diamonds (Diamond Cost = number of blocks divided by 16) - for survival/normal players. Configurable!
-<li>Multithreaded so it shouldn't lag your server 
+<li>Multithreaded so it shouldn't lag your server
 <li>Rotates the statue so that it faces you (Supports 4 directions + the aforementioned xy,xz,yz, so 12 orientations in total!)
 <li>If used by a survival/normal player, the plugin won't delete blocks- only modifies air. This prevents accidental modification of the terrain, and eliminates the possibility that the statue will destroy bedrock or other stuff it shouldn't destroy.
 <li>Spawns the statue two blocks above the player to prevent suffocation.
 <li>Undo-ing a statue affects only the last statue created by ANY player (Admin only)
 <li>You can add armor to your player statues now (chainmail, golden, diamond, iron)! You can select a piece of armor by stating what type of armor and then adding "_helmet" , "_chestplate" , or "_boots" (ex: diamond_boots).
 <li>The plugin uses bStats for plugin metrics; no personal information is stored and if you use worldedit/essentialsX you already use bStats. You may opt out by going to the configuration file under the "bStats" folder in your plugins folder.
-<li>You can now create a player statue DIRECTLY from your computer (if you're an admin). 
+<li>You can now create a player statue DIRECTLY from your computer (if you're an admin).
 <li>Config file supports cooldowns (min), extra items required, and # of extra items required
   <h2>How to create a statue with a skin image directly from your computer</h2>
   <li>1. Obtain your skin's .png file and copy it
@@ -77,10 +80,14 @@ Need something to decorate your server? Tired of building player statues by hand
     # For the number of blocks below inside the statue total, add one of the "charge" item to the total
     # So if rate is 16 and the total blocks in the statue is 512, the player would need 512/16 = 32 of the "charge" item (in this case, Diamond)
       rate: 16
-    # Cooldown time for using the command in MINUTES (No decimals, set to zero for no cooldown). So 5 means 5 minutes between SUCCESSFUL statue CREATIONS.
-      cooldown: 5
+    # Cooldown time for using the command in MINUTES (No decimals, set to zero for no cooldown). So 1 means 1 minute between SUCCESSFUL statue CREATIONS (or statue parts).
+      cooldown: 1
     # The "rate" determines how many extra of this "charge" item a player will need. Ex: EMERALD, REDSTONE, DIAMOND, etc.
       charge: DIAMOND
+    # Whether the plugin requires exact materials (ex: 10 blue_concrete and 7 red_concrete INSTEAD of 17 white_concrete)
+      exact: false
+    # Cost (in $ - EssentialsX/Vault support) per block that will be placed (ex: 1000 block statue adds $2500 to the cost if priceRate is 2.5)
+      priceRate: 0.0
     </pre>
 <h2>Gallery</h2>
 ![2019-12-24_14 56 38](https://user-images.githubusercontent.com/36645753/71426391-a5946000-265d-11ea-8f40-76a392d1133c.png)

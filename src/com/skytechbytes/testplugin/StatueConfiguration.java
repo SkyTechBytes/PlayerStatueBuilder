@@ -42,7 +42,7 @@ public class StatueConfiguration {
         c.addDefault("cooldown", 1);
         c.addDefault("charge", "DIAMOND");
         c.addDefault("exact", false);
-        c.addDefault("priceRate", 2.5);
+        c.addDefault("priceRate", 0);
        
         c.options().copyDefaults(true);
        
