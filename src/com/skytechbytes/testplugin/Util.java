@@ -1,6 +1,7 @@
 package com.skytechbytes.testplugin;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +13,8 @@ import javax.imageio.ImageIO;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import com.skytechbytes.builder.ImageUtil;
 /**
  * 
  * @author SkyTechBytes
@@ -94,9 +97,20 @@ public class Util {
 					bi = ImageIO.read(URL);
 					
 					
+				
+				} catch (IOException e) {
+					//We know what went wrong (500 error)
+					if (e.getMessage().contains("code: 500")) {
+						throw new Exception("The player you specified likely does not exist. ");
+					} else {
+						e.printStackTrace();
+						throw new Exception("Something is wrong with getting the skin from the API (IO Exception). The API servers may be down (Please try again later). ");
+					}
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					throw new Exception("Something is wrong with getting the skin from the API. The player may not exist or the API servers may be down. ");
+					
+					//We don't know what went wrong.
+					e.printStackTrace();
+					throw new Exception("The API servers may be down. Please try again later: " + e.getMessage());
 				}
 			
 			}
@@ -106,6 +120,6 @@ public class Util {
 			bi = cache.get(name);
 		}
 		
-		return (bi);
+		return ImageUtil.deepCopy(bi);
 	}
 }

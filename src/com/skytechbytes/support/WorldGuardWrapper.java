@@ -32,7 +32,7 @@ public class WorldGuardWrapper
     		this.worldGuard = (WorldGuardPlugin)PlayerStatuePlugin.instance.getServer().getPluginManager().getPlugin("WorldGuard");
     		Log.log("Worldguard detected!");
     	} catch (Exception e) {
-    		Log.log("Worldguard not detected.");
+    		Log.log("Worldguard not detected. You MUST have WorldGuard if you want PlayerStatueBuilderX to respect claim/region protections.");
     	}
     }
 

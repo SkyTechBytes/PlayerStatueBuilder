@@ -1,8 +1,8 @@
 name: PlayerStatueBuilderX
 main: com.skytechbytes.testplugin.PlayerStatuePlugin
-version: 1.8
+version: 1.9
 author: SkyTechBytes
-softdepend: [WorldGuard]
+softdepend: [WorldGuard,Vault]
 api-version: 1.13
 commands:
    statue:

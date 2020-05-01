@@ -39,8 +39,10 @@ public class StatueConfiguration {
         c.options().header("PlayerStatueBuilderX Configuration File");
        
         c.addDefault("rate", 16);
-        c.addDefault("cooldown", 5);
+        c.addDefault("cooldown", 1);
         c.addDefault("charge", "DIAMOND");
+        c.addDefault("exact", false);
+        c.addDefault("priceRate", 2.5);
        
         c.options().copyDefaults(true);
        

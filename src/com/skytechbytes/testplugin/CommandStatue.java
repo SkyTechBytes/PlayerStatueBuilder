@@ -109,7 +109,7 @@ public class CommandStatue implements CommandExecutor {
 
 			} catch (Exception e) {
 				arg0.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
-				e.printStackTrace();
+
 				return false;
 			}
 			return true;

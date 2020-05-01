@@ -3,7 +3,6 @@ package com.skytechbytes.builder;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -39,7 +38,7 @@ public class AssetManager {
 			String file = "/" + name + ".png";
 			Log.log("Loading texture " + file);
 			group.put(name, ImageIO.read(AssetManager.class.getResourceAsStream(file)));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.log("Failed to load texture " + name + ". Restart the server to fix.");
 		}
 	}

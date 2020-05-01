@@ -3,6 +3,7 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.skytechbytes.builder.AssetManager;
+import com.skytechbytes.support.VaultWrapper;
 import com.skytechbytes.support.WorldGuardWrapper;
 /**
  * 
@@ -12,6 +13,7 @@ import com.skytechbytes.support.WorldGuardWrapper;
 public class PlayerStatuePlugin extends JavaPlugin {
 	public static PlayerStatuePlugin instance;
 	public static WorldGuardWrapper wgw;
+	public static VaultWrapper vw;
 	public static StatueConfiguration sc;
 	public PlayerStatuePlugin() {
 		// TODO Auto-generated constructor stub
@@ -28,6 +30,12 @@ public class PlayerStatuePlugin extends JavaPlugin {
     		wgw = new WorldGuardWrapper();
     	} catch (Throwable fit) {
     		wgw = null;
+    	}
+    	
+    	try {
+    		vw = new VaultWrapper();
+    	} catch (Throwable rock) {
+    		vw = null;
     	}
     	
     	AssetManager.initialize();

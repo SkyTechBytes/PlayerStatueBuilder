@@ -28,7 +28,7 @@ public class Schematic {
 	 */
 
 	private HashMap<Integer,HashMap<Integer,HashMap<Integer,MaterialHolder>>> matrix = new HashMap<>();
-
+	private int count = -1;
 	public Schematic () {
 
 	}
@@ -124,16 +124,29 @@ public class Schematic {
 		if (p.hasPermission("playerstatuebuilderx.bypass")) {
 			return true;
 		}
-
-		HashMap<Material,Integer> blocks = query(p);
-
+		
 		boolean hasRequired = true;
+		
+		
+		
+		HashMap<Material,Integer> blocks = query(p);
+		
+		//query the price after block query to ensure correct number of blocks
+		if (queryPrice(p) == false || getPrice() < 0) {
+			hasRequired = false;
+		}
 
 		for (Material key : blocks.keySet()) {
 
 			if (p.getInventory().contains(key, blocks.get(key)) == false) {
 				hasRequired = false;
 			}
+		}
+		
+		if (hasRequired == false) {
+			p.sendMessage(ChatColor.RED + "You don't have all the materials to make that statue right now... "
+					+ "when you do, make sure you run this command in an open space. You will be at the base of the statue "
+					+ "and the statue will be facing towards you.");
 		}
 
 		if (hasRequired == true) {
@@ -142,14 +155,33 @@ public class Schematic {
 				p.getInventory().removeItem(new ItemStack(key,blocks.get(key)));
 			}
 			p.updateInventory();
-
+			
+			if (PlayerStatuePlugin.vw != null) {
+				PlayerStatuePlugin.vw.getEconomy().withdrawPlayer(p, getPrice());
+				p.sendMessage(ChatColor.GREEN + "$" + getPrice() + " has been removed from your account"); 
+			}
+			
 			return true;
 		}
 		return false;
 	}
+	private double getPrice() {
+		return PlayerStatuePlugin.instance.getConfig().getDouble("priceRate") * count;
+	}
+	private boolean queryPrice(Player p) {
+		if (PlayerStatuePlugin.vw != null) {
+			p.sendMessage(ChatColor.AQUA + "You will need $" + getPrice() + " as well.");
+			
+			if (!PlayerStatuePlugin.vw.getEconomy().has(p, getPrice())) {
+				p.sendMessage(ChatColor.RED + "You do not have enough money!");
+				return false;  
+			}
+			
+		}
+		return true;
+	}
 	public HashMap<Material,Integer> query(Player p) {
-		boolean hasRequired = true;
-		int count = 0;
+		count = 0;
 		HashMap<Material,Integer> blocks = new HashMap<>();
 		for (int keyZ : matrix.keySet()) {
 			for (int keyY : matrix.get(keyZ).keySet()) {
@@ -158,16 +190,20 @@ public class Schematic {
 					if (temp.equals(Material.AIR)) {
 						continue;
 					}
-					if (Tag.WOOL.isTagged(temp)) {
-						temp = Material.WHITE_WOOL;
-					} else if (Tag.PLANKS.isTagged(temp)) {
-						temp = Material.OAK_PLANKS;
-					} else if (temp.toString().endsWith("TERRACOTTA")) {
-						temp = Material.TERRACOTTA;
-					} else if (temp.toString().endsWith("CONCRETE")) {
-						temp = Material.WHITE_CONCRETE;
-					} else if (temp.toString().endsWith("GLASS")) {
-						temp = Material.GLASS;
+					
+					if(PlayerStatuePlugin.instance.getConfig().getBoolean("exact") == false) {
+					
+						if (Tag.WOOL.isTagged(temp)) {
+							temp = Material.WHITE_WOOL;
+						} else if (Tag.PLANKS.isTagged(temp)) {
+							temp = Material.OAK_PLANKS;
+						} else if (temp.toString().endsWith("TERRACOTTA")) {
+							temp = Material.TERRACOTTA;
+						} else if (temp.toString().endsWith("CONCRETE")) {
+							temp = Material.WHITE_CONCRETE;
+						} else if (temp.toString().endsWith("GLASS")) {
+							temp = Material.GLASS;
+						}
 					}
 					
 					if (blocks.containsKey(temp)) {
@@ -190,18 +226,14 @@ public class Schematic {
 		String need = ChatColor.AQUA + "To make this player statue, you need: \n";
 		for (Material key : blocks.keySet()) {
 			need+=(key + ": " + blocks.get(key) + "\n");
-			if (p.getInventory().contains(key, blocks.get(key)) == false) {
-				hasRequired = false;
-			}
-		}
 
+		}
+		
+		
+		
 		p.sendMessage(need);
 
-		if (hasRequired == false) {
-			p.sendMessage(ChatColor.YELLOW + "You don't have all the materials to make that statue right now... "
-					+ "when you do, make sure you run this command in an open space. You will be at the base of the statue "
-					+ "and the statue will be facing towards you.");
-		}
+		
 
 		return blocks;
 
