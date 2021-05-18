@@ -1,8 +1,10 @@
 package com.skytechbytes.builder;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,16 +32,16 @@ public class StatueMaker extends BukkitRunnable {
 	private boolean quote = false;
 	private BufferedImage bi;
 	private String mode;
-	private List<String> flags;
+	private LinkedHashMap<String, Float> params;
 
-	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote, List<String> arg3) {
+	public StatueMaker(World w, Player p, String mode, BufferedImage bi, boolean quote, LinkedHashMap<String, Float> flags) {
 		s = new Schematic();
 		this.w = w;
 		this.p = p;
 		this.quote = quote;
 		this.bi = bi;
 		this.mode = mode;
-		this.flags = arg3;
+		this.params = flags;
 		origin = new Location(w,p.getLocation().getBlockX(),p.getLocation().getBlockY(),p.getLocation().getBlockZ());
 	}
 	private void initialize() {
@@ -158,7 +160,7 @@ public class StatueMaker extends BukkitRunnable {
 				this.makeStatue(origin, bi);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			p.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
 		}
 	}
 	/**
@@ -175,8 +177,10 @@ public class StatueMaker extends BukkitRunnable {
 		
 		BufferedImage customizedImage = ImageUtil.deepCopy(ss);
 		
+		customizedImage = ImageUtil.applyFilters(customizedImage, params);
+		
 		for (String key : AssetManager.armor.keySet()) {
-			if (flags.contains(key)) {
+			if (params.keySet().contains(key)) {
 				//Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
 				
 				customizedImage = ImageUtil.overlayImage(customizedImage, AssetManager.armor.get(key));
@@ -294,7 +298,20 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 12+16+16+16-1, 20+32, 3, 12), 0,0+4+4,0+12,-3-1,true,false);
 				fb.buildFace(l, r.part(ss, 4+16+16+16, 20+32, 3, 12), 0,0+4+4,0+12,1);
 	}
-	
+	private boolean isSlimSkin(BufferedImage xx) {
+		if (xx.getWidth() < 64 || xx.getHeight() < 64) {
+			return false;
+		}
+		//Checks the top left hand side of the right and left arms to see if they are transparent (if they are it's probably slim)
+		if (new Color(xx.getRGB(54, 20), true).getAlpha() < 255) {
+			return true;
+		}
+		if (new Color(xx.getRGB(46, 52), true).getAlpha() < 255) {
+			return true;
+		}
+		return false;
+		
+	}
 	/**
 	 * Warning: the original "xx" image should not be changed (other than to convert to the new skin format). ONLY modify the ss image.
 	 * @param l
@@ -310,6 +327,12 @@ public class StatueMaker extends BukkitRunnable {
 					+ " smaller than 64x64, so the plugin made a legacy skin statue instead.");
 			return;
 		}
+		if (isSlimSkin(xx)) {
+			makeSlimStatue(l, xx);
+			p.sendMessage(ChatColor.YELLOW + "You attempted to make a classic statue (4 pixel arms) but the skin you specified"
+					+ " appears to have 3 pixel arms, so the plugin made a slim skin statue instead.");
+			return;
+		}
 		
 		BufferedImage ss = preProcessing(l,xx);
 
@@ -323,7 +346,7 @@ public class StatueMaker extends BukkitRunnable {
 		
 		//see if the player wants us to just build one part
 		boolean builtSomething = false;
-		
+		Set<String> flags = params.keySet();
 		if (flags.contains("right_leg")) {
 			right_leg(fb,r,l,ss);
 			builtSomething = true;
@@ -457,7 +480,7 @@ public class StatueMaker extends BukkitRunnable {
 		
 		//see if the player wants us to just build one part
 		boolean builtSomething = false;
-		
+		Set<String> flags = params.keySet();
 		if (flags.contains("right_leg")) {
 			right_leg(fb,r,l,ss);
 			builtSomething = true;

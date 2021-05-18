@@ -3,6 +3,7 @@ package com.skytechbytes.testplugin;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,16 +96,34 @@ public class CommandStatue implements CommandExecutor {
 				/*
 				 * Type of skin flags
 				 */
+				LinkedHashMap<String, Float> params = new LinkedHashMap<>();
+				/*
+				 * Tokenize flags with the format TAG:VALUE <-- Float values only!
+				 */
+				for (String flagToken : flags) {
+					String[] tokenized = flagToken.split(":");
+					if (tokenized.length == 2) {
+						try {
+							params.put(tokenized[0], Float.parseFloat(tokenized[1]));
+						} catch (Exception e) {
+							throw new Exception("Invalid non-number parameter value after ':': " + tokenized[1]);
+						}
+					} else if (tokenized.length == 0){
+						throw new Exception("Invalid ':' parameter");
+					} else {
+						params.put(tokenized[0], 0f);
+					}
+				}
 				if (flags.contains("slim") || flags.contains("legacy") || flags.contains("default")) {
 					if (flags.contains("slim")) {
-						new StatueMaker(p.getWorld(),p,"slim",bi,false,flags).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"slim",bi,false,params).runTask(PlayerStatuePlugin.instance);
 					} else if (flags.contains("legacy")) {
-						new StatueMaker(p.getWorld(),p,"legacy",bi,false,flags).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"legacy",bi,false,params).runTask(PlayerStatuePlugin.instance);
 					} else if (flags.contains("default")) {
-						new StatueMaker(p.getWorld(),p,"default",bi,false,flags).runTask(PlayerStatuePlugin.instance);
+						new StatueMaker(p.getWorld(),p,"default",bi,false,params).runTask(PlayerStatuePlugin.instance);
 					}
 				} else {
-					new StatueMaker(p.getWorld(),p,"default",bi,false,flags).runTask(PlayerStatuePlugin.instance);
+					new StatueMaker(p.getWorld(),p,"default",bi,false,params).runTask(PlayerStatuePlugin.instance);
 				}
 
 			} catch (Exception e) {

@@ -93,28 +93,28 @@ public class Util {
 					
 					System.out.println(uuid);
 					URL URL  = new URL("https://crafatar.com/skins/" + uuid);
-		
 					bi = ImageIO.read(URL);
 					
-					
-				
 				} catch (IOException e) {
 					//We know what went wrong (500 error)
 					if (e.getMessage().contains("code: 500")) {
 						throw new Exception("The player you specified likely does not exist. ");
 					} else {
-						e.printStackTrace();
-						throw new Exception("Something is wrong with getting the skin from the API (IO Exception). The API servers may be down (Please try again later). ");
+						//Try fallback/backup API
+						try {
+							bi = APIWrapper.readFallback(name);
+						} catch (Exception ee) {
+							ee.printStackTrace();
+							throw new Exception("Could not obtain skin from the API or backup API. Please try again later.");
+						}
 					}
 				} catch (Exception e) {
-					
 					//We don't know what went wrong.
 					e.printStackTrace();
 					throw new Exception("The API servers may be down. Please try again later: " + e.getMessage());
 				}
 			
 			}
-			
 			cache.put(name, bi);
 		} else {
 			bi = cache.get(name);

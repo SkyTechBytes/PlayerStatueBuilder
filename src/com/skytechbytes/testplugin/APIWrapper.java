@@ -1,4 +1,5 @@
 package com.skytechbytes.testplugin;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +8,10 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+
+import javax.imageio.ImageIO;
+
+import com.skytechbytes.builder.ImageUtil;
 
 
 
@@ -42,6 +47,14 @@ public class APIWrapper {
 		  is.close();
 		}
   }
-
-
+  public static BufferedImage readFallback(String playerName) throws IOException {
+	    String x = APIWrapper.readJsonFromUrl("https://skytechbytes-api.herokuapp.com/api/playerstatuebuilderx/skin/" + playerName);
+	    //ObjectMapper mapper = new ObjectMapper();
+	    SkinReference obj = new SkinReference();
+	    		//mapper.readValue(x, SkinReference.class);
+	    obj.setUrl(x.substring(x.indexOf("https://"), x.indexOf("\",")));
+	    URL url = new URL(obj.getUrl());
+	    //System.out.println(url);
+	    return ImageUtil.toRGB(ImageIO.read(url));
+  }
 }
