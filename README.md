@@ -9,7 +9,7 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>3. Restart your server
 <li>4. Type "/statue USERNAME" to generate a statue for the specified USERNAME
 <h2>Features</h2>
-<li>Usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor]"
+<li>Usage: "/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL]"
 <li>Usage: "/undostatue" (Admin) You can now UNDO more than just your last statue!
 <li>EXAMPLE 1: "/statue [USERNAME] glass" creates a statue made of glass only
 <li>EXAMPLE 2: "/statue [USERNAME] concrete" creates a statue made of concrete only
@@ -20,6 +20,9 @@ Need something to decorate your server? Tired of building player statues by hand
 <li>EXAMPLE 7: "/statue [USERNAME] diamond_armor concrete" creates a statue with diamond armor made only out of concrete
 <li>EXAMPLE 8: "/statue [USERNAME] wool glass chainmail_helmet iron_chestplate golden_boots" creates a statue with a chainmail helmet, iron chestplate, and golden boots, made only out of wool and glass.
 <li>EXAMPLE 9: "/statue [USERNAME] head right_arm slim" creates the head and right arm components of the statue only with slim arms (Use this to build a statue in parts)
+<li>EXAMPLE 10: "/statue [USERNAME] hue:.2 contrast:.3 posterize:3 saturation:.4 brightness:.5" shifts the hue of the image by .2, sets contrast at .3 (decreases contrast), posterizes the image with 3 levels (more levels = more colors), saturation reduced to .4, brightness reduced to .5
+<li>The plugin attempts to connect to a fallback API to grab skins if the Mojang API is down
+<li>Now automatically creates a slim statue if the arms are less than 4 pixels wide (instead of having to type "slim")
 <li>Supports the <strong>new skin type (sleeves, pantlegs, jacket, etc.)</strong>
 <li>Supports the <strong>"slim"</strong> skin format with 3 pixel arms
 <li>Supports the older skin type without sleeves, pantlegs, or a jacket
@@ -96,3 +99,4 @@ Need something to decorate your server? Tired of building player statues by hand
 <a href="https://imgur.com/a/m3HXHHj">Or Use Imgur to see them (click here)</a>
     <br>
     <a href="https://imgur.com/a/34qkFPs">1.7 Example (click)</a>
+1.10 Example: https://user-images.githubusercontent.com/36645753/118715520-8c52fd00-b7d8-11eb-857b-5ee5bfbdfd59.png
