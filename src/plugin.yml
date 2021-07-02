@@ -1,13 +1,13 @@
 name: PlayerStatueBuilderX
 main: com.skytechbytes.testplugin.PlayerStatuePlugin
-version: 1.9
+version: 1.11
 author: SkyTechBytes
 softdepend: [WorldGuard,Vault]
 api-version: 1.13
 commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation
-      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm]
+      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:<0-1>]
    undostatue:
       description: Undo the last statue created by ANYONE on the server
       usage: /undostatue
