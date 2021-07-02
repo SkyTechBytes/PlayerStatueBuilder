@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import com.jhlabs.image.ContrastFilter;
 import com.jhlabs.image.HSBAdjustFilter;
 import com.jhlabs.image.PosterizeFilter;
-import com.jhlabs.image.QuantizeFilter;
 import com.jhlabs.image.SaturationFilter;
 
 public class ImageUtil {

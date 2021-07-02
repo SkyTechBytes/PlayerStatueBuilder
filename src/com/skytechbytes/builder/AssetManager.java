@@ -46,30 +46,36 @@ public class AssetManager {
 	 * So it's like a spritesheet
 	 */
 	public static void load(String name, HashMap<String,BufferedImage> group, String baseImage, Rectangle... subregions) {
-		BufferedImage base = group.get(baseImage);
+		try {
 		
-		if (base == null) return;
-		
-		//Don't forget the A in ARGB (we have alpha)
-		BufferedImage subImage = new BufferedImage(base.getWidth(),base.getHeight(),BufferedImage.TYPE_INT_ARGB);
-		
-		Graphics g = subImage.getGraphics();
-		
-		for (Rectangle region : subregions) {
+			BufferedImage base = group.get(baseImage);
 			
-			g.drawImage(
-					base.getSubimage((int)region.getX(), (int)region.getY(),
-							(int)region.getWidth(), 
-							(int)region.getHeight()),
-					(int)region.getX(), (int)region.getY(), 
-					null);
+			if (base == null) return;
 			
+			//Don't forget the A in ARGB (we have alpha)
+			BufferedImage subImage = new BufferedImage(base.getWidth(),base.getHeight(),BufferedImage.TYPE_INT_ARGB);
+			
+			Graphics g = subImage.getGraphics();
+			
+			for (Rectangle region : subregions) {
+				
+				g.drawImage(
+						base.getSubimage((int)region.getX(), (int)region.getY(),
+								(int)region.getWidth(), 
+								(int)region.getHeight()),
+						(int)region.getX(), (int)region.getY(), 
+						null);
+				
+			}
+			
+			//definitely does something
+			g.dispose();
+			
+			group.put(name, subImage);
+		
+		} catch (Exception e) {
+			Log.log("Failed to load texture " + name);
 		}
-		
-		//definitely does something
-		g.dispose();
-		
-		group.put(name, subImage);
 		
 	}
 }
