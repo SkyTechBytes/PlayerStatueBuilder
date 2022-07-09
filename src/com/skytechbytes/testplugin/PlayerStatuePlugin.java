@@ -12,11 +12,10 @@ import com.skytechbytes.support.WorldGuardWrapper;
  */
 public class PlayerStatuePlugin extends JavaPlugin {
 	public static PlayerStatuePlugin instance;
-	public static WorldGuardWrapper wgw;
-	public static VaultWrapper vw;
+	public static WorldGuardWrapper wgw = null;
+	public static VaultWrapper vw = null;
 	public static StatueConfiguration sc;
 	public PlayerStatuePlugin() {
-		// TODO Auto-generated constructor stub
 	}
 	 // Fired when plugin is first enabled
     @Override
@@ -29,6 +28,7 @@ public class PlayerStatuePlugin extends JavaPlugin {
     	try {
     		wgw = new WorldGuardWrapper();
     	} catch (Throwable fit) {
+    		Log.log("Worldguard not detected. You MUST have WorldGuard if you want PlayerStatueBuilderX to respect claim/region protections.");
     		wgw = null;
     	}
     	
@@ -41,6 +41,8 @@ public class PlayerStatuePlugin extends JavaPlugin {
     	AssetManager.initialize();
     	
     	this.getCommand("statue").setExecutor(new CommandStatue());
+    	this.getCommand("statue").setTabCompleter(new StatueTabComplete());
+    	
     	this.getCommand("undostatue").setExecutor(new CommandUndostatue());
     	
     	//Bstats begins here

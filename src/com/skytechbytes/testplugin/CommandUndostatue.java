@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.skytechbytes.builder.Schematic;
+import com.skytechbytes.builder.SchematicUtil;
 /**
  * 
  * @author SkyTechBytes
@@ -37,13 +38,13 @@ public class CommandUndostatue implements CommandExecutor {
 				if (s == null) {
 					throw new Exception("There is no statue to undo right now.");
 				}
-				boolean canBuild = s.canBuild(p.getWorld(), p);
+				boolean canBuild = SchematicUtil.canBuild(s, p);
 
 				if (canBuild == false) {
 					throw new Exception("Insufficient build permissions. That statue is in a protected location!");
 				}
 				
-				s.createStatue(p.getWorld(), p, true);
+				s.createSchematic(true, p.hasPermission("playerstatuebuilderx.override") == false);
 				
 				arg0.sendMessage(ChatColor.GREEN + "Undo successful.");
 				

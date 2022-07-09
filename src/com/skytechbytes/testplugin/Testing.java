@@ -1,6 +1,5 @@
 package com.skytechbytes.testplugin;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Testing {
@@ -14,8 +13,8 @@ public class Testing {
 //	    URL url = new URL(obj.getUrl());
 //	    BufferedImage bi = ImageIO.read(url);
 //	    System.out.println(bi.getHeight());
-		BufferedImage bi = APIWrapper.readFallback("SkyTechBytes");
-		System.out.println(bi.getHeight());
+		//BufferedImage bi = APIWrapper.readFallback("SkyTechBytes");
+		//System.out.println(bi.getHeight());
 	}
 
 }
