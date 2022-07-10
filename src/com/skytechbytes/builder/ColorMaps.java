@@ -38,7 +38,7 @@ public class ColorMaps {
 		x.put(new Color(0x3AAFD9), Material.LIGHT_BLUE_WOOL);
 		x.put(new Color(0xF8C627), Material.YELLOW_WOOL);
 		x.put(new Color(0x70B919), Material.LIME_WOOL);
-		//x.put(new Color(0xED8DAC), Material.PINK_WOOL);
+		x.put(new Color(0xED8DAC), Material.PINK_WOOL);
 		x.put(new Color(0x3E4447), Material.GRAY_WOOL);
 		x.put(new Color(0x8E8E86), Material.LIGHT_GRAY_WOOL);
 		x.put(new Color(0x158991), Material.CYAN_WOOL);

@@ -10,7 +10,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.skytechbytes.testplugin.PlayerStatuePlugin;
-
+/**
+ * 
+ * @author SkyTechBytes
+ *
+ */
 public class SchematicUtil {
 	public static boolean canBuild(Schematic s, Player p) {
 		try {
@@ -95,7 +99,7 @@ public class SchematicUtil {
 						continue;
 					}
 					
-					if(PlayerStatuePlugin.instance.getConfig().getBoolean("exact") == false) {
+					if (PlayerStatuePlugin.instance.getConfig().getBoolean("exact") == false) {
 					
 						if (Tag.WOOL.isTagged(temp)) {
 							temp = Material.WHITE_WOOL;
