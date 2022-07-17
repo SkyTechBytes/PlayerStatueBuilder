@@ -34,7 +34,7 @@ public class CommandStatue implements CommandExecutor {
 
 			if (!p.hasPermission("playerstatuebuilderx.createStatue")) {
 				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");
-				return false;
+				return true;
 			}
 			
 			List<String> flags = Arrays.asList(arg3);

@@ -25,7 +25,7 @@ public class CommandUndostatue implements CommandExecutor {
 
 			if (!p.hasPermission("playerstatuebuilderx.undo")) {
 				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");
-				return false;
+				return true;
 			}
 			
 			try {
