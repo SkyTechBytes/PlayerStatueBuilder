@@ -99,41 +99,59 @@ public class Util {
 		}
 		return ImageUtil.deepCopy(bi);
 	}
+	private static String getUUID(String name) throws Exception {
+		String uuid = "";
+		try {
+			String json = APIWrapper.readJsonFromUrl("https://playerdb.co/api/player/minecraft/" + name);					
+			
+			uuid = json.substring(json.indexOf("raw_id\":")+9, json.indexOf("raw_id\":")+9+32);
+			
+			Log.log(uuid);
+		} catch (Exception e) {
+			throw new Exception("Failed to lookup uuid, likely because player specified does not exist.");
+			
+		}
+		return uuid;
+	}
 	public static BufferedImage getCloudSkinImage(String name) throws Exception {
 		BufferedImage bi = null;
 	
 		/*
 		 * If the skin has no prefix, it is a normal skin that must be retrieved from the cloud.
 		 */
+			
 		try {
+			URL url1 = new URL("https://mineskin.eu/download/" + name);
 			
-			String json = APIWrapper.readJsonFromUrl("https://playerdb.co/api/player/minecraft/" + name);					
-			
-			String uuid = json.substring(json.indexOf("raw_id\":")+9, json.indexOf("raw_id\":")+9+32);
-			
-			
-			Log.log(uuid);
-			URL URL  = new URL("https://crafatar.com/skins/" + uuid);
-			bi = ImageIO.read(URL);
-			
-		} catch (IOException e) {
-			//We know what went wrong (500 error)
-			if (e.getMessage().contains("code: 500")) {
-				throw new Exception("The player you specified likely does not exist. ");
-			} else {
-				//Try fallback/backup API
-				try {
-					bi = APIWrapper.readFallback(name);
-				} catch (Exception ee) {
-					ee.printStackTrace();
-					throw new Exception("Could not obtain skin from the API or backup API. Please try again later.");
-				}
+			bi = ImageIO.read(url1);
+			if (bi != null) {
+				return ImageUtil.deepCopy(bi);
 			}
-		} catch (Exception e) {
-			//We don't know what went wrong.
-			e.printStackTrace();
-			throw new Exception("The API servers may be down. Please try again later: " + e.getMessage());
+		} catch (IOException e) {
+			Log.log("Could not obtain skin from mineskin.eu");
 		}
-		return ImageUtil.deepCopy(bi);
+		
+		/*
+		 * Obtain player UUID to try alternate endpoints
+		 */
+		String uuid = getUUID(name);
+		
+		/*
+		 * Try endpoints that require player uuid
+		 */
+		String[] endpoints = { "https://mc-heads.net/download/", "https://crafatar.com/skins/" };
+		for (String endpoint : endpoints) {
+			try {
+				URL url = new URL(endpoint + uuid);
+				bi = ImageIO.read(url);
+				if (bi != null) {
+					return ImageUtil.deepCopy(bi);
+				}
+			} catch (IOException e) {
+				Log.log("Could not obtain skin from " + endpoint);
+			}
+		}
+		
+		throw new Exception("Could not obtain skin from the API or backup API. Please try again later.");
 	}
 }
