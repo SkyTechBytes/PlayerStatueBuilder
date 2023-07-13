@@ -33,8 +33,6 @@ public class PlayerStatueMaker extends StatueMaker {
 
 		this.p = p;
 		this.quote = quote;
-
-
 	}
 	/**
 	 * Converts a rotation to a cardinal direction name.
@@ -139,6 +137,9 @@ public class PlayerStatueMaker extends StatueMaker {
 	public void run() {
 		
 		try {
+			if (this.getImage() == null) {
+				throw new Exception("Failed to obtain that player's skin. Please check spelling or try again later.");
+			}
 			super.generateStatueSchematic();
 			this.createStatue();
 		} catch (Exception e) {

@@ -27,8 +27,6 @@ public class StatueMaker extends BukkitRunnable {
 	private String direction;
 
 	public StatueMaker(Location origin, String direction, String mode, BufferedImage bi, LinkedHashMap<String, Float> flags) {
-		
-		
 		s = new Schematic(origin.getWorld());
 		this.bi = bi;
 		this.mode = mode;
@@ -404,6 +402,12 @@ public class StatueMaker extends BukkitRunnable {
 	
 	protected Schematic getSchematic() {
 		return this.s;
+	}
+	public void setImage(BufferedImage bi) {
+		this.bi = bi;
+	}
+	public BufferedImage getImage() {
+		return this.bi;
 	}
 	
 }

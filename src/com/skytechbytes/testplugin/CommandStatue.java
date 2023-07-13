@@ -42,8 +42,18 @@ public class CommandStatue implements CommandExecutor {
 			try {
 				p.sendMessage(ChatColor.YELLOW + "Crunching numbers... please wait.");
 				
+				String name = p.getName();
 				
-				BufferedImage bi = Util.getSkinImage(p, arg3);
+				if (arg3.length >= 1) {
+					name = arg3[0];
+					
+				}
+				if (Util.isDiskSkin(name)) {
+					if (!p.hasPermission("playerstatuebuilderx.custom")) {
+						throw new Exception("Insufficient permissions to create custom statues!");
+					}
+				}
+				
 				/*
 				 * Type of skin flags
 				 */
@@ -67,14 +77,14 @@ public class CommandStatue implements CommandExecutor {
 				}
 				if (flags.contains("slim") || flags.contains("legacy") || flags.contains("default")) {
 					if (flags.contains("slim")) {
-						new PlayerStatueMaker(p,"slim",bi,false,params).runTask(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"slim",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
 					} else if (flags.contains("legacy")) {
-						new PlayerStatueMaker(p,"legacy",bi,false,params).runTask(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"legacy",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
 					} else if (flags.contains("default")) {
-						new PlayerStatueMaker(p,"default",bi,false,params).runTask(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
 					}
 				} else {
-					new PlayerStatueMaker(p,"default",bi,false,params).runTask(PlayerStatuePlugin.instance);
+					new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
 				}
 
 			} catch (Exception e) {

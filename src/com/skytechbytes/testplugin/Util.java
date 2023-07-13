@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
-
-import org.bukkit.entity.Player;
 
 import com.skytechbytes.builder.ImageUtil;
 /**
@@ -21,31 +19,10 @@ import com.skytechbytes.builder.ImageUtil;
  *
  */
 public class Util {
-	private static Map<String,BufferedImage> cache = new HashMap<>();
+	private static Map<String,BufferedImage> cache = new ConcurrentHashMap<>();
 	
-	
-	public static BufferedImage getSkinImage(Player p, String[] arg3) throws Exception {
-		
-		String name = p.getName();
-		
-		if (arg3.length >= 1) {
-			name = arg3[0];
-			
-		}
-		
-		BufferedImage bi = null;
-		
-		if (isDiskSkin(name)) {
-			if (!p.hasPermission("playerstatuebuilderx.custom")) {
-				throw new Exception("Insufficient permissions to create custom statues!");
-			}
-		}
-		bi = getSkinImage(name);
-		
-		
-		return ImageUtil.deepCopy(bi);
-	}
-	public static BufferedImage getSkinImage(String name) throws Exception{
+
+	public static BufferedImage getSkinImage(String name) throws Exception {
 		BufferedImage bi = null;
 		if (!cache.containsKey(name)) {
 			if (isDiskSkin(name)) {
