@@ -1,9 +1,9 @@
 name: PlayerStatueBuilderX
 main: com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder
-version: 1.13
+version: 1.14
 author: SkyTechBytes
 softdepend: [WorldGuard,Vault]
-api-version: 1.13
+api-version: 1.20
 commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation

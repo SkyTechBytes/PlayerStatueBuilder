@@ -1,6 +1,7 @@
 package com.skytechbytes.playerstatuebuilder;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -35,8 +36,11 @@ public class StatueConfiguration {
 	private void loadDefaultConfigFile() {
 	       
         FileConfiguration c = p.getConfig();
-       
-        c.options().header("PlayerStatueBuilderX Configuration File");
+        
+        ArrayList<String> headerContents = new ArrayList<>();
+        headerContents.add("PlayerStatueBuilderX Configuration File");
+        
+        c.options().setHeader(headerContents);
        
         c.addDefault("rate", 16);
         c.addDefault("cooldown", 1);
