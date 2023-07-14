@@ -1,11 +1,11 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 import java.awt.image.BufferedImage;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.skytechbytes.builder.ImageUtil;
-import com.skytechbytes.builder.StatueMaker;
+import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
+import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
 
 public class StatueBuildTask extends BukkitRunnable {
 	private String identifier;
@@ -23,7 +23,7 @@ public class StatueBuildTask extends BukkitRunnable {
 		} catch (Exception e) {
 			Log.log(e.getMessage());
 		}
-		callback.runTask(PlayerStatuePlugin.instance);
+		callback.runTask(PlayerStatueBuilder.instance);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import com.skytechbytes.builder.ImageUtil;
+import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
 /**
  * 
  * @author SkyTechBytes
@@ -45,7 +45,7 @@ public class Util {
 		/*
 		 * The skin is on the local disk in the plugin's data folder.
 		 */
-		//Remove the weirdness at the front
+		// Remove the weirdness at the front
 		String fileName = name.substring(1);
 		
 		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
@@ -62,7 +62,7 @@ public class Util {
 		
 		try {
 		
-			Path customFile = Paths.get(PlayerStatuePlugin.instance.getDataFolder().toURI().resolve(fileName));
+			Path customFile = Paths.get(PlayerStatueBuilder.instance.getDataFolder().toURI().resolve(fileName));
 		
 		
 			bi = ImageIO.read(customFile.toFile());

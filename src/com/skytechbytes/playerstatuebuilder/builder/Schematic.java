@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.util.HashMap;
 import java.util.Stack;
@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
-import com.skytechbytes.testplugin.Log;
+import com.skytechbytes.playerstatuebuilder.Log;
 /**
  * 
  * @author SkyTechBytes

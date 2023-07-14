@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 import java.util.ArrayList;
 import java.util.HashSet;

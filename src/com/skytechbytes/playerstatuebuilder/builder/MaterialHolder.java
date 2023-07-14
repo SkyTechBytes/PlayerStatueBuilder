@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import org.bukkit.Material;
 

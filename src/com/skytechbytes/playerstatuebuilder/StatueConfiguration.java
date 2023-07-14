@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 import java.io.File;
 
@@ -8,7 +8,7 @@ import org.bukkit.plugin.Plugin;
  * @author SkyTechBytes
  */
 public class StatueConfiguration {
-	private Plugin p = PlayerStatuePlugin.instance;
+	private Plugin p = PlayerStatueBuilder.instance;
 	
 	public FileConfiguration getConfig() {
 		return p.getConfig();

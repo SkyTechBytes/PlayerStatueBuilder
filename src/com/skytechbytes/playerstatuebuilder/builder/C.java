@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 public interface C {
 	public static final int WOOL = 0;

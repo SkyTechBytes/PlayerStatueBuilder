@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -47,7 +47,7 @@ public class ImageUtil {
 	}
 	
 	public static BufferedImage applyFilters(BufferedImage bi, LinkedHashMap<String,Float> params) {
-		//BufferedImage newImage = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
+		// BufferedImage newImage = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
 		
 		for (String key : params.keySet()) {
 			if (key.equalsIgnoreCase("contrast")) {

@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -8,8 +8,8 @@ import java.util.Set;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.skytechbytes.testplugin.LegacyConverter;
-import com.skytechbytes.testplugin.Log;
+import com.skytechbytes.playerstatuebuilder.LegacyConverter;
+import com.skytechbytes.playerstatuebuilder.Log;
 /**
  * 
  * @author SkyTechBytes
@@ -135,7 +135,7 @@ public class StatueMaker extends BukkitRunnable {
 		
 		for (String key : AssetManager.armor.keySet()) {
 			if (params.keySet().contains(key)) {
-				//Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
+				// Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
 				
 				customizedImage = ImageUtil.overlayImage(customizedImage, AssetManager.armor.get(key));
 				
@@ -145,7 +145,7 @@ public class StatueMaker extends BukkitRunnable {
 		
 	}
 	private void right_leg(FaceBuilder fb, Reader r, Location l, BufferedImage ss) throws Exception {
-		//Right Leg
+		// Right Leg
 				fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,1,-3,false,true);
 				fb.buildFace(l, r.part(ss, 0, 20, 4, 12), 2,0,0,-3);
 				//fb.buildFace(l, r.part(ss, 8, 16, 4, 4), 1,0,12,-3);
@@ -159,7 +159,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 4, 20+16, 4, 12), 0,0,0,1);
 	}
 	private void left_leg(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Left Leg
+		// Left Leg
 				fb.buildFace(l, r.part(ss, 8+16, 16+32, 4, 4), 1,0+4,1,-3,false,true);
 				fb.buildFace(l, r.part(ss, 24, 52, 4, 12), 2,0+7,0,-3,true,false);
 				//fb.buildFace(l, r.part(ss, 8+16, 16+32, 4, 4), 1,0+4,12,-3);
@@ -173,7 +173,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 4+16-16, 20+32, 4, 12), 0,0+4,0,1);
 	}
 	private void body(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Body
+		// Body
 				fb.buildFace(l, r.part(ss, 20, 20, 8, 12), 0,0,12,0);
 				fb.buildFace(l, r.part(ss, 32, 20, 8, 12), 0,0,12,-3,true,false);
 				//Jacket
@@ -181,7 +181,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 32, 20+16, 8, 12), 0,0,12,-4,true,false);
 	}
 	private void right_arm(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Right Arm
+		// Right Arm
 				fb.buildFace(l, r.part(ss, 8+40, 16, 4, 4), 1,0-4,1+12,-3,false,true);
 				fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0-4,0+12,-3);
 				fb.buildFace(l, r.part(ss, 8+40-4, 16, 4, 4), 1,0-4,12+12,-3);
@@ -195,7 +195,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 4+40, 20+16, 4, 12), 0,0-4,0+12,1);
 	}
 	private void left_arm(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Left Arm
+		// Left Arm
 				fb.buildFace(l, r.part(ss, 8+16+16, 16+32, 4, 4), 1,0+4+4,1+12,-3,false,true);
 				fb.buildFace(l, r.part(ss, 24+16, 52, 4, 12), 2,0+7+4,0+12,-3,true,false);
 				fb.buildFace(l, r.part(ss, 8+16+16-4, 16+32, 4, 4), 1,0+4+4,12+12,-3);
@@ -209,7 +209,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 4+16+16+16, 20+32, 4, 12), 0,0+4+4,0+12,1);
 	}
 	private void head(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Head
+		// Head
 				fb.buildFace(l, r.part(ss, 16, 0, 8, 8), 1,0,1+24,-5,false,true);
 				fb.buildFace(l, r.part(ss, 0, 8, 8, 8), 2,0,0+24,-5);
 				fb.buildFace(l, r.part(ss, 16, 8, 8, 8), 2,0+7,0+24,-5,true,false);
@@ -225,7 +225,7 @@ public class StatueMaker extends BukkitRunnable {
 	}
 	
 	private void right_arm_slim(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Right Arm
+		// Right Arm
 				fb.buildFace(l, r.part(ss, 8+40-1, 16, 3, 4), 1,0-4+1,1+12,-3,false,true);
 				fb.buildFace(l, r.part(ss, 0+40, 20, 4, 12), 2,0-4+1,0+12,-3);//Done
 				fb.buildFace(l, r.part(ss, 8+40-4, 16, 3, 4), 1,0-4+1,12+12,-3);
@@ -239,7 +239,7 @@ public class StatueMaker extends BukkitRunnable {
 				fb.buildFace(l, r.part(ss, 4+40, 20+16, 3, 12), 0,0-4+1,0+12,1);
 	}
 	private void left_arm_slim(FaceBuilder fb,Reader r,Location l, BufferedImage ss) throws Exception {
-		//Left Arm
+		// Left Arm
 				fb.buildFace(l, r.part(ss, 8+16+16-1, 16+32, 3, 4), 1,0+4+4,1+12,-3,false,true);
 				fb.buildFace(l, r.part(ss, 24+16-1, 52, 4, 12), 2,0+7+4-1,0+12,-3,true,false);//Done
 				fb.buildFace(l, r.part(ss, 8+16+16-4, 16+32, 3, 4), 1,0+4+4,12+12,-3);
@@ -256,7 +256,7 @@ public class StatueMaker extends BukkitRunnable {
 		if (xx.getWidth() < 64 || xx.getHeight() < 64) {
 			return false;
 		}
-		//Checks the top left hand side of the right and left arms to see if they are transparent (if they are it's probably slim)
+		// Checks the top left hand side of the right and left arms to see if they are transparent (if they are it's probably slim)
 		if (new Color(xx.getRGB(54, 20), true).getAlpha() < 255) {
 			return true;
 		}

@@ -1,21 +1,21 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.skytechbytes.builder.AssetManager;
-import com.skytechbytes.support.VaultWrapper;
-import com.skytechbytes.support.WorldGuardWrapper;
+import com.skytechbytes.playerstatuebuilder.builder.AssetManager;
+import com.skytechbytes.playerstatuebuilder.support.VaultWrapper;
+import com.skytechbytes.playerstatuebuilder.support.WorldGuardWrapper;
 /**
  * 
  * @author SkyTechBytes
  *
  */
-public class PlayerStatuePlugin extends JavaPlugin {
-	public static PlayerStatuePlugin instance;
+public class PlayerStatueBuilder extends JavaPlugin {
+	public static PlayerStatueBuilder instance;
 	public static WorldGuardWrapper wgw = null;
 	public static VaultWrapper vw = null;
 	public static StatueConfiguration sc;
-	public PlayerStatuePlugin() {
+	public PlayerStatueBuilder() {
 	}
 	 // Fired when plugin is first enabled
     @Override
@@ -45,10 +45,10 @@ public class PlayerStatuePlugin extends JavaPlugin {
     	
     	this.getCommand("undostatue").setExecutor(new CommandUndostatue());
     	
-    	//Bstats begins here
+    	// Bstats begins here
     	int pluginId = 7093;
     	Metrics m = new Metrics(this,pluginId);
-    	int version = Metrics.B_STATS_VERSION;
+    	// int version = Metrics.B_STATS_VERSION;
     	
     }
     // Fired when plugin is disabled

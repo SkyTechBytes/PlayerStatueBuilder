@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 public class SkinReference {
 	private String url;

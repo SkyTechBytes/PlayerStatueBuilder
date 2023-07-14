@@ -1,4 +1,4 @@
-package com.skytechbytes.support;
+package com.skytechbytes.playerstatuebuilder.support;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -13,8 +13,8 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.skytechbytes.testplugin.Log;
-import com.skytechbytes.testplugin.PlayerStatuePlugin;
+import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 /**
  * 
  * From ryanhamshire's GriefProtection Plugin
@@ -29,7 +29,7 @@ public class WorldGuardWrapper
     public WorldGuardWrapper() 
     {
     	try {
-    		this.worldGuard = (WorldGuardPlugin)PlayerStatuePlugin.instance.getServer().getPluginManager().getPlugin("WorldGuard");
+    		this.worldGuard = (WorldGuardPlugin)PlayerStatueBuilder.instance.getServer().getPluginManager().getPlugin("WorldGuard");
     		Log.log("Worldguard detected!");
     	} catch (Exception e) {
     		Log.log("Worldguard not detected. You MUST have WorldGuard if you want PlayerStatueBuilderX to respect claim/region protections.");

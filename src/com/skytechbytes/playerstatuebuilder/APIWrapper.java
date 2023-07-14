@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

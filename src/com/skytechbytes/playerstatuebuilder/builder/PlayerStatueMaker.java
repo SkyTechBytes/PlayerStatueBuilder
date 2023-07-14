@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.skytechbytes.testplugin.Log;
-import com.skytechbytes.testplugin.PlayerStatuePlugin;
+import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 /**
  * 
  * @author SkyTechBytes
@@ -128,7 +128,7 @@ public class PlayerStatueMaker extends StatueMaker {
 
 		getSchematic().createSchematic(false, p.hasPermission("playerstatuebuilderx.override") == false);
 
-		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatuePlugin.instance.getConfig().getInt("cooldown") * 60000);
+		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatueBuilder.instance.getConfig().getInt("cooldown") * 60000);
 		
 		p.sendMessage(ChatColor.GREEN + "Statue Created!");
 

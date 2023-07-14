@@ -1,4 +1,4 @@
-package com.skytechbytes.testplugin;
+package com.skytechbytes.playerstatuebuilder;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -13,11 +13,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.skytechbytes.builder.PlayerStatueMaker;
+import com.skytechbytes.playerstatuebuilder.builder.PlayerStatueMaker;
 /**
  * 
  * @author SkyTechBytes
- * Thank you SparklingComet for the mojang api (No longer used, but still, it was quite useful!)
  *
  */
 public class CommandStatue implements CommandExecutor {
@@ -77,14 +76,14 @@ public class CommandStatue implements CommandExecutor {
 				}
 				if (flags.contains("slim") || flags.contains("legacy") || flags.contains("default")) {
 					if (flags.contains("slim")) {
-						new StatueBuildTask(name, new PlayerStatueMaker(p,"slim",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"slim",null,false,params)).runTaskAsynchronously(PlayerStatueBuilder.instance);
 					} else if (flags.contains("legacy")) {
-						new StatueBuildTask(name, new PlayerStatueMaker(p,"legacy",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"legacy",null,false,params)).runTaskAsynchronously(PlayerStatueBuilder.instance);
 					} else if (flags.contains("default")) {
-						new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
+						new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatueBuilder.instance);
 					}
 				} else {
-					new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatuePlugin.instance);
+					new StatueBuildTask(name, new PlayerStatueMaker(p,"default",null,false,params)).runTaskAsynchronously(PlayerStatueBuilder.instance);
 				}
 
 			} catch (Exception e) {

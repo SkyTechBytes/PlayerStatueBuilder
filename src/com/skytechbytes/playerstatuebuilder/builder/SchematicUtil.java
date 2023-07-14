@@ -1,4 +1,4 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.skytechbytes.testplugin.PlayerStatuePlugin;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 /**
  * 
  * @author SkyTechBytes
@@ -21,7 +21,7 @@ public class SchematicUtil {
 			//WARNING: DO NOT CHANGE	
 			Location lesserCorner = new Location(s.getWorld(), s.getMinX(), s.getMinY(), s.getMinZ());
 			Location greaterCorner = new Location(s.getWorld(), s.getMaxX(), s.getMaxY(), s.getMaxZ());
-			return PlayerStatuePlugin.wgw.canBuild(lesserCorner, greaterCorner, p);
+			return PlayerStatueBuilder.wgw.canBuild(lesserCorner, greaterCorner, p);
 		} catch (Exception e) {
 			return true;
 		}
@@ -64,8 +64,8 @@ public class SchematicUtil {
 			}
 			p.updateInventory();
 			
-			if (PlayerStatuePlugin.vw != null) {
-				PlayerStatuePlugin.vw.getEconomy().withdrawPlayer(p, getPrice(s));
+			if (PlayerStatueBuilder.vw != null) {
+				PlayerStatueBuilder.vw.getEconomy().withdrawPlayer(p, getPrice(s));
 				p.sendMessage(ChatColor.GREEN + "$" + getPrice(s) + " has been removed from your account"); 
 			}
 			
@@ -74,13 +74,13 @@ public class SchematicUtil {
 		return false;
 	}
 	private static double getPrice(Schematic s) {
-		return PlayerStatuePlugin.instance.getConfig().getDouble("priceRate") * s.getCount();
+		return PlayerStatueBuilder.instance.getConfig().getDouble("priceRate") * s.getCount();
 	}
 	private static boolean queryPrice(Schematic s, Player p) {
-		if (PlayerStatuePlugin.vw != null) {
+		if (PlayerStatueBuilder.vw != null) {
 			p.sendMessage(ChatColor.AQUA + "You will need $" + getPrice(s) + " as well.");
 			
-			if (!PlayerStatuePlugin.vw.getEconomy().has(p, getPrice(s))) {
+			if (!PlayerStatueBuilder.vw.getEconomy().has(p, getPrice(s))) {
 				p.sendMessage(ChatColor.RED + "You do not have enough money!");
 				return false;  
 			}
@@ -99,7 +99,7 @@ public class SchematicUtil {
 						continue;
 					}
 					
-					if (PlayerStatuePlugin.instance.getConfig().getBoolean("exact") == false) {
+					if (PlayerStatueBuilder.instance.getConfig().getBoolean("exact") == false) {
 					
 						if (Tag.WOOL.isTagged(temp)) {
 							temp = Material.WHITE_WOOL;
@@ -123,8 +123,8 @@ public class SchematicUtil {
 				}
 			}
 		}
-		Material charge = Material.matchMaterial(PlayerStatuePlugin.instance.getConfig().getString("charge"));
-		int rate = PlayerStatuePlugin.instance.getConfig().getInt("rate");
+		Material charge = Material.matchMaterial(PlayerStatueBuilder.instance.getConfig().getString("charge"));
+		int rate = PlayerStatueBuilder.instance.getConfig().getInt("rate");
 		if (rate > 0 && charge != null) {
 			blocks.put(charge, count/rate);
 		} else {

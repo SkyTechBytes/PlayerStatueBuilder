@@ -1,11 +1,10 @@
-package com.skytechbytes.builder;
+package com.skytechbytes.playerstatuebuilder.builder;
 
 import org.bukkit.Material;
 
 public class BuildUtils {
 
 	public BuildUtils() {
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * Thank you stackoverflow
