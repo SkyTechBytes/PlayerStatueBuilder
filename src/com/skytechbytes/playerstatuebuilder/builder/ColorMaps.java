@@ -54,8 +54,16 @@ public class ColorMaps {
 		p.put(new Color(126,91,48),Material.SPRUCE_PLANKS);
 		p.put(new Color(175,126,89),Material.JUNGLE_PLANKS);
 		p.put(new Color(38,19,2),Material.DARK_OAK_PLANKS);
-		p.put(new Color(184,101,53),Material.OAK_PLANKS);
-
+		p.put(new Color(184,101,53),Material.ACACIA_PLANKS);
+		p.put(new Color(131, 68, 50), Material.MANGROVE_PLANKS);
+		
+		/*
+		p.put(new Color(214, 189, 85), Material.BAMBOO_PLANKS);
+		p.put(new Color(222, 161, 154), Material.CHERRY_PLANKS);
+		p.put(new Color(126, 54, 81), Material.CRIMSON_PLANKS);
+		p.put(new Color(50, 134, 132), Material.WARPED_PLANKS);
+		*/
+		
 		t.put(new Color(147,88,61),Material.TERRACOTTA);
 		t.put(new Color(72,57,89),Material.BLUE_TERRACOTTA);
 		t.put(new Color(73,45,27),Material.BROWN_TERRACOTTA);
