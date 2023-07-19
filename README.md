@@ -93,10 +93,15 @@ Need something to decorate your server? Tired of building player statues by hand
       priceRate: 0.0
     </pre>
 <h2>Gallery</h2>
+    
 ![2019-12-24_14 56 38](https://user-images.githubusercontent.com/36645753/71426391-a5946000-265d-11ea-8f40-76a392d1133c.png)
+    
 ![2019-12-24_14 56 21](https://user-images.githubusercontent.com/36645753/71426392-a5946000-265d-11ea-9dc7-929790f2dfa2.png)
 <br>
 <a href="https://imgur.com/a/m3HXHHj">Or Use Imgur to see them (click here)</a>
     <br>
     <a href="https://imgur.com/a/34qkFPs">1.7 Example (click)</a>
-1.10 Example: https://user-images.githubusercontent.com/36645753/118715520-8c52fd00-b7d8-11eb-857b-5ee5bfbdfd59.png
+<br>
+1.10 Example: 
+
+![image](https://user-images.githubusercontent.com/36645753/118715520-8c52fd00-b7d8-11eb-857b-5ee5bfbdfd59.png)
