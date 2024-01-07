@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.skytechbytes</groupId>
 	<artifactId>playerstatuebuilder</artifactId>
@@ -8,11 +8,37 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
+			<!-- Copy non-JAR files to the build directory -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src</directory>
+									<includes>
+										<include>**/*.png</include>
+										<include>**/*.yml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<!-- 1.5 is the original version -->
-				<version>3.1.0</version>
+				<version>3.5.1</version>
 				<!-- New shading stuff for bstats -->
 				<configuration>
 					<relocations>
@@ -41,12 +67,6 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
-
-		<!-- Bukkit can be found at the following repository -->
-		<repository>
-			<id>bukkit-repo</id>
-			<url>http://repo.bukkit.org/content/groups/public/</url>
-		</repository>
 		<repository>
 			<id>sk89q-repo</id>
 			<url>https://maven.enginehub.org/repo/</url>
@@ -59,7 +79,6 @@
 
 	<dependencies>
 		<!-- More dependencies... -->
-
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
@@ -76,18 +95,14 @@
 		<!--Worldguard dependency -->
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
-			<artifactId>worldguard-legacy</artifactId>
-			<version>7.0.0-SNAPSHOT</version>
+			<artifactId>worldguard-bukkit</artifactId>
+			<version>7.0.0</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.bukkit</groupId>
 					<artifactId>bukkit</artifactId>
 				</exclusion>
-				<!--<exclusion> -->
-				<!--<groupId>com.sk89q.worldedit</groupId> -->
-				<!--<artifactId>worldedit-bukkit</artifactId> -->
-				<!--</exclusion> -->
 				<exclusion>
 					<groupId>com.sk89q</groupId>
 					<artifactId>commandbook</artifactId>
@@ -98,18 +113,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
-			<version>2.12.3</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/com.jhlabs/filters -->
 		<dependency>
 			<groupId>com.jhlabs</groupId>
 			<artifactId>filters</artifactId>
 			<version>2.0.235-1</version>
 		</dependency>
-
-
-
 		<!-- Bstats -->
 		<dependency>
 			<groupId>org.bstats</groupId>
@@ -118,5 +126,9 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
 
 </project>
