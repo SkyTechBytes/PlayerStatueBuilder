@@ -30,6 +30,7 @@ public class VaultWrapper {
         }
         RegisteredServiceProvider<Economy> rsp = p.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
+            Log.log("Vault detected, but no vault economy provider detected!");
             return false;
         }
         econ = rsp.getProvider();
