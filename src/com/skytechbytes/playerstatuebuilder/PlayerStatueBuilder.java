@@ -1,4 +1,5 @@
 package com.skytechbytes.playerstatuebuilder;
+import com.skytechbytes.playerstatuebuilder.support.PlotSquaredWrapper;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ public class PlayerStatueBuilder extends JavaPlugin {
 	public static PlayerStatueBuilder instance;
 	public static WorldGuardWrapper wgw = null;
 	public static VaultWrapper vw = null;
+	public static PlotSquaredWrapper plotw = null;
 	public static StatueConfiguration sc;
 	public PlayerStatueBuilder() {
 	}
@@ -37,6 +39,13 @@ public class PlayerStatueBuilder extends JavaPlugin {
     	} catch (Throwable rock) {
     		vw = null;
     	}
+
+		try {
+			plotw = new PlotSquaredWrapper();
+		} catch (Throwable stick) {
+			Log.log("PlotSquared not detected. The plugin MUST detect PlotSquared if you want the plugin to respect plot squared protections.");
+			plotw = null;
+		}
     	
     	AssetManager.initialize();
     	

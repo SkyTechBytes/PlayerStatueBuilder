@@ -2,7 +2,7 @@ name: PlayerStatueBuilderX
 main: com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder
 version: 1.14
 author: SkyTechBytes
-softdepend: [WorldGuard,Vault]
+softdepend: [WorldGuard,Vault,PlotSquared]
 api-version: 1.20
 commands:
    statue:
