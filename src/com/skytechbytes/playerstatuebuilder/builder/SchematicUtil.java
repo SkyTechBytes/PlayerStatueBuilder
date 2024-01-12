@@ -2,6 +2,7 @@ package com.skytechbytes.playerstatuebuilder.builder;
 
 import java.util.HashMap;
 
+import com.skytechbytes.playerstatuebuilder.Log;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,14 +18,23 @@ import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
  */
 public class SchematicUtil {
 	public static boolean canBuild(Schematic s, Player p) {
-		try {
-			//WARNING: DO NOT CHANGE	
-			Location lesserCorner = new Location(s.getWorld(), s.getMinX(), s.getMinY(), s.getMinZ());
-			Location greaterCorner = new Location(s.getWorld(), s.getMaxX(), s.getMaxY(), s.getMaxZ());
-			return PlayerStatueBuilder.wgw.canBuild(lesserCorner, greaterCorner, p);
-		} catch (Exception e) {
-			return true;
+		//WARNING: DO NOT CHANGE
+		Location lesserCorner = new Location(s.getWorld(), s.getMinX(), s.getMinY(), s.getMinZ());
+		Location greaterCorner = new Location(s.getWorld(), s.getMaxX(), s.getMaxY(), s.getMaxZ());
+
+		boolean canBuild = true;
+		// if worldguard detected, check if we can build here
+		if (PlayerStatueBuilder.wgw != null) {
+			canBuild = PlayerStatueBuilder.wgw.canBuild(lesserCorner, greaterCorner, p);
+			Log.log("WorldGuard can build: " + canBuild);
 		}
+		// if plot squared detected, also check if we can build here
+		if (PlayerStatueBuilder.plotw != null) {
+			boolean plotSquaredCanBuild = PlayerStatueBuilder.plotw.canBuild(lesserCorner, greaterCorner, p);
+			canBuild = canBuild && plotSquaredCanBuild;
+			Log.log("PlotSquared can build: " + plotSquaredCanBuild);
+		}
+		return canBuild;
 	}
 
 	public static boolean removeItemsOrAlert(Schematic s, Player p) {
