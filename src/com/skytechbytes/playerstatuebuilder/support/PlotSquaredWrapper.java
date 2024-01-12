@@ -1,7 +1,7 @@
 package com.skytechbytes.playerstatuebuilder.support;
 
+import com.plotsquared.bukkit.BukkitPlatform;
 import com.plotsquared.bukkit.util.BukkitUtil;
-import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.plot.Plot;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
@@ -11,11 +11,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class PlotSquaredWrapper {
-    private PlotSquared plotSquared = null;
+    private BukkitPlatform plotSquared = null;
 
     public PlotSquaredWrapper()
     {
-        this.plotSquared = (PlotSquared) PlayerStatueBuilder.instance.getServer().getPluginManager().getPlugin("PlotSquared");
+        this.plotSquared = (BukkitPlatform) PlayerStatueBuilder.instance.getServer().getPluginManager().getPlugin("PlotSquared");
+
+        Log.log("PlotSquared detected!");
     }
 
     public boolean canBuild(Location lesserCorner, Location greaterCorner, Player creatingPlayer)

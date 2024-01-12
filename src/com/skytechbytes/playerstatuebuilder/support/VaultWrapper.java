@@ -18,7 +18,7 @@ public class VaultWrapper {
 
     public VaultWrapper() throws Exception {
         if (!setupEconomy() ) {
-            Log.log("Vault not detected. You MUST have the Vault Plugin if you want PlayerStatueBuilderX to interact with the economy.");
+            Log.log("Vault with economy provider not detected. You MUST have the Vault Plugin if you want PlayerStatueBuilderX to interact with the economy.");
             throw new Exception();
         }
         Log.log("Vault detected!");
