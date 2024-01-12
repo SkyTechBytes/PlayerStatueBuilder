@@ -13,11 +13,15 @@ import org.bukkit.entity.Player;
 public class PlotSquaredWrapper {
     private BukkitPlatform plotSquared = null;
 
-    public PlotSquaredWrapper()
+    public PlotSquaredWrapper() throws Exception
     {
         this.plotSquared = (BukkitPlatform) PlayerStatueBuilder.instance.getServer().getPluginManager().getPlugin("PlotSquared");
 
-        Log.log("PlotSquared detected!");
+        if (plotSquared == null) {
+            throw new Exception();
+        } else {
+            Log.log("PlotSquared detected!");
+        }
     }
 
     public boolean canBuild(Location lesserCorner, Location greaterCorner, Player creatingPlayer)
@@ -62,12 +66,12 @@ public class PlotSquaredWrapper {
                 if (
                     // statue's min x is still greater than the permitted region's minimum x bound
                         lesserCorner.getBlockX() > regionLesserCorner.getBlockX() &&
-                        lesserCorner.getBlockY() > regionLesserCorner.getBlockY() &&
-                        lesserCorner.getBlockZ() > regionLesserCorner.getBlockZ() &&
+                                lesserCorner.getBlockY() > regionLesserCorner.getBlockY() &&
+                                lesserCorner.getBlockZ() > regionLesserCorner.getBlockZ() &&
                                 // statue's max x is still smaller than the region's maximum x bound
-                        greaterCorner.getBlockX() < regionGreaterCorner.getBlockX() &&
-                        greaterCorner.getBlockY() < regionGreaterCorner.getBlockY() &&
-                        greaterCorner.getBlockZ() < regionGreaterCorner.getBlockZ()
+                                greaterCorner.getBlockX() < regionGreaterCorner.getBlockX() &&
+                                greaterCorner.getBlockY() < regionGreaterCorner.getBlockY() &&
+                                greaterCorner.getBlockZ() < regionGreaterCorner.getBlockZ()
                 ) {
                     // fully contained! If the statue fits in just one of the regions, it's okay since all regions have the same flags
                     statueContainedInOneRegion = true;
