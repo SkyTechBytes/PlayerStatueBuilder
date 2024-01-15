@@ -8,8 +8,8 @@ import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
 import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
 
 public class StatueBuildTask extends BukkitRunnable {
-	private String identifier;
-	private StatueMaker callback;
+	private final String identifier;
+	private final StatueMaker callback;
 	public StatueBuildTask(String identifier, StatueMaker callback) {
 		this.identifier = identifier;
 		this.callback = callback;

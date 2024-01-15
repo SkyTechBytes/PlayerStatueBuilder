@@ -9,11 +9,8 @@ import org.bukkit.plugin.Plugin;
  * @author SkyTechBytes
  */
 public class StatueConfiguration {
-	private Plugin p = PlayerStatueBuilder.instance;
-	
-	public FileConfiguration getConfig() {
-		return p.getConfig();
-	}
+	private final Plugin p = PlayerStatueBuilder.instance;
+
 	public void createConfig() {
         try {
             if (!p.getDataFolder().exists()) {

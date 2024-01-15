@@ -11,7 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class PlotSquaredWrapper {
-    private BukkitPlatform plotSquared = null;
+    private final BukkitPlatform plotSquared;
 
     public PlotSquaredWrapper() throws Exception
     {

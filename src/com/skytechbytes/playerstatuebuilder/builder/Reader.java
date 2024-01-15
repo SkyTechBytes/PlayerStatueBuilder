@@ -24,7 +24,7 @@ public class Reader {
 		return new Color(red,green,blue,alpha);
 	}
 	public BufferedImage read() throws IOException {
-		BufferedImage bi = null;
+		BufferedImage bi;
 
 		bi = ImageIO.read(new File("str2.png"));
 		

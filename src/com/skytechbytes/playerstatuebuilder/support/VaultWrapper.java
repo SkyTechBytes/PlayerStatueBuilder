@@ -12,9 +12,9 @@ import net.milkbowl.vault.permission.Permission;
 public class VaultWrapper {
 
     private Economy econ = null;
-    private Permission perms = null;
-    private Chat chat = null;
-    private PlayerStatueBuilder p = PlayerStatueBuilder.instance;
+    private final Permission perms = null;
+    private final Chat chat = null;
+    private final PlayerStatueBuilder p = PlayerStatueBuilder.instance;
 
     public VaultWrapper() throws Exception {
         if (!setupEconomy() ) {

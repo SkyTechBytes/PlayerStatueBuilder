@@ -50,24 +50,24 @@ public class SchematicUtil {
 		HashMap<Material,Integer> blocks = query(s, p);
 		
 		//query the price after block query to ensure correct number of blocks
-		if (queryPrice(s, p) == false || getPrice(s) < 0) {
+		if (!queryPrice(s, p) || getPrice(s) < 0) {
 			hasRequired = false;
 		}
 
 		for (Material key : blocks.keySet()) {
 
-			if (p.getInventory().contains(key, blocks.get(key)) == false) {
+			if (!p.getInventory().contains(key, blocks.get(key))) {
 				hasRequired = false;
 			}
 		}
 		
-		if (hasRequired == false) {
+		if (!hasRequired) {
 			p.sendMessage(ChatColor.RED + "You don't have all the materials to make that statue right now... "
 					+ "when you do, make sure you run this command in an open space. You will be at the base of the statue "
 					+ "and the statue will be facing towards you.");
 		}
 
-		if (hasRequired == true) {
+		if (hasRequired) {
 			p.sendMessage(ChatColor.GREEN + "You have all required materials!");
 			for (Material key : blocks.keySet()) {
 				p.getInventory().removeItem(new ItemStack(key,blocks.get(key)));
@@ -109,7 +109,7 @@ public class SchematicUtil {
 						continue;
 					}
 					
-					if (PlayerStatueBuilder.instance.getConfig().getBoolean("exact") == false) {
+					if (!PlayerStatueBuilder.instance.getConfig().getBoolean("exact")) {
 					
 						if (Tag.WOOL.isTagged(temp)) {
 							temp = Material.WHITE_WOOL;
@@ -141,15 +141,15 @@ public class SchematicUtil {
 			blocks.put(Material.EMERALD, count/10);
 		}
 
-		String need = ChatColor.AQUA + "To make this player statue, you need: \n";
+		StringBuilder need = new StringBuilder(ChatColor.AQUA + "To make this player statue, you need: \n");
 		for (Material key : blocks.keySet()) {
-			need+=(key + ": " + blocks.get(key) + "\n");
+			need.append(key).append(": ").append(blocks.get(key)).append("\n");
 
 		}
 		
 		
 		
-		p.sendMessage(need);
+		p.sendMessage(need.toString());
 
 		
 

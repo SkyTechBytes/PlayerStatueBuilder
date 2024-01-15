@@ -22,8 +22,8 @@ public class Schematic {
 	 * Hashception
 	 */
 
-	private HashMap<Integer,HashMap<Integer,HashMap<Integer,MaterialHolder>>> matrix = new HashMap<>();
-	private World w;
+	private final HashMap<Integer,HashMap<Integer,HashMap<Integer,MaterialHolder>>> matrix = new HashMap<>();
+	private final World w;
 	private int count = 0; //Count of non-air blocks
 	public Schematic (World w) {
 		this.w = w;
@@ -51,13 +51,13 @@ public class Schematic {
 		if (y < minY) minY = y;
 		if (z < minZ) minZ = z;
 
-		if (matrix.containsKey(z) == false) {
+		if (!matrix.containsKey(z)) {
 			matrix.put(z, new HashMap<Integer,HashMap<Integer,MaterialHolder>>() );
 		}
-		if (matrix.get(z).containsKey(y) == false) {
+		if (!matrix.get(z).containsKey(y)) {
 			matrix.get(z).put(y, new HashMap<Integer,MaterialHolder>());
 		}
-		if (matrix.get(z).get(y).containsKey(x) == false) {
+		if (!matrix.get(z).get(y).containsKey(x)) {
 			matrix.get(z).get(y).put(x, new MaterialHolder(Material.AIR));
 		}
 		
@@ -96,13 +96,13 @@ public class Schematic {
 					 * If this were somehow triggered too early, nothing would happen as all mat.isSuccess() is false by default 
 					 * Please note that you'll also need the "override" permission to overwrite any non-air blocks
 					 */
-					if (eraseMode == true && 
-							mat.isSuccess() == true && 
+					if (eraseMode &&
+							mat.isSuccess() &&
 							b.getBlockData().getMaterial().equals(matrix.get(keyZ).get(keyY).get(keyX).getM())) 
 					{
 						b.setType(Material.AIR);
 						continue;
-					} else if (eraseMode == true) {
+					} else if (eraseMode) {
 						continue;
 					}
 
@@ -111,7 +111,7 @@ public class Schematic {
 				}
 			}
 		}
-		if (eraseMode == false) {
+		if (!eraseMode) {
 			Log.log("Statue Created");
 	
 			Schematic.history.add(this);

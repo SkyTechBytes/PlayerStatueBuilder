@@ -1,35 +1,30 @@
 package com.skytechbytes.playerstatuebuilder;
 
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.skytechbytes.playerstatuebuilder.builder.PlayerStatueMaker;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-import com.skytechbytes.playerstatuebuilder.builder.PlayerStatueMaker;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 /**
  * 
  * @author SkyTechBytes
  *
  */
 public class CommandStatue implements CommandExecutor {
-	
-	public static Map<String,BufferedImage> cache = new HashMap<>();
 
 	public CommandStatue() {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		if (arg0 instanceof Player) {
-			Player p = (Player) arg0;
+	public boolean onCommand(@NotNull CommandSender arg0, @NotNull Command arg1, @NotNull String arg2, String[] arg3) {
+		if (arg0 instanceof Player p) {
 
 			if (!p.hasPermission("playerstatuebuilderx.createStatue")) {
 				arg0.sendMessage(ChatColor.RED + "Insufficient permissions.");

@@ -10,10 +10,10 @@ import java.awt.image.BufferedImage;
 public class LegacyConverter {
 	/**
 	 * DOES NOT modify the image parameter put inside.
-	 * @param legacy
-	 * @param slim
-	 * @return
-	 * @throws Exception
+	 * @param legacy the image to convert
+	 * @param slim type to convert to
+	 * @return converted skin
+	 * @throws Exception during reading the image
 	 */
 	public static BufferedImage convertLegacy(BufferedImage legacy, boolean slim) throws Exception {
 
@@ -34,7 +34,7 @@ public class LegacyConverter {
 
 		// Right arm -> left arm
 		
-		if (slim == false) {
+		if (!slim) {
 			outGfx.drawImage(inImg, 40, 48, 36, 52, 44, 16, 48, 20, null); // Top
 			outGfx.drawImage(inImg, 44, 48, 40, 52, 48, 16, 52, 20, null); // Bottom
 			outGfx.drawImage(inImg, 48, 52, 44, 64, 52, 20, 56, 32, null); // Back
@@ -43,7 +43,7 @@ public class LegacyConverter {
 			outGfx.drawImage(inImg, 36, 52, 32, 64, 48, 20, 52, 32, null); // Outside -> inside
 			
 		} else {
-			/**
+			/*
 			 * A bit more difficult than it seems (slim converter made by SkyTechBytes)
 			 */
 			BufferedImage front = inImg.getSubimage(44, 20, 3, 12);//front

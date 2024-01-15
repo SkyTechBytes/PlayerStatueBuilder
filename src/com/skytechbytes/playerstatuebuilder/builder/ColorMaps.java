@@ -16,18 +16,17 @@ import org.bukkit.Material;
  *
  */
 public class ColorMaps {
-	static Map<Color,Material> x = new HashMap<Color,Material>();
-	static Map<Color,Material> p = new HashMap<Color,Material>();
-	static Map<Color,Material> t = new HashMap<Color,Material>();
-	static Map<Color,Material> c = new HashMap<Color,Material>();
-	static Map<Color,Material> g = new HashMap<Color,Material>();
-	static Map<Color,Material> w = new HashMap<Color,Material>();
+	static Map<Color,Material> x = new HashMap<>();
+	static Map<Color,Material> p = new HashMap<>();
+	static Map<Color,Material> t = new HashMap<>();
+	static Map<Color,Material> c = new HashMap<>();
+	static Map<Color,Material> g = new HashMap<>();
+	static Map<Color,Material> w = new HashMap<>();
 	
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
 	
 	static List<Integer> activeColorMaps = new ArrayList<>();
 
-	static Map<Integer,Material> qMap = new HashMap<Integer,Material>();
 	public ColorMaps() {
 
 	}

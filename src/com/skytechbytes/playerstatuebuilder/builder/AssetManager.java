@@ -17,7 +17,7 @@ import com.skytechbytes.playerstatuebuilder.Log;
 public class AssetManager {
 	public static HashMap<String,BufferedImage> armor = new HashMap<>();
 	public static HashMap<String,BufferedImage> items = new HashMap<>();
-	private static String[] armor_materials = {"chainmail","iron","golden","diamond"};
+	private static final String[] armor_materials = {"chainmail","iron","golden","diamond"};
 	public static void initialize() {
 		
 		

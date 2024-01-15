@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.skytechbytes.playerstatuebuilder.builder.Schematic;
 import com.skytechbytes.playerstatuebuilder.builder.SchematicUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 
@@ -19,9 +20,8 @@ public class CommandUndostatue implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		if (arg0 instanceof Player) {
-			Player p = (Player) arg0;
+	public boolean onCommand(@NotNull CommandSender arg0, @NotNull Command arg1, @NotNull String arg2, String[] arg3) {
+		if (arg0 instanceof Player p) {
 
 			try {
 				if (!p.hasPermission("playerstatuebuilderx.undo")) {
@@ -39,11 +39,11 @@ public class CommandUndostatue implements CommandExecutor {
 				}
 				boolean canBuild = SchematicUtil.canBuild(s, p);
 
-				if (canBuild == false) {
+				if (!canBuild) {
 					throw new Exception("Insufficient build permissions. That statue is in a protected location!");
 				}
 
-				s.createSchematic(true, p.hasPermission("playerstatuebuilderx.override") == false);
+				s.createSchematic(true, !p.hasPermission("playerstatuebuilderx.override"));
 
 				arg0.sendMessage(ChatColor.GREEN + "Undo successful.");
 

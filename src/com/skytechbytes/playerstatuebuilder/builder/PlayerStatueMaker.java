@@ -20,8 +20,8 @@ public class PlayerStatueMaker extends StatueMaker {
 	
 	public static HashMap<String,Long> cooldowns = new HashMap<>();
 	
-	private Player p;
-	private boolean quote = false;
+	private final Player p;
+	private final boolean quote;
 
 	public PlayerStatueMaker(Player p, String mode, BufferedImage bi, boolean quote, LinkedHashMap<String, Float> flags) {
 		super( new Location(
@@ -37,8 +37,8 @@ public class PlayerStatueMaker extends StatueMaker {
 	/**
 	 * Converts a rotation to a cardinal direction name.
 	 * From sk89qs's command book plugin
-	 * @param rot
-	 * @return
+	 * @param rot rotation
+	 * @return direction, like North, East, South, or West
 	 */
 	private static String getDirection(double rot) {
 		if (rot < 0) {
@@ -107,28 +107,28 @@ public class PlayerStatueMaker extends StatueMaker {
 
 		boolean canBuild = SchematicUtil.canBuild(this.getSchematic(), p);
 
-		if (canBuild == false) {
+		if (!canBuild) {
 			p.sendMessage(ChatColor.RED + "Insufficient build permissions. Move to a place where you're allowed to build.");
 			return;
 		}
 		
-		if (hasCooldown(p) == true) {
+		if (hasCooldown(p)) {
 			return;
 		}
 		
 		Log.log("Trying to remove items...");
 		boolean takeMaterials = SchematicUtil.removeItemsOrAlert(this.getSchematic(), p);
 		
-		if (takeMaterials == false) {
+		if (!takeMaterials) {
 			Log.log("Insufficient materials");
 			return;
 		}
 
 		Log.log("Creating Structure...");
 
-		getSchematic().createSchematic(false, p.hasPermission("playerstatuebuilderx.override") == false);
+		getSchematic().createSchematic(false, !p.hasPermission("playerstatuebuilderx.override"));
 
-		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatueBuilder.instance.getConfig().getInt("cooldown") * 60000);
+		cooldowns.put(p.getName(), System.currentTimeMillis() + PlayerStatueBuilder.instance.getConfig().getInt("cooldown") * 60000L);
 		
 		p.sendMessage(ChatColor.GREEN + "Statue Created!");
 

@@ -25,7 +25,7 @@ public class ImageUtil {
 	}
 	/**
 	 * Thanks Stackoverflow
-	 * @param bi
+	 * @param source
 	 * @return
 	 */
 	public static BufferedImage deepCopy(BufferedImage source) {
@@ -89,7 +89,7 @@ public class ImageUtil {
 		
 	}
 	private static void checkParams(String name, Float in, float low, float high) throws IllegalArgumentException {
-		if (in < low || in > high || in == null) {
+		if (in == null || in < low || in > high) {
 			throw new IllegalArgumentException("Parameter " + name + " must be in the range " + low + " to " + high);
 		}
 	}

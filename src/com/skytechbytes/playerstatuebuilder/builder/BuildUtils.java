@@ -9,8 +9,7 @@ public class BuildUtils {
 	/**
 	 * Thank you stackoverflow
 	 * Assume not weird matrix with non-null values
-	 * @param imgArray
-	 * @return
+	 * @param imgArray 2d matrix of materials to be flipped vertically in-place
 	 */
 	public static void flipVertical(Material[][] imgArray) {
 		Material temp;

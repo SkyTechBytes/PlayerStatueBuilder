@@ -4,8 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
-import com.skytechbytes.playerstatuebuilder.builder.BuildUtils;
-
 /**
  * 
  * @author SkyTechBytes This is where the faces of the statue are built (the
@@ -51,39 +49,21 @@ public class FaceBuilder {
 			for (int x = 0; x < matrix[y].length; x++) {
 				if (master_orientation == 0) {
 					switch (orientation) {
-					case 0:
-						gba(w, o, x + off1, -y + matrix.length + off2, off3, matrix[y][x]);
-						break;
-					case 1:
-						gba(w, o, x + off1, off2, y + off3, matrix[y][x]);
-						break;
-					case 2:
-						gba(w, o, off1, -y + matrix.length + off2, x + off3, matrix[y][x]);
-						break;
+						case 0 -> gba(w, o, x + off1, -y + matrix.length + off2, off3, matrix[y][x]);
+						case 1 -> gba(w, o, x + off1, off2, y + off3, matrix[y][x]);
+						case 2 -> gba(w, o, off1, -y + matrix.length + off2, x + off3, matrix[y][x]);
 					}
 				} else if (master_orientation == 1) {
 					switch (orientation) {
-					case 0:
-						gba(w, o, off3, off1 + x, -y + matrix.length + off2, matrix[y][x]);
-						break;
-					case 1:
-						gba(w, o, y + off3, off1 + x, off2, matrix[y][x]);
-						break;
-					case 2:
-						gba(w, o, x + off3, off1, -y + matrix.length + off2, matrix[y][x]);
-						break;
+						case 0 -> gba(w, o, off3, off1 + x, -y + matrix.length + off2, matrix[y][x]);
+						case 1 -> gba(w, o, y + off3, off1 + x, off2, matrix[y][x]);
+						case 2 -> gba(w, o, x + off3, off1, -y + matrix.length + off2, matrix[y][x]);
 					}
 				} else if (master_orientation == 2) {
 					switch (orientation) {
-					case 0:
-						gba(w, o, -y + matrix.length + off2, off3, off1 + x, matrix[y][x]);
-						break;
-					case 1:
-						gba(w, o, off2, y + off3, off1 + x, matrix[y][x]);
-						break;
-					case 2:
-						gba(w, o, -y + matrix.length + off2, x + off3, off1, matrix[y][x]);
-						break;
+						case 0 -> gba(w, o, -y + matrix.length + off2, off3, off1 + x, matrix[y][x]);
+						case 1 -> gba(w, o, off2, y + off3, off1 + x, matrix[y][x]);
+						case 2 -> gba(w, o, -y + matrix.length + off2, x + off3, off1, matrix[y][x]);
 					}
 				}
 			}
@@ -92,20 +72,14 @@ public class FaceBuilder {
 
 	private void gba(World w, Location o, int off1, int off2, int off3, Material m) {
 		switch (minor_orientation) {
-		case 0:
-			ll(w, o.getBlockX() + off1, o.getBlockY() + off2, o.getBlockZ() + off3, m);
-			break;
-		case 1:
-			ll(w, o.getBlockX() - off1, o.getBlockY() + off2, o.getBlockZ() - off3, m);
-			break;
-		case 2:
-			ll(w, o.getBlockX() + off3, o.getBlockY() + off2, o.getBlockZ() - off1, m);// fixed by swapping +off1 to
-																						// -off1
-			break;
-		case 3:
-			ll(w, o.getBlockX() - off3, o.getBlockY() + off2, o.getBlockZ() + off1, m);// fixed by swapping -off1 to
-																						// +off1
-			break;
+			case 0 -> ll(w, o.getBlockX() + off1, o.getBlockY() + off2, o.getBlockZ() + off3, m);
+			case 1 -> ll(w, o.getBlockX() - off1, o.getBlockY() + off2, o.getBlockZ() - off3, m);
+			case 2 -> ll(w, o.getBlockX() + off3, o.getBlockY() + off2, o.getBlockZ() - off1, m);// fixed by swapping +off1 to
+
+			// -off1
+			case 3 -> ll(w, o.getBlockX() - off3, o.getBlockY() + off2, o.getBlockZ() + off1, m);// fixed by swapping -off1 to
+
+			// +off1
 		}
 
 	}

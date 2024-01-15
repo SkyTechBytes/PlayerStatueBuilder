@@ -10,13 +10,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.Lists;
+import org.jetbrains.annotations.NotNull;
 
 public class StatueTabComplete implements TabCompleter {
 
 	@Override
-	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
+	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
+		if (sender instanceof Player p) {
 			if (command.getName().equalsIgnoreCase("statue")) {
 				if (args.length > 1) {
 					List<String> list = Lists.asList("", args);
@@ -45,7 +45,7 @@ public class StatueTabComplete implements TabCompleter {
 					for (String param : hs) {
 						a.remove(param);
 					}
-					return new ArrayList<String>(a);
+					return new ArrayList<>(a);
 				}
 			}
 		}

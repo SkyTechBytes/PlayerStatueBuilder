@@ -19,7 +19,7 @@ import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
  *
  */
 public class Util {
-	private static Map<String,BufferedImage> cache = new ConcurrentHashMap<>();
+	private static final Map<String,BufferedImage> cache = new ConcurrentHashMap<>();
 	
 
 	public static BufferedImage getSkinImage(String name) throws Exception {
@@ -80,9 +80,9 @@ public class Util {
 		String uuid = "";
 		try {
 			String json = APIWrapper.readJsonFromUrl("https://playerdb.co/api/player/minecraft/" + name);					
-			
+
 			uuid = json.substring(json.indexOf("raw_id\":")+9, json.indexOf("raw_id\":")+9+32);
-			
+
 			Log.log(uuid);
 		} catch (Exception e) {
 			throw new Exception("Failed to lookup uuid, likely because player specified does not exist.");
@@ -91,7 +91,7 @@ public class Util {
 		return uuid;
 	}
 	public static BufferedImage getCloudSkinImage(String name) throws Exception {
-		BufferedImage bi = null;
+		BufferedImage bi;
 	
 		/*
 		 * If the skin has no prefix, it is a normal skin that must be retrieved from the cloud.

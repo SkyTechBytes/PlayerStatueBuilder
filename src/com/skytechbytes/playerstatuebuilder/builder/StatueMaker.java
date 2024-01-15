@@ -18,13 +18,13 @@ import com.skytechbytes.playerstatuebuilder.Log;
  */
 public class StatueMaker extends BukkitRunnable {
 	
-	private Schematic s;
+	private final Schematic s;
 
-	private Location origin;
+	private final Location origin;
 	private BufferedImage bi;
-	private String mode;
-	private LinkedHashMap<String, Float> params;
-	private String direction;
+	private final String mode;
+	private final LinkedHashMap<String, Float> params;
+	private final String direction;
 
 	public StatueMaker(Location origin, String direction, String mode, BufferedImage bi, LinkedHashMap<String, Float> flags) {
 		s = new Schematic(origin.getWorld());
@@ -323,7 +323,7 @@ public class StatueMaker extends BukkitRunnable {
 		}
 		
 		//if the player does not specify what part to build, just build the whole thing
-		if (builtSomething == false) {
+		if (!builtSomething) {
 			right_leg(fb,r,l,ss);
 			left_leg(fb,r,l,ss);
 			body(fb,r,l,ss);
@@ -381,7 +381,7 @@ public class StatueMaker extends BukkitRunnable {
 		}
 		
 		//if the player does not specify what part to build, just build the whole thing
-		if (builtSomething == false) {
+		if (!builtSomething) {
 			right_leg(fb,r,l,ss);
 			left_leg(fb,r,l,ss);
 			body(fb,r,l,ss);
