@@ -6,6 +6,7 @@
   <version>1.15.3</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <finalName>PlayerStatueBuilderXv${project.version}-SkyTechBytes</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>

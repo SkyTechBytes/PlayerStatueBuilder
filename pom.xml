@@ -6,6 +6,7 @@
 	<artifactId>playerstatuebuilder</artifactId>
 	<version>1.15.3</version>
 	<build>
+		<finalName>PlayerStatueBuilderXv${project.version}-SkyTechBytes</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<!-- Copy non-JAR files to the build directory -->
