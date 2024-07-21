@@ -35,6 +35,14 @@ public class StatueTabComplete implements TabCompleter {
 					a.add("diamond_armor");
 					a.add("chainmail_armor");
 					a.add("golden_armor");
+
+					a.add("head");
+					a.add("body");
+					a.add("left_arm");
+					a.add("right_arm");
+					a.add("left_leg");
+					a.add("right_leg");
+
 					if (p.hasPermission("playerstatuebuilderx.specialOrientations")) {
 						a.add("xy");
 						a.add("xz");
