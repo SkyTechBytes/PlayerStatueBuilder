@@ -1,16 +1,15 @@
 package com.skytechbytes.playerstatuebuilder;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-
-import com.google.common.collect.Lists;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class StatueTabComplete implements TabCompleter {
 

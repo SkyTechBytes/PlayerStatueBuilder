@@ -1,13 +1,12 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.Color;
+import org.bukkit.Material;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import org.bukkit.Material;
 /**
  * 
  * @author SkyTechBytes

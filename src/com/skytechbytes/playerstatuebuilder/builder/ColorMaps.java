@@ -1,13 +1,10 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.bukkit.Material;
+
+import java.awt.*;
+import java.util.List;
+import java.util.*;
 /**
  * 
  * @author SkyTechBytes

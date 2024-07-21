@@ -1,16 +1,15 @@
 package com.skytechbytes.api;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import com.skytechbytes.playerstatuebuilder.StatueArgs;
-import org.bukkit.Location;
-
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import com.skytechbytes.playerstatuebuilder.StatueBuildTask;
 import com.skytechbytes.playerstatuebuilder.Util;
 import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
+import org.bukkit.Location;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class PlayerStatueBuilderAPI {
 	/**

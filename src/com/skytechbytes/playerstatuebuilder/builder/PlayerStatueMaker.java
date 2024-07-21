@@ -1,16 +1,15 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
+import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilderException;
 import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.skytechbytes.playerstatuebuilder.Log;
-import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 /**
  * 
  * @author SkyTechBytes
@@ -89,7 +88,7 @@ public class PlayerStatueMaker extends StatueMaker {
 		if (getParams().hasFlag("xy") || getParams().hasFlag("xz") || getParams().hasFlag("yz")) {
 			if (!p.hasPermission("playerstatuebuilderx.specialOrientations")) {
 				p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
-				throw new Exception("Insufficient Permissions");
+				throw new PlayerStatueBuilderException("Insufficient Permissions");
 			}
 		}
 		
@@ -139,13 +138,15 @@ public class PlayerStatueMaker extends StatueMaker {
 		
 		try {
 			if (this.getImage() == null) {
-				throw new Exception("Failed to obtain that player's skin. Please check spelling or try again later.");
+				throw new PlayerStatueBuilderException("Failed to obtain that player's skin. Please check spelling or try again later.");
 			}
 			super.generateStatueSchematic();
 			this.createStatue();
+		} catch (PlayerStatueBuilderException psbe) {
+			p.sendMessage(ChatColor.RED + "Error! " + psbe.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
 			p.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

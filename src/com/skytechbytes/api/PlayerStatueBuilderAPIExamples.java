@@ -1,10 +1,10 @@
 package com.skytechbytes.api;
 
-import java.util.LinkedHashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+
+import java.util.LinkedHashMap;
 
 public class PlayerStatueBuilderAPIExamples {
 	public static void examples() {

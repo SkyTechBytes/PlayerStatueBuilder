@@ -1,16 +1,14 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.util.LinkedHashMap;
-import java.util.Set;
-
+import com.skytechbytes.playerstatuebuilder.LegacyConverter;
+import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilderException;
 import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.skytechbytes.playerstatuebuilder.LegacyConverter;
-import com.skytechbytes.playerstatuebuilder.Log;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 /**
  * 
  * @author SkyTechBytes
@@ -114,6 +112,8 @@ public class StatueMaker extends BukkitRunnable {
 		try {
 			generateStatueSchematic();
 			createStatue();
+		} catch (PlayerStatueBuilderException psbe) {
+			Log.log(psbe.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,10 +131,12 @@ public class StatueMaker extends BukkitRunnable {
 		 */
 		
 		BufferedImage customizedImage = ImageUtil.deepCopy(ss);
-		
-		customizedImage = ImageUtil.applyFilters(customizedImage, params.getContrast(), params.getBrightness(),
-				params.getSaturation(), params.getHue(), params.getPosterize());
-		
+		try {
+			customizedImage = ImageUtil.applyFilters(customizedImage, params.getContrast(), params.getBrightness(),
+					params.getSaturation(), params.getHue(), params.getPosterize());
+		} catch (IllegalArgumentException e) {
+			throw new PlayerStatueBuilderException(e.getMessage());
+		}
 		for (String key : AssetManager.armor.keySet()) {
 			if (params.hasFlag(key)) {
 				// Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.

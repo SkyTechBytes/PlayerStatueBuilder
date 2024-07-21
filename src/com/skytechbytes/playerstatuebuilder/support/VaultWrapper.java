@@ -1,13 +1,12 @@
 package com.skytechbytes.playerstatuebuilder.support;
 
-import org.bukkit.plugin.RegisteredServiceProvider;
-
 import com.skytechbytes.playerstatuebuilder.Log;
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
-
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilderException;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class VaultWrapper {
 
@@ -19,7 +18,7 @@ public class VaultWrapper {
     public VaultWrapper() throws Exception {
         if (!setupEconomy() ) {
             Log.log("Vault with economy provider not detected. You MUST have the Vault Plugin if you want PlayerStatueBuilderX to interact with the economy.");
-            throw new Exception();
+            throw new PlayerStatueBuilderException("");
         }
         Log.log("Vault detected!");
     }

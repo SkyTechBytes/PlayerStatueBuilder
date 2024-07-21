@@ -1,14 +1,12 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.util.LinkedHashMap;
-
 import com.jhlabs.image.ContrastFilter;
 import com.jhlabs.image.HSBAdjustFilter;
 import com.jhlabs.image.PosterizeFilter;
 import com.jhlabs.image.SaturationFilter;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class ImageUtil {
 	

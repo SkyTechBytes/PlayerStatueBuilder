@@ -7,6 +7,7 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.skytechbytes.playerstatuebuilder.Log;
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilderException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -18,7 +19,7 @@ public class PlotSquaredWrapper {
         this.plotSquared = (BukkitPlatform) PlayerStatueBuilder.instance.getServer().getPluginManager().getPlugin("PlotSquared");
 
         if (plotSquared == null) {
-            throw new Exception();
+            throw new PlayerStatueBuilderException("");
         } else {
             Log.log("PlotSquared detected!");
         }

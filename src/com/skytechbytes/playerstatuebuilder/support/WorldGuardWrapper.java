@@ -1,12 +1,10 @@
 package com.skytechbytes.playerstatuebuilder.support;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.bukkit.BukkitPlayer;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.internal.permission.RegionPermissionModel;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
@@ -15,6 +13,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.skytechbytes.playerstatuebuilder.Log;
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 /**
  * 
  * From ryanhamshire's GriefProtection Plugin

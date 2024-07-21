@@ -1,8 +1,7 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.util.HashMap;
-
 import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,7 +9,7 @@ import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
+import java.util.HashMap;
 /**
  * 
  * @author SkyTechBytes

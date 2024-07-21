@@ -1,6 +1,6 @@
 package com.skytechbytes.playerstatuebuilder;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 /**
  * Super useful converter by DarkVamprism!

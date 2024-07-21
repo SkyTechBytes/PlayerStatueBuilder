@@ -1,14 +1,12 @@
 package com.skytechbytes.playerstatuebuilder;
 
-import java.awt.image.BufferedImage;
-
+import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
+import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
-import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
+import java.awt.image.BufferedImage;
 
 public class StatueBuildTask extends BukkitRunnable {
 	private final String identifier;
@@ -29,8 +27,13 @@ public class StatueBuildTask extends BukkitRunnable {
 			callback.setImage(bi);
 
 			callback.runTask(PlayerStatueBuilder.instance);
+
+		} catch (PlayerStatueBuilderException psbe) {
+			if (sender != null) {
+				sender.sendMessage(ChatColor.RED + "Error! " + psbe.getMessage());
+			}
 		} catch (Exception e) {
-			Log.log(e.getMessage());
+			e.printStackTrace();
 			if (sender != null) {
 				sender.sendMessage(ChatColor.RED + "Error! " + e.getMessage());
 			}

@@ -1,11 +1,11 @@
 package com.skytechbytes.playerstatuebuilder;
-import com.skytechbytes.playerstatuebuilder.support.PlotSquaredWrapper;
-import org.bstats.bukkit.Metrics;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import com.skytechbytes.playerstatuebuilder.builder.AssetManager;
+import com.skytechbytes.playerstatuebuilder.support.PlotSquaredWrapper;
 import com.skytechbytes.playerstatuebuilder.support.VaultWrapper;
 import com.skytechbytes.playerstatuebuilder.support.WorldGuardWrapper;
+import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.java.JavaPlugin;
 /**
  * 
  * @author SkyTechBytes

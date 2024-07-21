@@ -1,13 +1,11 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
+import com.skytechbytes.playerstatuebuilder.Log;
 
 import javax.imageio.ImageIO;
-
-import com.skytechbytes.playerstatuebuilder.Log;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 /**
  * Overlay Armor Textures are by SmashPortal https://www.planetminecraft.com/skin/18-diamond-armor-overlay-skin/
  * 

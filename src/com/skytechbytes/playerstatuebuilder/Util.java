@@ -1,5 +1,8 @@
 package com.skytechbytes.playerstatuebuilder;
 
+import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -9,10 +12,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
-
-import javax.imageio.ImageIO;
-
-import com.skytechbytes.playerstatuebuilder.builder.ImageUtil;
 /**
  * 
  * @author SkyTechBytes
@@ -53,7 +52,7 @@ public class Util {
 		boolean hasSpecialChar = pattern.matcher(fileName).find();
 		
 		if (hasSpecialChar) {
-			throw new Exception("Admins: make sure your skin image is alphanumeric only; Your skin name can't have a special character (don't include .png).");
+			throw new PlayerStatueBuilderException("Admins: make sure your skin image is alphanumeric only; Your skin name can't have a special character (don't include .png).");
 		}
 		
 		if (!(fileName.endsWith(".png") || fileName.endsWith(".PNG"))) {
@@ -72,10 +71,10 @@ public class Util {
 			bi = convertToARGB(bi);
 			
 			if (bi == null) {
-				throw new Exception();
+				throw new PlayerStatueBuilderException("");
 			}
 		} catch (Exception e) {
-			throw new Exception("Unable to load file from plugin data folder. Make sure the name is spelled correctly and the skin"
+			throw new PlayerStatueBuilderException("Unable to load file from plugin data folder. Make sure the name is spelled correctly and the skin"
 					+ " image file is in the same folder as the config file.");
 		}
 		return ImageUtil.deepCopy(bi);
@@ -104,7 +103,7 @@ public class Util {
 
 			Log.log(uuid);
 		} catch (Exception e) {
-			throw new Exception("Failed to lookup uuid, likely because player specified does not exist.");
+			throw new PlayerStatueBuilderException("Failed to lookup uuid, likely because player specified does not exist.");
 			
 		}
 		return uuid;
@@ -148,6 +147,6 @@ public class Util {
 			}
 		}
 		
-		throw new Exception("Could not obtain skin from the API or backup API. Please try again later.");
+		throw new PlayerStatueBuilderException("Could not obtain skin from the API or backup API. Please try again later.");
 	}
 }

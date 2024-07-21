@@ -1,10 +1,10 @@
 package com.skytechbytes.playerstatuebuilder;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
+
+import java.io.File;
+import java.util.ArrayList;
 /**
  * @author SkyTechBytes
  */
