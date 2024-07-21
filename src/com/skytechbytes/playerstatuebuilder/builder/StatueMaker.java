@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
+import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -23,15 +24,15 @@ public class StatueMaker extends BukkitRunnable {
 	private final Location origin;
 	private BufferedImage bi;
 	private final String mode;
-	private final LinkedHashMap<String, Float> params;
+	private final StatueArgs params;
 	private final String direction;
 
-	public StatueMaker(Location origin, String direction, String mode, BufferedImage bi, LinkedHashMap<String, Float> flags) {
+	public StatueMaker(Location origin, String direction, String mode, BufferedImage bi, StatueArgs params) {
 		s = new Schematic(origin.getWorld());
 		this.bi = bi;
 		this.mode = mode;
 		this.direction = direction;
-		this.params = flags;
+		this.params = params;
 		this.origin = origin;
 	}
 	private void initialize() {
@@ -41,13 +42,13 @@ public class StatueMaker extends BukkitRunnable {
 		String d = direction;
 		//Log.log(d);
 		
-		if (d.equals("North")) {
+		if (d.equalsIgnoreCase("North")) {
 			FaceBuilder.minor_orientation = 1;
-		} else if (d.equals("East")) {
+		} else if (d.equalsIgnoreCase("East")) {
 			FaceBuilder.minor_orientation = 2;
-		} else if (d.equals("West")) {
+		} else if (d.equalsIgnoreCase("West")) {
 			FaceBuilder.minor_orientation = 3;
-		} else if (d.equals("South")) {
+		} else if (d.equalsIgnoreCase("South")) {
 			FaceBuilder.minor_orientation = 0;
 		}
 	}
@@ -58,17 +59,17 @@ public class StatueMaker extends BukkitRunnable {
 		
 		ColorMaps.getActiveColorMaps().clear();
 		
-		if (params.containsKey("wool")) ColorMaps.getActiveColorMaps().add(C.WOOL);
+		if (params.hasFlag("wool")) ColorMaps.getActiveColorMaps().add(C.WOOL);
 		
-		if (params.containsKey("planks")) ColorMaps.getActiveColorMaps().add(C.PLANKS);
+		if (params.hasFlag("planks")) ColorMaps.getActiveColorMaps().add(C.PLANKS);
 		
-		if (params.containsKey("terracotta")) ColorMaps.getActiveColorMaps().add(C.TERRACOTTA);
+		if (params.hasFlag("terracotta")) ColorMaps.getActiveColorMaps().add(C.TERRACOTTA);
 		
-		if (params.containsKey("concrete")) ColorMaps.getActiveColorMaps().add(C.CONCRETE);
+		if (params.hasFlag("concrete")) ColorMaps.getActiveColorMaps().add(C.CONCRETE);
 		
-		if (params.containsKey("glass")) ColorMaps.getActiveColorMaps().add(C.GLASS);
+		if (params.hasFlag("glass")) ColorMaps.getActiveColorMaps().add(C.GLASS);
 		
-		if (params.containsKey("gray")) ColorMaps.getActiveColorMaps().add(C.GRAY);
+		if (params.hasFlag("gray")) ColorMaps.getActiveColorMaps().add(C.GRAY);
 		
 		if (ColorMaps.getActiveColorMaps().size() == 0) {
 			ColorMaps.getActiveColorMaps().add(C.WOOL);
@@ -78,11 +79,11 @@ public class StatueMaker extends BukkitRunnable {
 		}
 		//Then populate the schematic based on those block types
 		
-		if (params.containsKey("xy")) {
+		if (params.hasFlag("xy")) {
 			FaceBuilder.master_orientation = 0;
-		} else if (params.containsKey("xz")) {
+		} else if (params.hasFlag("xz")) {
 			FaceBuilder.master_orientation = 2;
-		} else if (params.containsKey("yz")) {
+		} else if (params.hasFlag("yz")) {
 			FaceBuilder.master_orientation = 1;
 		} else {
 			FaceBuilder.master_orientation = 0;
@@ -131,12 +132,12 @@ public class StatueMaker extends BukkitRunnable {
 		
 		BufferedImage customizedImage = ImageUtil.deepCopy(ss);
 		
-		customizedImage = ImageUtil.applyFilters(customizedImage, params);
+		customizedImage = ImageUtil.applyFilters(customizedImage, params.getContrast(), params.getBrightness(),
+				params.getSaturation(), params.getHue(), params.getPosterize());
 		
 		for (String key : AssetManager.armor.keySet()) {
-			if (params.keySet().contains(key)) {
+			if (params.hasFlag(key)) {
 				// Since BufferedImage is mutable, I should be able to modify the bufferedImage inside the method and it should reflect outside.
-				
 				customizedImage = ImageUtil.overlayImage(customizedImage, AssetManager.armor.get(key));
 				
 			}
@@ -296,28 +297,27 @@ public class StatueMaker extends BukkitRunnable {
 		
 		//see if the player wants us to just build one part
 		boolean builtSomething = false;
-		Set<String> flags = params.keySet();
-		if (flags.contains("right_leg")) {
+		if (params.hasFlag("right_leg")) {
 			right_leg(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("left_leg")) {
+		if (params.hasFlag("left_leg")) {
 			left_leg(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("body")) {
+		if (params.hasFlag("body")) {
 			body(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("right_arm")) {
+		if (params.hasFlag("right_arm")) {
 			right_arm(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("left_arm")) {
+		if (params.hasFlag("left_arm")) {
 			left_arm(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("head")) {
+		if (params.hasFlag("head")) {
 			head(fb,r,l,ss);
 			builtSomething = true;
 		}
@@ -354,28 +354,27 @@ public class StatueMaker extends BukkitRunnable {
 		
 		//see if the player wants us to just build one part
 		boolean builtSomething = false;
-		Set<String> flags = params.keySet();
-		if (flags.contains("right_leg")) {
+		if (params.hasFlag("right_leg")) {
 			right_leg(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("left_leg")) {
+		if (params.hasFlag("left_leg")) {
 			left_leg(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("body")) {
+		if (params.hasFlag("body")) {
 			body(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("right_arm")) {
+		if (params.hasFlag("right_arm")) {
 			right_arm_slim(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("left_arm")) {
+		if (params.hasFlag("left_arm")) {
 			left_arm_slim(fb,r,l,ss);
 			builtSomething = true;
 		}
-		if (flags.contains("head")) {
+		if (params.hasFlag("head")) {
 			head(fb,r,l,ss);
 			builtSomething = true;
 		}
@@ -396,7 +395,7 @@ public class StatueMaker extends BukkitRunnable {
 		makeStatueSchematic(l,LegacyConverter.convertLegacy(ss,false));
 		
 	}
-	protected LinkedHashMap<String, Float> getParams() {
+	protected StatueArgs getParams() {
 		return this.params;
 	}
 	

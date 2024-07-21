@@ -1,7 +1,10 @@
 package com.skytechbytes.api;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import org.bukkit.Location;
 
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
@@ -25,7 +28,15 @@ public class PlayerStatueBuilderAPI {
 	 */
 	public static void createStatue(String skinIdentifier, Location origin, String direction, String mode, LinkedHashMap<String, Float> params) 
 			throws IllegalArgumentException, IllegalStateException, Exception {
-		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, Util.getSkinImage(skinIdentifier), params), null).runTaskAsynchronously(PlayerStatueBuilder.instance);
+
+		// convert old signature to new args
+		List<String> input = new ArrayList<>();
+		for (String key: params.keySet()) {
+			input.add(key + ":" + params.get(key));
+		}
+
+		StatueArgs statueArgs = new StatueArgs(input);
+		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, Util.getSkinImage(skinIdentifier), statueArgs), null).runTaskAsynchronously(PlayerStatueBuilder.instance);
 	}
 	/**
 	 * Programmatically creates a player statue at location "origin"
@@ -44,7 +55,7 @@ public class PlayerStatueBuilderAPI {
 			throws IllegalArgumentException, IllegalStateException, Exception {
 		LinkedHashMap<String, Float> temp = new LinkedHashMap<>();
 		for (String param : params) {
-			temp.put(param, 0f);
+			temp.put(param, -1f);
 		}
 		createStatue(skinIdentifier, origin, direction, mode, temp);
 	}

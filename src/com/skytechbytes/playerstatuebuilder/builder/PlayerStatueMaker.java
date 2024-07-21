@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -23,13 +24,13 @@ public class PlayerStatueMaker extends StatueMaker {
 	private final Player p;
 	private final boolean quote;
 
-	public PlayerStatueMaker(Player p, String mode, BufferedImage bi, boolean quote, LinkedHashMap<String, Float> flags) {
+	public PlayerStatueMaker(Player p, String mode, BufferedImage bi, boolean quote, StatueArgs params) {
 		super( new Location(
 				p.getLocation().getWorld(), 
 				p.getLocation().getBlockX(), 
 				p.getLocation().getBlockY() + 3, 
 				p.getLocation().getBlockZ()), 
-			   getDirection(p.getLocation().getYaw()), mode, bi, flags);
+			   getDirection(p.getLocation().getYaw()), mode, bi, params);
 
 		this.p = p;
 		this.quote = quote;
@@ -85,7 +86,7 @@ public class PlayerStatueMaker extends StatueMaker {
 		/*
 		 * Special orientation flags
 		 */
-		if (getParams().containsKey("xy") || getParams().containsKey("xz") || getParams().containsKey("yz")) {
+		if (getParams().hasFlag("xy") || getParams().hasFlag("xz") || getParams().hasFlag("yz")) {
 			if (!p.hasPermission("playerstatuebuilderx.specialOrientations")) {
 				p.sendMessage(ChatColor.RED + "You are not allowed to issue this command with xy|xz|yz. Omit that term and run it again.");
 				throw new Exception("Insufficient Permissions");

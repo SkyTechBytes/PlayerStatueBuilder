@@ -46,50 +46,46 @@ public class ImageUtil {
 	    return rgb;
 	}
 	
-	public static BufferedImage applyFilters(BufferedImage bi, LinkedHashMap<String,Float> params) {
+	public static BufferedImage applyFilters(BufferedImage bi, float contrast, float brightness,
+											 float saturation, float hue, float posterize) {
 		// BufferedImage newImage = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
-		
-		for (String key : params.keySet()) {
-			if (key.equalsIgnoreCase("contrast")) {
-				checkParams(key, params.get(key), 0, 1);
-				ContrastFilter cf = new ContrastFilter();
-				cf.setContrast(params.get(key));
-				bi = cf.filter(bi, null);
-			}
-			if (key.equalsIgnoreCase("brightness")) {
-				checkParams(key, params.get(key), 0, 1);
-				ContrastFilter cf = new ContrastFilter();
-				cf.setBrightness(params.get(key));
-				bi = cf.filter(bi, null);
-			}
-			if (key.equalsIgnoreCase("saturation")) {
-				checkParams(key, params.get(key), 0, 1);
-				SaturationFilter sf = new SaturationFilter();
-				sf.setAmount(params.get(key));
-				bi = sf.filter(bi,  null);
-			}
-			if (key.equalsIgnoreCase("hue")) {
-				checkParams(key, params.get(key), 0, 1);
-				HSBAdjustFilter hsb = new HSBAdjustFilter();
-				hsb.setHFactor(params.get(key));
-				bi = hsb.filter(bi, null);
-			}
-			if (key.equalsIgnoreCase("posterize")) {
-				PosterizeFilter p = new PosterizeFilter();
-				p.setNumLevels(Math.round(params.get(key)));
-				bi = p.filter(bi, null);
-			}
-//			if (key.equalsIgnoreCase("quantize")) {
-//				QuantizeFilter qf = new QuantizeFilter();
-//				qf.setNumColors(Math.round(params.get(key)));
-//				bi = qf.filter(bi, null);
-//			}
+
+		if (contrast != -1) {
+			checkParams("contrast", contrast, 0, 1);
+			ContrastFilter cf = new ContrastFilter();
+			cf.setContrast(contrast);
+			bi = cf.filter(bi, null);
 		}
+		if (brightness != -1) {
+			checkParams("brightness", brightness, 0, 1);
+			ContrastFilter cf = new ContrastFilter();
+			cf.setBrightness(brightness);
+			bi = cf.filter(bi, null);
+		}
+		if (saturation != -1) {
+			checkParams("saturation", saturation, 0, 1);
+			SaturationFilter sf = new SaturationFilter();
+			sf.setAmount(saturation);
+			bi = sf.filter(bi,  null);
+		}
+		if (hue != -1) {
+			checkParams("hue", hue, 0, 1);
+			HSBAdjustFilter hsb = new HSBAdjustFilter();
+			hsb.setHFactor(hue);
+			bi = hsb.filter(bi, null);
+		}
+		if (posterize != -1) {
+			checkParams("posterize", posterize, 0, 128);
+			PosterizeFilter p = new PosterizeFilter();
+			p.setNumLevels(Math.round(posterize));
+			bi = p.filter(bi, null);
+		}
+
 		return bi;
 		
 	}
-	private static void checkParams(String name, Float in, float low, float high) throws IllegalArgumentException {
-		if (in == null || in < low || in > high) {
+	private static void checkParams(String name, float in, float low, float high) throws IllegalArgumentException {
+		if (in < low || in > high) {
 			throw new IllegalArgumentException("Parameter " + name + " must be in the range " + low + " to " + high);
 		}
 	}
