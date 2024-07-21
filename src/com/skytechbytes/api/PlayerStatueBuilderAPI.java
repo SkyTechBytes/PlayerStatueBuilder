@@ -25,7 +25,7 @@ public class PlayerStatueBuilderAPI {
 	 */
 	public static void createStatue(String skinIdentifier, Location origin, String direction, String mode, LinkedHashMap<String, Float> params) 
 			throws IllegalArgumentException, IllegalStateException, Exception {
-		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, Util.getSkinImage(skinIdentifier), params)).runTaskAsynchronously(PlayerStatueBuilder.instance);
+		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, Util.getSkinImage(skinIdentifier), params), null).runTaskAsynchronously(PlayerStatueBuilder.instance);
 	}
 	/**
 	 * Programmatically creates a player statue at location "origin"

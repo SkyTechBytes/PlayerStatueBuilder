@@ -1,5 +1,6 @@
 package com.skytechbytes.playerstatuebuilder;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -66,6 +67,9 @@ public class Util {
 		
 		
 			bi = ImageIO.read(customFile.toFile());
+
+			// convert to argb
+			bi = convertToARGB(bi);
 			
 			if (bi == null) {
 				throw new Exception();
@@ -75,6 +79,21 @@ public class Util {
 					+ " image file is in the same folder as the config file.");
 		}
 		return ImageUtil.deepCopy(bi);
+	}
+	public static BufferedImage convertToARGB(BufferedImage originalImage) {
+		// Create a new buffered image with the ARGB color model
+		BufferedImage argbImage = new BufferedImage(
+				originalImage.getWidth(),
+				originalImage.getHeight(),
+				BufferedImage.TYPE_INT_ARGB
+		);
+
+		// Draw the original image onto the new ARGB buffered image
+		Graphics2D g2d = argbImage.createGraphics();
+		g2d.drawImage(originalImage, 0, 0, null);
+		g2d.dispose();
+
+		return argbImage;
 	}
 	private static String getUUID(String name) throws Exception {
 		String uuid = "";

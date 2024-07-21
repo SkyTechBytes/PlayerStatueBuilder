@@ -33,7 +33,7 @@ public class Reader {
 	public Material[][] part(BufferedImage bi) {
 		return part(bi,0,0,bi.getWidth(),bi.getHeight());
 	}
-	public Material[][] part(BufferedImage bi,int lx, int ly, int sx, int sy) {
+	public Material[][] part(BufferedImage bi, int lx, int ly, int sx, int sy) {
 		try {
 			bi = bi.getSubimage(lx, ly, sx, sy);
 		} catch (Exception e) {
