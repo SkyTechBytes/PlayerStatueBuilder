@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.skytechbytes</groupId>
 	<artifactId>playerstatuebuilder</artifactId>
-	<version>1.15.3</version>
+	<version>1.16</version>
 	<build>
 		<finalName>PlayerStatueBuilderXv${project.version}-SkyTechBytes</finalName>
 		<sourceDirectory>src</sourceDirectory>
