@@ -102,6 +102,7 @@ public class PlayerStatueMaker extends StatueMaker {
 
 		if (quote) {
 			SchematicUtil.query(this.getSchematic(), p);
+			SchematicUtil.queryPrice(this.getSchematic(), p);
 			return;
 		}
 

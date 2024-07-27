@@ -65,7 +65,7 @@ public class CommandStatue implements CommandExecutor {
 					throw new PlayerStatueBuilderException("Players cannot directly set x:, y:, z:, direction:, or world:");
 				}
 				sender.sendMessage(ChatColor.YELLOW + "Crunching numbers... please wait.");
-				new StatueBuildTask(name, new PlayerStatueMaker(p, mode, null, false, params), p).runTaskAsynchronously(PlayerStatueBuilder.instance);
+				new StatueBuildTask(name, new PlayerStatueMaker(p, mode, null, params.hasFlag("quote"), params), p).runTaskAsynchronously(PlayerStatueBuilder.instance);
 			} else if (sender instanceof ConsoleCommandSender || sender instanceof BlockCommandSender) {
 				if (!params.isSet("x") || !params.isSet("y") || !params.isSet("z") || !params.isSet("direction") || !params.isSet("world")) {
 					throw new PlayerStatueBuilderException("Console users must pass in x:<x> y:<y> z:<z> direction:[North|South|East|West] world:<name> to the command");

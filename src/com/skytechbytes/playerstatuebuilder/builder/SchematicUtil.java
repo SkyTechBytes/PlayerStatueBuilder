@@ -85,7 +85,7 @@ public class SchematicUtil {
 	private static double getPrice(Schematic s) {
 		return PlayerStatueBuilder.instance.getConfig().getDouble("priceRate") * s.getCount();
 	}
-	private static boolean queryPrice(Schematic s, Player p) {
+	public static boolean queryPrice(Schematic s, Player p) {
 		if (PlayerStatueBuilder.vw != null) {
 			p.sendMessage(ChatColor.AQUA + "You will need $" + getPrice(s) + " as well.");
 			

@@ -35,6 +35,7 @@ public class StatueTabComplete implements TabCompleter {
 					a.add("diamond_armor");
 					a.add("chainmail_armor");
 					a.add("golden_armor");
+					a.add("quote");
 
 					a.add("head");
 					a.add("body");
