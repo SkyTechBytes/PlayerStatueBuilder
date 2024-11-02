@@ -1,6 +1,7 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
 import com.skytechbytes.playerstatuebuilder.Log;
+import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -112,6 +113,8 @@ public class Schematic {
 		}
 		if (!eraseMode) {
 			Log.log("Statue Created");
+
+			PlayerStatueBuilder.statueCount.incrementAndGet();
 	
 			Schematic.history.add(this);
 		}

@@ -5,7 +5,12 @@ import com.skytechbytes.playerstatuebuilder.support.PlotSquaredWrapper;
 import com.skytechbytes.playerstatuebuilder.support.VaultWrapper;
 import com.skytechbytes.playerstatuebuilder.support.WorldGuardWrapper;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 
  * @author SkyTechBytes
@@ -17,6 +22,7 @@ public class PlayerStatueBuilder extends JavaPlugin {
 	public static VaultWrapper vw = null;
 	public static PlotSquaredWrapper plotw = null;
 	public static StatueConfiguration sc;
+	public static AtomicInteger statueCount = new AtomicInteger(0);
 	public PlayerStatueBuilder() {
 	}
 	 // Fired when plugin is first enabled
@@ -57,6 +63,13 @@ public class PlayerStatueBuilder extends JavaPlugin {
     	// Bstats begins here
     	int pluginId = 7093;
     	Metrics m = new Metrics(this,pluginId);
+
+		m.addCustomChart(new Metrics.SingleLineChart("statues", () -> {
+			int statuesCreated = statueCount.get();
+			// reset number of statues made up to this point
+			statueCount.set(0);
+			return statuesCreated;
+		}));
     	// int version = Metrics.B_STATS_VERSION;
     	
     }
