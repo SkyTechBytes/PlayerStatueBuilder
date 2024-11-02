@@ -1,5 +1,6 @@
 package com.skytechbytes.playerstatuebuilder.builder;
 
+import com.skytechbytes.playerstatuebuilder.Log;
 import org.bukkit.Material;
 
 import java.awt.*;
@@ -135,12 +136,12 @@ public class ColorMaps {
 		colorMaps.add(w);
 
 	}
-	public static Material getMatchingMaterial(int r, int g, int b, int alpha) {
-		if (alpha < 255) {
+	public static Material getMatchingMaterial(Color want, ColorDiffable diffFunc, float w1, float w2, float w3) {
+		if (want.getAlpha() < 180) {
 			return Material.AIR;
 		}
 		Material temp = Material.AIR;
-		int smallestDifference = Integer.MAX_VALUE;
+		double smallestDifference = Double.MAX_VALUE;
 		for (int i = 0 ; i < colorMaps.size() ; i++) {
 			if (!activeColorMaps.contains(i)) {
 				continue;
@@ -148,8 +149,8 @@ public class ColorMaps {
 			Map<Color,Material> x = colorMaps.get(i);
 			Set<Color> keys = x.keySet();
 			for(Color key: keys){
-				int difference = (int) (Math.pow(key.getRed()-r,2) + Math.pow(key.getGreen()-g,2) + Math.pow(key.getBlue()-b,2));
-				if (difference < smallestDifference) {
+				double difference = diffFunc.getDelta(key, want, w1, w2, w3);
+				if (difference <= smallestDifference) {
 					temp = x.get(key);
 					smallestDifference = difference;
 				}
@@ -157,6 +158,7 @@ public class ColorMaps {
 		}
 		return temp;
 	}
+
 	public static List<Integer> getActiveColorMaps() {
 		return activeColorMaps;
 	}

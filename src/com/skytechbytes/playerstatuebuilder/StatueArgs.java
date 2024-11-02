@@ -16,6 +16,10 @@ public class StatueArgs {
     private String world = "";
     private HashSet<String> flags;
     private HashSet<String> assigned;
+    private ColorMode colorMode = ColorMode.RGB;
+    private float w1 = 1;
+    private float w2 = 1;
+    private float w3 = 1;
     public StatueArgs(List<String> tokens) throws Exception {
         /*
          * Type of skin flags
@@ -50,6 +54,18 @@ public class StatueArgs {
                         this.direction = tokenized[1];
                     } else if (tokenized[0].equalsIgnoreCase("world")) {
                         this.world = tokenized[1];
+                    } else if (tokenized[0].equalsIgnoreCase("converter")) {
+                        try {
+                            this.colorMode = ColorMode.valueOf(tokenized[1].toUpperCase());
+                        } catch (IllegalArgumentException ie) {
+                            throw new PlayerStatueBuilderException("Invalid color mode: " + tokenized[1]);
+                        }
+                    } else if (tokenized[0].equalsIgnoreCase("w1")) {
+                        this.w1 = Float.parseFloat(tokenized[1]);
+                    } else if (tokenized[0].equalsIgnoreCase("w2")) {
+                        this.w2 = Float.parseFloat(tokenized[1]);
+                    } else if (tokenized[0].equalsIgnoreCase("w3")) {
+                        this.w3 = Float.parseFloat(tokenized[1]);
                     } else {
                         flags.add(tokenized[0]);
                     }
@@ -110,5 +126,21 @@ public class StatueArgs {
     // returns true if the value was ever included in the command input
     public boolean isSet(String value) {
         return this.assigned.contains(value);
+    }
+
+    public ColorMode getColorMode() {
+        return colorMode;
+    }
+
+    public float getW1() {
+        return w1;
+    }
+
+    public float getW2() {
+        return w2;
+    }
+
+    public float getW3() {
+        return w3;
     }
 }
