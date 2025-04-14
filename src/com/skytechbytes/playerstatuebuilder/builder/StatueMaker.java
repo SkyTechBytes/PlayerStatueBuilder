@@ -70,6 +70,8 @@ public class StatueMaker extends BukkitRunnable {
 		if (params.hasFlag("gray")) ColorMaps.getActiveColorMaps().add(C.GRAY);
 
 		if (params.hasFlag("all")) ColorMaps.getActiveColorMaps().add(C.ALL);
+
+		if (params.hasFlag("all")) ColorMaps.getActiveColorMaps().add(C.FALLING);
 		
 		if (ColorMaps.getActiveColorMaps().size() == 0) {
 			ColorMaps.getActiveColorMaps().add(C.WOOL);
