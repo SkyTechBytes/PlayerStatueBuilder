@@ -20,6 +20,7 @@ public class ColorMaps {
 	static Map<Color,Material> g = new HashMap<>();
 	static Map<Color,Material> w = new HashMap<>();
 	static Map<Color,Material> a = new HashMap<>();
+	static Map<Color,Material> f = new HashMap<>();
 	
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
 	
@@ -137,13 +138,11 @@ public class ColorMaps {
 		a.put(new Color(216, 215, 210), Material.BIRCH_WOOD);
 		a.put(new Color(42, 35, 40), Material.BLACKSTONE);
 		a.put(new Color(8, 10, 15), Material.BLACK_CONCRETE);
-		//a.put(new Color(25, 26, 31), Material.BLACK_CONCRETE_POWDER);
 		a.put(new Color(67, 30, 32), Material.BLACK_GLAZED_TERRACOTTA);
 		a.put(new Color(25, 25, 25), Material.BLACK_STAINED_GLASS);
 		a.put(new Color(37, 22, 16), Material.BLACK_TERRACOTTA);
 		a.put(new Color(20, 21, 25), Material.BLACK_WOOL);
 		a.put(new Color(44, 46, 143), Material.BLUE_CONCRETE);
-		//a.put(new Color(70, 73, 166), Material.BLUE_CONCRETE_POWDER);
 		a.put(new Color(47, 64, 139), Material.BLUE_GLAZED_TERRACOTTA);
 		a.put(new Color(116, 167, 253), Material.BLUE_ICE);
 		a.put(new Color(51, 76, 178, 121), Material.BLUE_STAINED_GLASS);
@@ -151,7 +150,6 @@ public class ColorMaps {
 		a.put(new Color(53, 57, 157), Material.BLUE_WOOL);
 		a.put(new Color(150, 97, 83), Material.BRICKS);
 		a.put(new Color(96, 59, 31), Material.BROWN_CONCRETE);
-		//a.put(new Color(125, 84, 53), Material.BROWN_CONCRETE_POWDER);
 		a.put(new Color(119, 106, 85), Material.BROWN_GLAZED_TERRACOTTA);
 		a.put(new Color(149, 111, 81), Material.BROWN_MUSHROOM_BLOCK);
 		a.put(new Color(102, 76, 51), Material.BROWN_STAINED_GLASS);
@@ -175,7 +173,6 @@ public class ColorMaps {
 		a.put(new Color(101, 48, 70), Material.CRIMSON_PLANKS);
 		a.put(new Color(32, 10, 60), Material.CRYING_OBSIDIAN);
 		a.put(new Color(21, 119, 136), Material.CYAN_CONCRETE);
-		//a.put(new Color(36, 147, 157), Material.CYAN_CONCRETE_POWDER);
 		a.put(new Color(52, 118, 125), Material.CYAN_GLAZED_TERRACOTTA);
 		a.put(new Color(76, 127, 153), Material.CYAN_STAINED_GLASS);
 		a.put(new Color(86, 91, 91), Material.CYAN_TERRACOTTA);
@@ -200,15 +197,12 @@ public class ColorMaps {
 		a.put(new Color(246, 208, 61), Material.GOLD_BLOCK);
 		a.put(new Color(143, 140, 125), Material.GOLD_ORE);
 		a.put(new Color(149, 103, 85), Material.GRANITE);
-		//a.put(new Color(131, 127, 126), Material.GRAVEL);
 		a.put(new Color(54, 57, 61), Material.GRAY_CONCRETE);
-		//a.put(new Color(76, 81, 84), Material.GRAY_CONCRETE_POWDER);
 		a.put(new Color(83, 90, 93), Material.GRAY_GLAZED_TERRACOTTA);
 		a.put(new Color(76, 76, 76), Material.GRAY_STAINED_GLASS);
 		a.put(new Color(57, 42, 35), Material.GRAY_TERRACOTTA);
 		a.put(new Color(62, 68, 71), Material.GRAY_WOOL);
 		a.put(new Color(73, 91, 36), Material.GREEN_CONCRETE);
-		//a.put(new Color(97, 119, 44), Material.GREEN_CONCRETE_POWDER);
 		a.put(new Color(117, 142, 67), Material.GREEN_GLAZED_TERRACOTTA);
 		a.put(new Color(102, 127, 51), Material.GREEN_STAINED_GLASS);
 		a.put(new Color(76, 83, 42), Material.GREEN_TERRACOTTA);
@@ -222,25 +216,21 @@ public class ColorMaps {
 		a.put(new Color(30, 67, 140), Material.LAPIS_BLOCK);
 		a.put(new Color(99, 110, 132), Material.LAPIS_ORE);
 		a.put(new Color(35, 137, 198), Material.LIGHT_BLUE_CONCRETE);
-		//a.put(new Color(74, 180, 213), Material.LIGHT_BLUE_CONCRETE_POWDER);
 		a.put(new Color(94, 164, 208), Material.LIGHT_BLUE_GLAZED_TERRACOTTA);
 		a.put(new Color(102, 153, 216), Material.LIGHT_BLUE_STAINED_GLASS);
 		a.put(new Color(113, 108, 137), Material.LIGHT_BLUE_TERRACOTTA);
 		a.put(new Color(58, 175, 217), Material.LIGHT_BLUE_WOOL);
 		a.put(new Color(125, 125, 115), Material.LIGHT_GRAY_CONCRETE);
-		//a.put(new Color(154, 154, 148), Material.LIGHT_GRAY_CONCRETE_POWDER);
 		a.put(new Color(144, 166, 167), Material.LIGHT_GRAY_GLAZED_TERRACOTTA);
 		a.put(new Color(153, 153, 153), Material.LIGHT_GRAY_STAINED_GLASS);
 		a.put(new Color(135, 106, 97), Material.LIGHT_GRAY_TERRACOTTA);
 		a.put(new Color(142, 142, 134), Material.LIGHT_GRAY_WOOL);
 		a.put(new Color(94, 168, 24), Material.LIME_CONCRETE);
-		//a.put(new Color(125, 189, 41), Material.LIME_CONCRETE_POWDER);
 		a.put(new Color(162, 197, 55), Material.LIME_GLAZED_TERRACOTTA);
 		a.put(new Color(127, 204, 25), Material.LIME_STAINED_GLASS);
 		a.put(new Color(103, 117, 52), Material.LIME_TERRACOTTA);
 		a.put(new Color(112, 185, 25), Material.LIME_WOOL);
 		a.put(new Color(169, 48, 159), Material.MAGENTA_CONCRETE);
-		//a.put(new Color(192, 83, 184), Material.MAGENTA_CONCRETE_POWDER);
 		a.put(new Color(208, 100, 191), Material.MAGENTA_GLAZED_TERRACOTTA);
 		a.put(new Color(178, 76, 216), Material.MAGENTA_STAINED_GLASS);
 		a.put(new Color(149, 88, 108), Material.MAGENTA_TERRACOTTA);
@@ -259,14 +249,12 @@ public class ColorMaps {
 		a.put(new Color(109, 85, 50), Material.OAK_WOOD);
 		a.put(new Color(15, 10, 24), Material.OBSIDIAN);
 		a.put(new Color(224, 97, 0), Material.ORANGE_CONCRETE);
-		//a.put(new Color(227, 131, 31), Material.ORANGE_CONCRETE_POWDER);
 		a.put(new Color(154, 147, 91), Material.ORANGE_GLAZED_TERRACOTTA);
 		a.put(new Color(216, 127, 51), Material.ORANGE_STAINED_GLASS);
 		a.put(new Color(161, 83, 37), Material.ORANGE_TERRACOTTA);
 		a.put(new Color(240, 118, 19), Material.ORANGE_WOOL);
 		a.put(new Color(141, 180, 250), Material.PACKED_ICE);
 		a.put(new Color(213, 101, 142), Material.PINK_CONCRETE);
-		//a.put(new Color(228, 153, 181), Material.PINK_CONCRETE_POWDER);
 		a.put(new Color(235, 154, 181), Material.PINK_GLAZED_TERRACOTTA);
 		a.put(new Color(242, 127, 165), Material.PINK_STAINED_GLASS);
 		a.put(new Color(161, 78, 78), Material.PINK_TERRACOTTA);
@@ -279,7 +267,6 @@ public class ColorMaps {
 		a.put(new Color(99, 171, 158), Material.PRISMARINE_BRICKS);
 		a.put(new Color(195, 114, 24), Material.PUMPKIN);
 		a.put(new Color(100, 31, 156), Material.PURPLE_CONCRETE);
-		//a.put(new Color(131, 55, 177), Material.PURPLE_CONCRETE_POWDER);
 		a.put(new Color(109, 48, 152), Material.PURPLE_GLAZED_TERRACOTTA);
 		a.put(new Color(127, 63, 178), Material.PURPLE_STAINED_GLASS);
 		a.put(new Color(118, 70, 86), Material.PURPLE_TERRACOTTA);
@@ -293,15 +280,12 @@ public class ColorMaps {
 		a.put(new Color(95, 54, 30), Material.REDSTONE_LAMP);
 		a.put(new Color(133, 107, 107), Material.REDSTONE_ORE);
 		a.put(new Color(142, 32, 32), Material.RED_CONCRETE);
-		//a.put(new Color(168, 54, 50), Material.RED_CONCRETE_POWDER);
 		a.put(new Color(181, 59, 53), Material.RED_GLAZED_TERRACOTTA);
 		a.put(new Color(200, 46, 45), Material.RED_MUSHROOM_BLOCK);
 		a.put(new Color(69, 7, 9), Material.RED_NETHER_BRICKS);
-		//a.put(new Color(190, 102, 33), Material.RED_SAND);
 		a.put(new Color(153, 51, 51, 151), Material.RED_STAINED_GLASS);
 		a.put(new Color(143, 61, 46), Material.RED_TERRACOTTA);
 		a.put(new Color(160, 39, 34), Material.RED_WOOL);
-		//a.put(new Color(219, 207, 163), Material.SAND);
 		a.put(new Color(158, 158, 158), Material.SMOOTH_STONE);
 		a.put(new Color(249, 254, 254), Material.SNOW_BLOCK);
 		a.put(new Color(81, 62, 50), Material.SOUL_SAND);
@@ -319,24 +303,45 @@ public class ColorMaps {
 		a.put(new Color(177, 144, 86), Material.STRIPPED_OAK_WOOD);
 		a.put(new Color(115, 89, 52), Material.STRIPPED_SPRUCE_WOOD);
 		a.put(new Color(57, 150, 147), Material.STRIPPED_WARPED_HYPHAE);
-		//a.put(new Color(229, 176, 168), Material.TARGET);
 		a.put(new Color(152, 94, 67), Material.TERRACOTTA);
 		a.put(new Color(58, 58, 77), Material.WARPED_HYPHAE);
 		a.put(new Color(43, 104, 99), Material.WARPED_PLANKS);
 		a.put(new Color(22, 119, 121), Material.WARPED_WART_BLOCK);
 		a.put(new Color(171, 181, 70), Material.WET_SPONGE);
 		a.put(new Color(207, 213, 214), Material.WHITE_CONCRETE);
-		//a.put(new Color(225, 227, 227), Material.WHITE_CONCRETE_POWDER);
 		a.put(new Color(188, 212, 202), Material.WHITE_GLAZED_TERRACOTTA);
 		a.put(new Color(255, 255, 255), Material.WHITE_STAINED_GLASS);
 		a.put(new Color(209, 178, 161), Material.WHITE_TERRACOTTA);
 		a.put(new Color(233, 236, 236), Material.WHITE_WOOL);
 		a.put(new Color(240, 175, 21), Material.YELLOW_CONCRETE);
-		//a.put(new Color(232, 199, 54), Material.YELLOW_CONCRETE_POWDER);
 		a.put(new Color(234, 192, 88), Material.YELLOW_GLAZED_TERRACOTTA);
 		a.put(new Color(229, 229, 51), Material.YELLOW_STAINED_GLASS);
 		a.put(new Color(186, 133, 35), Material.YELLOW_TERRACOTTA);
 		a.put(new Color(248, 197, 39), Material.YELLOW_WOOL);
+		
+		f.put(new Color(25, 26, 31), Material.BLACK_CONCRETE_POWDER);
+		f.put(new Color(125, 84, 53), Material.BROWN_CONCRETE_POWDER);
+		f.put(new Color(70, 73, 166), Material.BLUE_CONCRETE_POWDER);
+		f.put(new Color(36, 147, 157), Material.CYAN_CONCRETE_POWDER);
+		f.put(new Color(131, 127, 126), Material.GRAVEL);
+		f.put(new Color(76, 81, 84), Material.GRAY_CONCRETE_POWDER);
+		f.put(new Color(97, 119, 44), Material.GREEN_CONCRETE_POWDER);
+		f.put(new Color(74, 180, 213), Material.LIGHT_BLUE_CONCRETE_POWDER);
+		f.put(new Color(154, 154, 148), Material.LIGHT_GRAY_CONCRETE_POWDER);
+		f.put(new Color(125, 189, 41), Material.LIME_CONCRETE_POWDER);
+		f.put(new Color(192, 83, 184), Material.MAGENTA_CONCRETE_POWDER);
+		f.put(new Color(227, 131, 31), Material.ORANGE_CONCRETE_POWDER);
+		f.put(new Color(228, 153, 181), Material.PINK_CONCRETE_POWDER);
+		f.put(new Color(131, 55, 177), Material.PURPLE_CONCRETE_POWDER);
+		f.put(new Color(168, 54, 50), Material.RED_CONCRETE_POWDER);
+		f.put(new Color(190, 102, 33), Material.RED_SAND);
+		f.put(new Color(219, 207, 163), Material.SAND);
+  		f.put(new Color(225, 227, 227), Material.WHITE_CONCRETE_POWDER);
+		f.put(new Color(232, 199, 54), Material.YELLOW_CONCRETE_POWDER);
+
+		/*
+  		a.put(new Color(229, 176, 168), Material.TARGET);
+		*/
 		
 		colorMaps.add(x);
 		colorMaps.add(p);
