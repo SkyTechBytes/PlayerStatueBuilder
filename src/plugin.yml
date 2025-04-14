@@ -7,7 +7,7 @@ api-version: 1.20
 commands:
    statue:
       description: Make a player statue based on a certain model and in a certain orientation
-      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool|all] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:<0-1>] [quote]
+      usage: /statue <Username> [glass|concrete|terracotta|planks|gray|wool|all|falling] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:<0-1>] [quote]
    undostatue:
       description: Undo the last statue created by ANYONE on the server
       usage: /undostatue
