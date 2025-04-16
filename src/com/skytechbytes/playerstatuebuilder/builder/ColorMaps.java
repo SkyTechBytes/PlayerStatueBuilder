@@ -151,6 +151,8 @@ public class ColorMaps {
 		a.put(new Color(149, 111, 81), Material.BROWN_MUSHROOM_BLOCK);
 		a.put(new Color(77, 51, 35), Material.BROWN_TERRACOTTA);
 		a.put(new Color(114, 71, 40), Material.BROWN_WOOL);
+		a.put(new Color(222, 161, 154), Material.CHERRY_PLANKS);
+		a.put(new Color(62, 40, 52), Material.CHERRY_WOOD);
 		a.put(new Color(47, 23, 28), Material.CHISELED_NETHER_BRICKS);
 		a.put(new Color(53, 48, 56), Material.CHISELED_POLISHED_BLACKSTONE);
 		a.put(new Color(231, 226, 218), Material.CHISELED_QUARTZ_BLOCK);
@@ -188,7 +190,6 @@ public class ColorMaps {
 		a.put(new Color(117, 136, 124), Material.EMERALD_ORE);
 		a.put(new Color(219, 222, 158), Material.END_STONE);
 		a.put(new Color(218, 224, 162), Material.END_STONE_BRICKS);
-		a.put(new Color(140, 149, 151, 64), Material.GLASS);
 		a.put(new Color(246, 208, 61), Material.GOLD_BLOCK);
 		a.put(new Color(143, 140, 125), Material.GOLD_ORE);
 		a.put(new Color(149, 103, 85), Material.GRANITE);
@@ -282,6 +283,8 @@ public class ColorMaps {
 		a.put(new Color(122, 121, 122), Material.STONE_BRICKS);
 		a.put(new Color(174, 92, 59), Material.STRIPPED_ACACIA_WOOD);
 		a.put(new Color(196, 176, 118), Material.STRIPPED_BIRCH_WOOD);
+		a.put(new Color(211, 175, 167), Material.STRIPPED_CHERRY_LOG);
+		a.put(new Color(211, 155, 158), Material.STRIPPED_CHERRY_WOOD);
 		a.put(new Color(137, 57, 90), Material.STRIPPED_CRIMSON_HYPHAE);
 		a.put(new Color(96, 76, 49), Material.STRIPPED_DARK_OAK_WOOD);
 		a.put(new Color(171, 132, 84), Material.STRIPPED_JUNGLE_WOOD);
