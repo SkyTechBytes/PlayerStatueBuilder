@@ -282,7 +282,7 @@ public class ColorMaps {
 		a.put(new Color(125, 125, 125), Material.STONE);
 		a.put(new Color(122, 121, 122), Material.STONE_BRICKS);
 		a.put(new Color(174, 92, 59), Material.STRIPPED_ACACIA_WOOD);
-		a.put(new Color(196, 176, 118), Material.STRIPPED_BIRCH_WOOD);
+		a.put(new Color(190, 189, 185), Material.STRIPPED_BIRCH_WOOD);
 		a.put(new Color(211, 175, 167), Material.STRIPPED_CHERRY_LOG);
 		a.put(new Color(211, 155, 158), Material.STRIPPED_CHERRY_WOOD);
 		a.put(new Color(137, 57, 90), Material.STRIPPED_CRIMSON_HYPHAE);
