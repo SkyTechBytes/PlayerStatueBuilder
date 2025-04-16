@@ -302,7 +302,8 @@ public class ColorMaps {
 		a.put(new Color(234, 192, 88), Material.YELLOW_GLAZED_TERRACOTTA);
 		a.put(new Color(186, 133, 35), Material.YELLOW_TERRACOTTA);
 		a.put(new Color(248, 197, 39), Material.YELLOW_WOOL);
-		
+
+		/*
 		f.put(new Color(25, 26, 31), Material.BLACK_CONCRETE_POWDER);
 		f.put(new Color(125, 84, 53), Material.BROWN_CONCRETE_POWDER);
 		f.put(new Color(70, 73, 166), Material.BLUE_CONCRETE_POWDER);
@@ -322,6 +323,7 @@ public class ColorMaps {
 		f.put(new Color(219, 207, 163), Material.SAND);
   		f.put(new Color(225, 227, 227), Material.WHITE_CONCRETE_POWDER);
 		f.put(new Color(232, 199, 54), Material.YELLOW_CONCRETE_POWDER);
+  		*/
 
 		/*
   		a.put(new Color(229, 176, 168), Material.TARGET);
