@@ -8,7 +8,6 @@ public interface C {
 	public static final int GLASS = 4;
 	public static final int GRAY = 5;
 	public static final int ALL = 6;
-	public static final int FALLING = 7;
 	
 	public static final String[] PARTS = {"right_leg","left_leg","body","right_arm","left_arm","head"};
 }
