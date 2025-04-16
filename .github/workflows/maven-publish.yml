@@ -1,0 +1,50 @@
+name: Build Spigot Plugin
+
+# 触发条件：当发布被创建时
+on:
+  release:
+    types: [ created ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 设置 Java 环境（Minecraft 1.21.3 推荐使用 Java 21）
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin' # 使用 Eclipse Temurin 发行版
+
+      # 缓存 Maven 依赖以加速构建
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      # 使用 Maven 构建项目
+      - name: Build with Maven
+        run: mvn clean package --file pom.xml
+
+      # 上传构建产物（JAR 文件）到 GitHub Actions
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spigot-plugin
+          path: target/*.jar
+          if-no-files-found: error
+
+      # 附加 JAR 文件到 GitHub Release
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
