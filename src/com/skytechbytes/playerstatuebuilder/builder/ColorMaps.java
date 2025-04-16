@@ -20,7 +20,6 @@ public class ColorMaps {
 	static Map<Color,Material> g = new HashMap<>();
 	static Map<Color,Material> w = new HashMap<>();
 	static Map<Color,Material> a = new HashMap<>();
-	static Map<Color,Material> f = new HashMap<>();
 	
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
 	
@@ -336,7 +335,6 @@ public class ColorMaps {
 		colorMaps.add(g);
 		colorMaps.add(w);
 		colorMaps.add(a);
-		colorMaps.add(f);
 
 	}
 	public static Material getMatchingMaterial(int r, int g, int b, int alpha) {
