@@ -28,7 +28,6 @@ public class StatueTabComplete implements TabCompleter {
 					a.add("gray");
 					a.add("wool");
 					a.add("all");
-					a.add("falling");
 					a.add("slim");
 					a.add("legacy");
 					a.add("default");
