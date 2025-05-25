@@ -23,7 +23,7 @@ public class ColorMaps {
 	
 	static List<Map<Color,Material>> colorMaps = new ArrayList<>();
 	
-	static List<Integer> activeColorMaps = new ArrayList<>();
+	static Set<Integer> activeColorMaps = new HashSet<>();
 
 	public ColorMaps() {
 
@@ -137,11 +137,15 @@ public class ColorMaps {
 
 	}
 	public static Material getMatchingMaterial(Color want, ColorDiffable diffFunc, float w1, float w2, float w3) {
-		if (want.getAlpha() < 180) {
+		if (want.getAlpha() < 32) {
+			// if the color is < ~10% visible we just output air
 			return Material.AIR;
 		}
-		Material temp = Material.AIR;
-		double smallestDifference = Double.MAX_VALUE;
+		boolean wantTransparent = want.getAlpha() < 200;
+		Material bestSolid = Material.AIR;
+		Material bestTransparent = Material.AIR;
+		double smallestDifferenceSolid = Double.MAX_VALUE;
+		double smallestDifferenceTransparent = Double.MAX_VALUE;
 		for (int i = 0 ; i < colorMaps.size() ; i++) {
 			if (!activeColorMaps.contains(i)) {
 				continue;
@@ -150,16 +154,35 @@ public class ColorMaps {
 			Set<Color> keys = x.keySet();
 			for(Color key: keys){
 				double difference = diffFunc.getDelta(key, want, w1, w2, w3);
-				if (difference <= smallestDifference) {
-					temp = x.get(key);
-					smallestDifference = difference;
+
+				if (difference <= smallestDifferenceSolid && x.get(key).isOccluding()) {
+					bestSolid = x.get(key);
+					smallestDifferenceSolid = difference;
+				}
+				if (difference <= smallestDifferenceTransparent && !x.get(key).isOccluding()) {
+					bestTransparent = x.get(key);
+					smallestDifferenceTransparent = difference;
 				}
 			}
 		}
-		return temp;
+		if (wantTransparent) {
+			// if the color has sufficient transparency, pick the best transparent block
+			if (bestTransparent == Material.AIR) {
+				// and the best solid block if there are no transparent blocks available
+				return bestSolid;
+			}
+			return bestTransparent;
+		} else {
+			// otherwise, pick the best solid block
+			if (bestSolid == Material.AIR) {
+				// and the best transparent block if there are no solid blocks active
+				return bestTransparent;
+			}
+			return bestSolid;
+		}
 	}
 
-	public static List<Integer> getActiveColorMaps() {
+	public static Set<Integer> getActiveColorMaps() {
 		return activeColorMaps;
 	}
 	

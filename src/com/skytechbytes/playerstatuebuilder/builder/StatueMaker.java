@@ -74,6 +74,7 @@ public class StatueMaker extends BukkitRunnable {
 			ColorMaps.getActiveColorMaps().add(C.PLANKS);
 			ColorMaps.getActiveColorMaps().add(C.TERRACOTTA);
 			ColorMaps.getActiveColorMaps().add(C.CONCRETE);
+			ColorMaps.getActiveColorMaps().add(C.GLASS);
 		}
 		//Then populate the schematic based on those block types
 		
