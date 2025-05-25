@@ -16,7 +16,7 @@ public class StatueArgs {
     private String world = "";
     private HashSet<String> flags;
     private HashSet<String> assigned;
-    private ColorMode colorMode = ColorMode.RGB;
+    private ColorMode colorMode = ColorMode.LAB;
     private float w1 = 1;
     private float w2 = 1;
     private float w3 = 1;

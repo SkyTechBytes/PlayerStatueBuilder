@@ -33,6 +33,7 @@ Need something to decorate your server? Tired of building player statues by hand
 | CONSOLE EXAMPLE 11 | `/statue [USERNAME] x:-593 y:32 z:269 direction:North world:world`                          | console/command block only; builds a statue with the specified coordinates and world                                                                                |
 | CONSOLE EXAMPLE 12 | `/statue [USERNAME] x:-593 y:32 z:269 direction:North world:world hue:.34 posterize:3 wool` | console/command block only; builds a statue with the specified coordinates and world with parameters                                                                |
 | EXAMPLE 13         | `/statue [USERNAME] converter:lab`                                                          | creates a statue with color to block conversion based on the LAB color space which may result in more accurate colors                                               |
+| EXAMPLE 14         | `/statue [USERNAME] converter:rgb`                                                          | creates a statue with color to block conversion based on the RGB color space which is the original color diff algorithm                                             |
 
 
 ## Features
