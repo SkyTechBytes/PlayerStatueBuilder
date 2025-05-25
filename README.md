@@ -13,8 +13,8 @@ Need something to decorate your server? Tired of building player statues by hand
 
 ## Basics
 
-- Usage: `/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL]`
-- Console/Command Block Usage: `/statue USERNAME x:[x coord] y:[y coord] z:[z coord] direction:[North|South|East|West] world:[world] [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL]`
+- Usage: `/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL] [quote] [converter:<rgb|lab|absrgb|hsl|hsb>]`
+- Console/Command Block Usage: `/statue USERNAME x:[x coord] y:[y coord] z:[z coord] direction:[North|South|East|West] world:[world] [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL] [converter:<rgb|lab|absrgb|hsl|hsb>]`
 - Usage: `/undostatue` (Admin) You can now UNDO more than just your last statue!
 
 ## Examples
@@ -115,10 +115,18 @@ playerstatuebuilderx.custom:
     
 ![2019-12-24_14 56 21](https://user-images.githubusercontent.com/36645753/71426392-a5946000-265d-11ea-9dc7-929790f2dfa2.png)
 <br>
+### 1.7 Example:
 <a href="https://imgur.com/a/m3HXHHj">Or Use Imgur to see them (click here)</a>
     <br>
     <a href="https://imgur.com/a/34qkFPs">1.7 Example (click)</a>
 <br>
-1.10 Example: 
+
+
+### 1.10 Example: 
 
 ![image](https://user-images.githubusercontent.com/36645753/118715520-8c52fd00-b7d8-11eb-857b-5ee5bfbdfd59.png)
+
+
+### 1.17 Example
+
+<img src="https://github.com/user-attachments/assets/f481d1c7-3fc4-4166-a28e-c8e882f1eeee" alt="rgbvslab" width="400"/>
