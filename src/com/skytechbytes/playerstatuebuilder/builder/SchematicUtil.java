@@ -22,6 +22,7 @@ public class SchematicUtil {
 		Location greaterCorner = new Location(s.getWorld(), s.getMaxX(), s.getMaxY(), s.getMaxZ());
 
 		boolean canBuild = true;
+
 		// if worldguard detected, check if we can build here
 		if (PlayerStatueBuilder.wgw != null) {
 			canBuild = PlayerStatueBuilder.wgw.canBuild(lesserCorner, greaterCorner, p);
@@ -33,6 +34,12 @@ public class SchematicUtil {
 			canBuild = canBuild && plotSquaredCanBuild;
 			Log.log("PlotSquared can build: " + plotSquaredCanBuild);
 		}
+		// if an operator, can always build regardless
+		if (p.isOp()) {
+			Log.log("Player is an operator-- bypassing build check");
+			return true;
+		}
+
 		return canBuild;
 	}
 

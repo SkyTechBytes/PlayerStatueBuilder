@@ -2,7 +2,9 @@ package com.skytechbytes.playerstatuebuilder.support;
 
 import com.plotsquared.bukkit.BukkitPlatform;
 import com.plotsquared.bukkit.util.BukkitUtil;
+import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.plot.Plot;
+import com.plotsquared.core.plot.PlotArea;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.skytechbytes.playerstatuebuilder.Log;
@@ -40,17 +42,35 @@ public class PlotSquaredWrapper {
             com.plotsquared.core.location.Location plotSquaredGreaterCorner = BukkitUtil.adapt(greaterCorner);
 
             Plot plot = Plot.getPlot(plotSquaredlesserCorner);
+            // if in a world without a plotsquared area configuration, allow building
             if (plot == null) {
-                return false; // possibly a road, they aren't on a plot owned by themselves
+                if (lesserCorner.getWorld() == null) {
+                    Log.log("No world provided");
+                    return false;
+                }
+                PlotArea area = PlotSquared.get()
+                        .getPlotAreaManager()
+                        .getPlotArea(lesserCorner.getWorld().getName(), null);
+
+                if (area != null) {
+                    Log.log("Plotsquared protected area configured in this world but statue is not in a plot player can build on");
+                    return false;
+                }
+                return true;
             }
+
             if (!plot.isOwner(creatingPlayer.getUniqueId()) && !plot.isAdded(creatingPlayer.getUniqueId())) {
-                return false; // neither added to the plot nor the owner of the plot
+                Log.log("Player is not an owner nor added to this plot");
+                return false;
             }
 
             // CuboidRegion statueBoundingBox = new CuboidRegion(BlockVector3.at(lesserCorner.getBlockX(), lesserCorner.getBlockY(), lesserCorner.getBlockZ()),
             //        BlockVector3.at(greaterCorner.getBlockX(), greaterCorner.getBlockY(), greaterCorner.getBlockZ()));
 
             boolean statueContainedInOneRegion = false;
+            if (plot.getRegions().size() > 1) {
+                Log.log("Plot contains multiple regions-- statue must fully fit inside one of them");
+            }
             for (CuboidRegion region: plot.getRegions()) {
                 // The statue's bounding area must fit fully into a SINGLE region, even if the regions are next to each other
                 BlockVector3 regionLesserCorner = region.getMinimumPoint();
