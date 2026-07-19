@@ -2,6 +2,7 @@ package com.skytechbytes.playerstatuebuilder;
 
 import com.skytechbytes.playerstatuebuilder.builder.PlayerStatueMaker;
 import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
+import com.skytechbytes.playerstatuebuilder.lookup.LookupUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -38,7 +39,7 @@ public class CommandStatue implements CommandExecutor {
 			if (arg3.length >= 1) {
 				name = arg3[0];
 			}
-			if (Util.isDiskSkin(name)) {
+			if (LookupUtils.isDiskSkin(name)) {
 				if (!sender.hasPermission("playerstatuebuilderx.custom")) {
 					throw new PlayerStatueBuilderException("Insufficient permissions to create custom statues!");
 				}
@@ -76,7 +77,7 @@ public class CommandStatue implements CommandExecutor {
 				}
 				Location origin = new Location(selectedWorld, params.getX(), params.getY(), params.getZ());
 
-				new StatueBuildTask(name, new StatueMaker(origin, params.getDirection(), mode, Util.getSkinImage(name), params), sender).runTaskAsynchronously(PlayerStatueBuilder.instance);
+				new StatueBuildTask(name, new StatueMaker(origin, params.getDirection(), mode, LookupUtils.getSkinImage(name), params), sender).runTaskAsynchronously(PlayerStatueBuilder.instance);
 			}
 		} catch (PlayerStatueBuilderException psbe) {
 			sender.sendMessage(ChatColor.RED + "Error! " + psbe.getMessage());

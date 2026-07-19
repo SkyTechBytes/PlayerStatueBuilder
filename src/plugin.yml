@@ -1,6 +1,6 @@
 name: PlayerStatueBuilderX
 main: com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder
-version: 1.17
+version: 1.18
 author: SkyTechBytes
 softdepend: [WorldGuard,Vault,PlotSquared]
 api-version: 1.20
@@ -11,6 +11,9 @@ commands:
    undostatue:
       description: Undo the last statue created by ANYONE on the server
       usage: /undostatue
+   clearskincache:
+      description: Clear all skin images cached by the server, forcing new statues to pull a player's skin from the API
+      usage: /clearskincache
 permissions:
    playerstatuebuilderx.createStatue:
       description: Allow creation of a statue
@@ -33,3 +36,6 @@ permissions:
    playerstatuebuilderx.custom:
       description: The player can put a '.' in front to create a custom statue from the plugin's data folder
       default: true
+   playerstatuebuilderx.clearCache:
+      description: The player can run /clearskincache
+      default: op

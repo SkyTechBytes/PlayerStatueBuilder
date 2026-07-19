@@ -3,8 +3,8 @@ package com.skytechbytes.api;
 import com.skytechbytes.playerstatuebuilder.PlayerStatueBuilder;
 import com.skytechbytes.playerstatuebuilder.StatueArgs;
 import com.skytechbytes.playerstatuebuilder.StatueBuildTask;
-import com.skytechbytes.playerstatuebuilder.Util;
 import com.skytechbytes.playerstatuebuilder.builder.StatueMaker;
+import com.skytechbytes.playerstatuebuilder.lookup.LookupUtils;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class PlayerStatueBuilderAPI {
 		}
 
 		StatueArgs statueArgs = new StatueArgs(input);
-		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, Util.getSkinImage(skinIdentifier), statueArgs), null).runTaskAsynchronously(PlayerStatueBuilder.instance);
+		new StatueBuildTask(skinIdentifier, new StatueMaker(origin, direction, mode, LookupUtils.getSkinImage(skinIdentifier), statueArgs), null).runTaskAsynchronously(PlayerStatueBuilder.instance);
 	}
 	/**
 	 * Programmatically creates a player statue at location "origin"

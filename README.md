@@ -16,6 +16,7 @@ Need something to decorate your server? Tired of building player statues by hand
 - Usage: `/statue USERNAME [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL] [quote] [converter:<rgb|lab|absrgb|hsl|hsb>]`
 - Console/Command Block Usage: `/statue USERNAME x:[x coord] y:[y coord] z:[z coord] direction:[North|South|East|West] world:[world] [glass|concrete|terracotta|planks|gray|wool] [default|slim|legacy] [xy|xz|yz] [iron_armor|diamond_armor|chainmail_armor|golden_armor] [left_leg|right_leg|body|head|left_arm|right_arm] [hue:0-1|saturation:0-1|brightness:0-1|contrast:0-1|posterize:LEVEL] [converter:<rgb|lab|absrgb|hsl|hsb>]`
 - Usage: `/undostatue` (Admin) You can now UNDO more than just your last statue!
+- Usage: `/clearskincache` (Admin) Clears cached skin images (auto runs every 20 minutes)
 
 ## Examples
 | Example            | Command                                                                                     | Description                                                                                                                                                         |
@@ -92,6 +93,9 @@ playerstatuebuilderx.undo:
 playerstatuebuilderx.custom:
   description: The player can put a '.' in front to create a custom statue from the plugin's data folder
   default: true   
+playerstatuebuilderx.clearCache:
+  description: The player can run /clearskincache
+  default: op
   </pre>
 ```
 ## Configuration File Explanation

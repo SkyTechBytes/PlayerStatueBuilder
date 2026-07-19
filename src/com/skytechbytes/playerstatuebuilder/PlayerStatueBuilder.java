@@ -1,6 +1,7 @@
 package com.skytechbytes.playerstatuebuilder;
 
 import com.skytechbytes.playerstatuebuilder.builder.AssetManager;
+import com.skytechbytes.playerstatuebuilder.lookup.LookupUtils;
 import com.skytechbytes.playerstatuebuilder.support.PlotSquaredWrapper;
 import com.skytechbytes.playerstatuebuilder.support.VaultWrapper;
 import com.skytechbytes.playerstatuebuilder.support.WorldGuardWrapper;
@@ -59,6 +60,10 @@ public class PlayerStatueBuilder extends JavaPlugin {
     	this.getCommand("statue").setTabCompleter(new StatueTabComplete());
     	
     	this.getCommand("undostatue").setExecutor(new CommandUndostatue());
+
+		this.getCommand("clearskincache").setExecutor(new CommandClearSkinCache());
+
+		getServer().getScheduler().runTaskTimer(this, LookupUtils::clearSkinCache, 20L * 60 * 20, 20L * 60 * 20);
     	
     	// Bstats begins here
     	int pluginId = 7093;

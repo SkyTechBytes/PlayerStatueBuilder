@@ -35,7 +35,7 @@ public class SchematicUtil {
 			Log.log("PlotSquared can build: " + plotSquaredCanBuild);
 		}
 		// if an operator, can always build regardless
-		if (p.isOp()) {
+		if (!canBuild && p.isOp()) {
 			Log.log("Player is an operator-- bypassing build check");
 			return true;
 		}
