@@ -22,9 +22,9 @@ import java.util.regex.Pattern;
  */
 public class LookupUtils {
     private static final Map<String, BufferedImage> cache = new ConcurrentHashMap<>();
-    private static final UUIDFetcher[] uuidFetchers = new UUIDFetcher[]{ new MojangUUIDFetcher(), new PlayerDBUUIDFetcher() };
-    private static final SkinFetcher[] skinFetchers = new SkinFetcher[]{ new MojangSkinFetcher(), new CrafatarSkinFetcher(), new MCHeadsSkinFetcher(), new MineskinSkinFetcher()};
-    private static final String uuidNotFoundMsg = "Failed to lookup uuid, likely because player specified does not exist.";
+    static final String uuidNotFoundMsg = "Failed to lookup uuid, likely because player specified does not exist.";
+    static UUIDFetcher[] uuidFetchers = new UUIDFetcher[]{ new MojangUUIDFetcher(), new PlayerDBUUIDFetcher() };
+    static SkinFetcher[] skinFetchers = new SkinFetcher[]{ new MojangSkinFetcher(), new CrafatarSkinFetcher(), new MCHeadsSkinFetcher(), new MineskinSkinFetcher()};
 
     public static BufferedImage getSkinImage(String name) throws Exception {
         BufferedImage bi = null;

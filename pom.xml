@@ -7,35 +7,8 @@
 	<version>1.18</version>
 	<build>
 		<finalName>PlayerStatueBuilderXv${project.version}-SkyTechBytes</finalName>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-			<!-- Copy non-JAR files to the build directory -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/classes</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src</directory>
-									<includes>
-										<include>**/*.png</include>
-										<include>**/*.yml</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -157,6 +130,12 @@
 			<artifactId>bstats-bukkit</artifactId>
 			<version>1.7</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<properties>
