@@ -24,7 +24,7 @@ public class LookupUtils {
     private static final Map<String, BufferedImage> cache = new ConcurrentHashMap<>();
     static final String uuidNotFoundMsg = "Failed to lookup uuid, likely because player specified does not exist.";
     static UUIDFetcher[] uuidFetchers = new UUIDFetcher[]{ new MojangUUIDFetcher(), new PlayerDBUUIDFetcher() };
-    static SkinFetcher[] skinFetchers = new SkinFetcher[]{ new MojangSkinFetcher(), new CrafatarSkinFetcher(), new MCHeadsSkinFetcher(), new MineskinSkinFetcher()};
+    static SkinFetcher[] skinFetchers = new SkinFetcher[]{ new MojangSkinFetcher(), new MCHeadsSkinFetcher(), new MineskinSkinFetcher()};
 
     public static BufferedImage getSkinImage(String name) throws Exception {
         BufferedImage bi = null;

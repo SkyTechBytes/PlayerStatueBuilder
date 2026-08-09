@@ -37,7 +37,7 @@ public class LookupTest {
         FakeUUIDFetcher fakeUUIDFetcher = new FakeUUIDFetcher(new PlayerStatueBuilderException("fake uuid exception"), null);
         FakeSkinFetcher fakeSkinFetcher = new FakeSkinFetcher(new PlayerStatueBuilderException("fake skin fetch exception"));
         LookupUtils.uuidFetchers = new UUIDFetcher[]{ fakeUUIDFetcher, new PlayerDBUUIDFetcher() };
-        LookupUtils.skinFetchers = new SkinFetcher[]{ fakeSkinFetcher, new CrafatarSkinFetcher() };
+        LookupUtils.skinFetchers = new SkinFetcher[]{ fakeSkinFetcher, new MineskinSkinFetcher() };
 
         BufferedImage response = LookupUtils.getCloudSkinImage("SkyTechBytes");
         assertNotNull(response);
@@ -65,13 +65,8 @@ public class LookupTest {
         // might as well test alt uuid getter
         LookupUtils.uuidFetchers = new UUIDFetcher[]{ new PlayerDBUUIDFetcher() };
 
-        LookupUtils.skinFetchers = new SkinFetcher[]{ new CrafatarSkinFetcher() };
-        BufferedImage response = LookupUtils.getCloudSkinImage("SkyTechBytes");
-        assertNotNull(response);
-        assertEquals(64, response.getWidth());
-
         LookupUtils.skinFetchers = new SkinFetcher[]{ new MCHeadsSkinFetcher() };
-        response = LookupUtils.getCloudSkinImage("SkyTechBytes");
+        BufferedImage response = LookupUtils.getCloudSkinImage("SkyTechBytes");
         assertNotNull(response);
         assertEquals(64, response.getWidth());
 
